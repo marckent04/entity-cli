@@ -1,10 +1,11 @@
 # Entity CLI
 
 ## Features
-* Generate entity
-*support OneToMany relation
-*support OneToOne relation
-*support string, number, boolean type
+
+- Generate entity
+  *support OneToMany relation
+  *support OneToOne relation
+  \*support string, number, boolean type
 
 ## How to install (typeORM)
 
@@ -16,5 +17,9 @@
 
 #### Add to scripts key to package.json
 
-`"entity-cli": "node ./node_modules/entity-cli/index.js"`
-
+```
+"scripts" {
+    ...
+    "entity-cli": "node ./node_modules/entity-cli/index.js"
+}
+```
