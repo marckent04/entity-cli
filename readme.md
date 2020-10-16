@@ -1,17 +1,20 @@
-# Entity Manager
+# Entity CLI
 
-generer entite ok
+## Features
+* Generate entity
+*support OneToMany relation
+*support OneToOne relation
+*support string, number, boolean type
 
-generer proprietes avec types de base ok
+## How to install (typeORM)
 
-gerer les doublures dans les propriétés ok
+#### Install typeORM globally
 
-prise en charge de relations ok
+`npm i -g typeorm`
 
-linter ok
+`yarn global add typeorm`
 
-gerer doublons entre les relations
+#### Add to scripts key to package.json
 
-choix dossier de destination
+`"entity-cli": "node ./node_modules/entity-cli/index.js"`
 
-# entity-cli
