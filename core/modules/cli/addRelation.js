@@ -24,8 +24,8 @@ const cli = async (entityName, apCli) =>
             entityName,
             entity
           );
-          manager.update(entityName, result.many);
-          manager.update(entity, result.one);
+          manager.update(entityName, result.one);
+          manager.update(entity, result.many);
           break;
         case "mto":
           result = relations.otm(
@@ -35,8 +35,8 @@ const cli = async (entityName, apCli) =>
             entityName
           );
 
-          manager.update(entityName, result.one);
-          manager.update(entity, result.many);
+          manager.update(entityName, result.many);
+          manager.update(entity, result.one);
 
           break;
         default:
