@@ -18,18 +18,18 @@ const addPropertyQuestions = (entityName) => {
     {
       type: "input",
       name: "name",
-      message: "Nom de la propriété",
+      message: "property name",
       validate: function (val) {
         const validVar = validateVariable(val);
         if (validVar) return entityPropertyExists(getEntity(entityName), val);
 
-        return "entrer un nom valide";
+        return "enter an valid name";
       },
     },
     {
       type: "list",
       name: "type",
-      message: "Type de la propriété ?",
+      message: "choose property type",
       choices: ["string", "number", "boolean", "Date", "text"],
       filter: function (val) {
         return val.toLowerCase();
@@ -38,13 +38,13 @@ const addPropertyQuestions = (entityName) => {
     {
       type: "confirm",
       name: "required",
-      message: "champ obligatoire ?",
+      message: "Mandatory ?",
       default: true,
     },
     {
       type: "confirm",
       name: "add",
-      message: "ajouter nouvelle propriété",
+      message: "Add new property ?",
       default: false,
     },
   ];
@@ -54,7 +54,7 @@ const entityCreationQuestions = [
   {
     type: "input",
     name: "name",
-    message: "Nom de l'entité",
+    message: "Entity name",
     validate: (val) => {
       return validateVariable(val);
     },
@@ -67,7 +67,7 @@ const addQuestions = [
   {
     type: "list",
     name: "action",
-    message: "Prochaine action",
+    message: "What for next ?",
     choices: [
       { name: "Ajouter propriété", value: "p" },
       { name: "Ajouter relation", value: "r" },
@@ -79,13 +79,13 @@ const addRelationQuestions = (entity) => [
   {
     type: "list",
     name: "entity",
-    message: "Choisissez une entité",
+    message: "Choose the entity",
     choices: existingEntities(entity),
   },
   {
     type: "list",
     name: "relation",
-    message: "Type de relation",
+    message: "Relationship",
     choices: [
       { value: "oto", name: "One-to-one" },
       { value: "otm", name: "One-to-many" },
@@ -96,7 +96,7 @@ const addRelationQuestions = (entity) => [
   {
     type: "confirm",
     name: "add",
-    message: "ajouter nouvelle propriété",
+    message: "Add new property",
     default: false,
   },
 ];

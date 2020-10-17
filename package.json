@@ -1,6 +1,6 @@
 {
   "name": "entity-cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "generate entities by cli",
   "main": "index.js",
   "scripts": {

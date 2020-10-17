@@ -15,9 +15,8 @@ const cli = async (entityName, arCli) =>
       );
 
       if (add) addCli(entityName, cli, arCli);
-      else console.log("Bon code a vous !");
+      else console.log("Good code to you");
     } catch (error) {
-      console.log("an error");
       console.log(error);
     }
     // if (answers.add) return addNewProperty(entityName)

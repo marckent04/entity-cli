@@ -16,7 +16,7 @@ const cli = async () =>
       if (stderr) throw stderr;
       console.log(stdout);
     } else {
-      console.log(`mise a jour de ${name}`);
+      console.log(`update ${name}`);
     }
 
     addCli(name, apCli, arCli);
