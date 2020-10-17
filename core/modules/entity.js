@@ -45,7 +45,7 @@ class EntityManager {
   static async create(name) {
     const file = getConfigFile();
     let src = "src/entities";
-    if (file.src) src = file.src;
+    if (file && file.src) src = file.src;
 
     return await exec(
       `typeorm entity:create -d ${src} -n ${Str(name).capitalize().s}`

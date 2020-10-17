@@ -24,6 +24,8 @@ const cli = async (entityName, apCli) =>
             entityName,
             entity
           );
+          manager.update(entityName, result.many);
+          manager.update(entity, result.one);
           break;
         case "mto":
           result = relations.otm(
@@ -32,10 +34,15 @@ const cli = async (entityName, apCli) =>
             entity,
             entityName
           );
+
+          manager.update(entityName, result.one);
+          manager.update(entity, result.many);
+
           break;
         default:
           break;
       }
+
       console.log("relation etablie");
       if (add) addCli(entityName, apCli, cli);
     } catch (error) {

@@ -16,7 +16,7 @@ const getConfigFile = () => {
 const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
   if (config) return path.join(rootDir, config.src);
-  return directory;
+  return defaultDirectory;
 };
 
 getDirectoryFromConfigFile = () => {
