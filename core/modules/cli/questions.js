@@ -1,4 +1,6 @@
-const { fileExists } = require("../common/common");
+const {
+  entityExistsFromConfigFile: fileExists,
+} = require("../common/configFile");
 const {
   existingEntities,
   entityPropertyExists,
