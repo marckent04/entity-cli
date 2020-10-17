@@ -1,6 +1,6 @@
 {
   "name": "entity-cli",
-  "version": "1.0.2.1",
+  "version": "1.0.4",
   "description": "generate entities by cli",
   "main": "index.js",
   "scripts": {
@@ -17,5 +17,15 @@
     "typeorm": "^0.2.26",
     "yargs": "^16.0.3",
     "prettier": "2.1.2"
-  }
+  },
+  "keywords": [
+    "typeORM",
+    "typeorm",
+    "prettier",
+    "inquirer",
+    "entity-cli",
+    "entity",
+    "cli",
+    "entity cli"
+  ]
 }
