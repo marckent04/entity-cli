@@ -1,7 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const Str = require("string");
-const { directory } = require("./common");
+const { getDirectoryFromConfigFile } = require("./configFile");
+
+const directory = getDirectoryFromConfigFile();
 
 const filterEntities = (files) => {
   return files

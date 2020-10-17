@@ -11,10 +11,10 @@ function cli(name, apCli, arCli) {
   inquirer.prompt(addQuestions).then(({ action }) => {
     switch (action) {
       case "p":
-        apCli(name);
+        apCli(name, arCli);
         break;
       case "r":
-        arCli(name);
+        arCli(name, apCli);
         break;
     }
   });

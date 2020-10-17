@@ -4,10 +4,9 @@ const relations = require("../make/relations");
 const inquirer = require("inquirer");
 const manager = require("../entity");
 const addCli = require("./add");
-const apCli = require("./addProperty");
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
-const cli = async (entityName) =>
+const cli = async (entityName, apCli) =>
   inquirer.prompt(addRelationQuestions(entityName)).then(async (answers) => {
     const { entity, relation, add } = answers;
     try {

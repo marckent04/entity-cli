@@ -2,10 +2,9 @@ const { addPropertyQuestions } = require("../cli/questions");
 const inquirer = require("inquirer");
 const MakeProperty = require("../make/property");
 const addCli = require("./add");
-const arCli = require("./addRelation");
 const entityManager = require("../entity");
 
-const cli = async (entityName) =>
+const cli = async (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then(async (answers) => {
     try {
       const { name, type, add, required } = answers;
