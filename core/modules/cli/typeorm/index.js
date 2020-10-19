@@ -1,18 +1,19 @@
-const { entityCreationQuestions } = require("./questions");
-const entityManager = require("../entity");
-const { fileExists } = require("../common/common");
-const addCli = require("./add");
+const Str = require("string");
 const inquirer = require("inquirer");
+
+const { entityCreationQuestions } = require("./questions");
+const EntityManager = require("../../entity-manager/TypeOrm");
+const { fileExists } = require("../../common/common");
+const addCli = require("./add");
 const arCli = require("./addRelation");
 const apCli = require("./addProperty");
-const Str = require("string");
 
 const cli = async () =>
-  inquirer.prompt(entityCreationQuestions).then(async (answers) => {
+  inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
     const { name } = answers;
     if (!fileExists(Str(name).capitalize().s)) {
-      const { stderr, stdout } = await entityManager.create(name);
-      entityManager.init(name);
+      const { stderr, stdout } = await EntityManager.create(name);
+      EntityManager.init(name);
       if (stderr) throw stderr;
       console.log(stdout);
     } else {

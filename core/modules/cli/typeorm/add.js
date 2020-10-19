@@ -8,7 +8,8 @@ const inquirer = require("inquirer");
  * @param {*} arCli add relation cli
  */
 function cli(name, apCli, arCli) {
-  inquirer.prompt(addQuestions).then(({ action }) => {
+  inquirer.prompt(addQuestions()).then(({ action }) => {
+    console.log(global.num);
     switch (action) {
       case "p":
         apCli(name, arCli);

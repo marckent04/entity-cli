@@ -1,18 +1,19 @@
-const { addRelationQuestions } = require("../cli/questions");
-const { getEntity } = require("../common");
-const relations = require("../make/relations");
 const inquirer = require("inquirer");
-const manager = require("../entity");
+
+const { addRelationQuestions } = require("./questions");
+const { getEntity } = require("../../common");
+const relations = require("../../make/typeorm/relations");
+const EntityManager = require("../../entity-manager/TypeOrm");
 const addCli = require("./add");
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
-const cli = async (entityName, apCli) =>
-  inquirer.prompt(addRelationQuestions(entityName)).then(async (answers) => {
+const cli = (entityName, apCli) =>
+  inquirer.prompt(addRelationQuestions(entityName)).then((answers) => {
     const { entity, relation, add } = answers;
     try {
       switch (relation) {
         case "oto":
-          manager.update(
+          EntityManager.update(
             entityName,
             relations.oto(getEntity(entityName), entity)
           );
@@ -24,8 +25,8 @@ const cli = async (entityName, apCli) =>
             entityName,
             entity
           );
-          manager.update(entityName, result.one);
-          manager.update(entity, result.many);
+          EntityManager.update(entityName, result.one);
+          EntityManager.update(entity, result.many);
           break;
         case "mto":
           result = relations.otm(
@@ -35,8 +36,8 @@ const cli = async (entityName, apCli) =>
             entityName
           );
 
-          manager.update(entityName, result.many);
-          manager.update(entity, result.one);
+          EntityManager.update(entityName, result.many);
+          EntityManager.update(entity, result.one);
 
           break;
         default:

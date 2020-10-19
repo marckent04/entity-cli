@@ -32,17 +32,17 @@ const existingEntities = (currentEntity) => {
   );
 };
 
-const entityDestructuring = (entityContent) => {
-  const seprator = entityContent.indexOf("@Entity()");
+const entityDestructuring = (entityContent, breakpoint) => {
+  const seprator = entityContent.indexOf(breakpoint);
   return {
     imports: entityContent.slice(0, seprator).filter((line) => line != ""),
     body: entityContent.slice(seprator),
   };
 };
 
-const entityPropertyExists = (entityContent, property) => {
+const entityPropertyExists = (entityContent, breakpoint, property) => {
   const test = new RegExp(`${property}:`);
-  const { body } = entityDestructuring(entityContent);
+  const { body } = entityDestructuring(entityContent, breakpoint);
   return body.find((line) => test.test(line)) ? "Propriété existe deja" : true;
 };
 

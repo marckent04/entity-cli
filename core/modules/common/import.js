@@ -29,8 +29,8 @@ const formalizeImports = (currentImports, newImports) => {
 
 const deleteTypeOrmImport = (imp) => {};
 
-const addEntityImport = (entityContent, entityToImport) => {
-  let { imports, body } = entityDestructuring(entityContent);
+const addEntityImport = (entityContent, entityToImport, breakpoint) => {
+  let { imports, body } = entityDestructuring(entityContent, breakpoint);
 
   imports = [
     ...imports,

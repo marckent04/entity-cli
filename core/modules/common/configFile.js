@@ -15,13 +15,13 @@ const getConfigFile = () => {
 
 const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
-  if (config) return path.join(rootDir, config.src);
+  if (config && config.src) return path.join(rootDir, config.src);
   return defaultDirectory;
 };
 
 getDirectoryFromConfigFile = () => {
   const config = getConfigFile();
-  if (config) return path.join(rootDir, config.src);
+  if (config && config.src) return path.join(rootDir, config.src);
   return defaultDirectory;
 };
 

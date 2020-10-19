@@ -1,15 +1,16 @@
-const { addPropertyQuestions } = require("../cli/questions");
 const inquirer = require("inquirer");
-const MakeProperty = require("../make/property");
-const addCli = require("./add");
-const entityManager = require("../entity");
 
-const cli = async (entityName, arCli) =>
-  inquirer.prompt(addPropertyQuestions(entityName)).then(async (answers) => {
+const { addPropertyQuestions } = require("./questions");
+const MakeProperty = require("../../make/typeorm/property");
+const addCli = require("./add");
+const EntityManager = require("../../entity-manager/TypeOrm");
+
+const cli = (entityName, arCli) =>
+  inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
     try {
       const { name, type, add, required } = answers;
 
-      entityManager.append(
+      EntityManager.append(
         entityName,
         MakeProperty[type](name, required).join("\n")
       );

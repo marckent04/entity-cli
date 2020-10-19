@@ -1,18 +1,19 @@
 const fs = require("fs");
 const path = require("path");
 const util = require("util");
-const exec = util.promisify(require("child_process").exec);
 const Str = require("string");
+const exec = util.promisify(require("child_process").exec);
 
 const {
   getSrcPathFormConfigFile,
   getConfigFile,
-} = require("./common/configFile");
+} = require("../common/configFile");
 const { linter } = require("./common/linter");
 
 class EntityManager {
   static directory = getSrcPathFormConfigFile();
-  static async init(name) {
+
+  static init(name) {
     const file = path.join(
       this.directory,
       `${Str(name).capitalize().s}.entity.ts`
@@ -44,7 +45,7 @@ class EntityManager {
     fs.writeFileSync(file, linter(content));
   }
 
-  static async create(name) {
+  static create(name) {
     const file = getConfigFile();
     let src = "src/entities";
     if (file && file.src) src = file.src;

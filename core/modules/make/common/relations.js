@@ -1,6 +1,8 @@
 const { addEntityImport, addTypeOrmImport } = require("../common/import");
 const manager = require("../entity");
 const Str = require("string");
+const { typeORM } = require("../common/destructuringBreakpoints");
+
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
     entityName = Str(entityName).capitalize().s;
@@ -41,7 +43,8 @@ class Maker {
   static common(entityContent, relationEntity, typeOrmImport, newContent) {
     const content = addEntityImport(
       addTypeOrmImport(entityContent, typeOrmImport),
-      relationEntity
+      relationEntity,
+      typeORM
     );
 
     return manager.append(content, newContent.join("\n")).join("\n");

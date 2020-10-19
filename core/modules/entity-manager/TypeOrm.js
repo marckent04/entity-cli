@@ -1,23 +1,16 @@
-const fs = require("fs");
-const path = require("path");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const Str = require("string");
+const fs = require("fs");
+const path = require("path");
 
-const {
-  getSrcPathFormConfigFile,
-  getConfigFile,
-} = require("./common/configFile");
-const { linter } = require("./common/linter");
+const BaseEntityManager = require("./Base");
+const { getConfigFile } = require("../common/configFile");
+const { linter } = require("../common/linter");
 
-class EntityManager {
-  static directory = getSrcPathFormConfigFile();
-  static async init(name) {
-    const file = path.join(
-      this.directory,
-      `${Str(name).capitalize().s}.entity.ts`
-    );
-
+class TypeOrmManager extends BaseEntityManager {
+  static init(name) {
+    const file = super.init(name);
     const classDeclaration = `export class ${
       Str(name).capitalize().s
     } extends BaseEntity {`;
@@ -53,31 +46,6 @@ class EntityManager {
       `typeorm entity:create -d ${src} -n ${Str(name).capitalize().s}`
     );
   }
-
-  static update(name, content) {
-    const file = path.join(
-      this.directory,
-      `${Str(name).capitalize().s}.entity.ts`
-    );
-    fs.writeFileSync(file, linter(content));
-  }
-
-  static append(nameOrContent, newContent) {
-    let content = nameOrContent;
-    let file = null;
-    if (!Array.isArray(nameOrContent)) {
-      file = path.join(
-        this.directory,
-        `${Str(nameOrContent).capitalize().s}.entity.ts`
-      );
-      content = fs.readFileSync(file).toString().split("\n");
-    }
-
-    const lastIndex = content.lastIndexOf("}");
-    content.splice(lastIndex, 0, newContent);
-    if (file) fs.writeFileSync(file, linter(content));
-    else return content;
-  }
 }
 
-module.exports = EntityManager;
+module.exports = TypeOrmManager;
