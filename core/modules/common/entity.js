@@ -32,7 +32,10 @@ const existingEntities = (currentEntity) => {
 };
 
 const entityDestructuring = (entityContent, breakpoint) => {
-  const seprator = entityContent.indexOf(breakpoint);
+  const regex = new RegExp(breakpoint);
+
+  const seprator = entityContent.findIndex((line) => regex.test(line));
+
   return {
     imports: entityContent.slice(0, seprator).filter((line) => line != ""),
     body: entityContent.slice(seprator),

@@ -1,6 +1,6 @@
 const typeORM = "@Entity()";
 
-const mongoose = "";
+const mongoose = "(new Schema\\({)$";
 
 const sequelize = "";
 

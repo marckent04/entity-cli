@@ -44,6 +44,10 @@ class TypeOrmManager extends BaseEntityManager {
 
     return await exec(`typeorm entity:create -d ${src} -n ${capitalize(name)}`);
   }
+
+  static append(nameOrContent, newContent) {
+    super.append(nameOrContent, newContent, "});");
+  }
 }
 
 module.exports = TypeOrmManager;

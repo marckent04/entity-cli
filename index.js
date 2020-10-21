@@ -1,5 +1,6 @@
 const { getConfigFile } = require("./core/modules/common/configFile");
 const typeOrmCli = require("./core/modules/cli/typeorm");
+const mongooseCli = require("./core/modules/cli/mongoose");
 
 const config = getConfigFile();
 
@@ -10,7 +11,7 @@ if (config && config.orm) {
       console.log("sequelize Soon");
       break;
     case "mongoose":
-      console.log("mongoose Soon");
+      mongooseCli();
       break;
     default:
       typeOrmCli();

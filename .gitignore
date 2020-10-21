@@ -3,3 +3,4 @@ src
 package-lock.json
 .DS_Store
 ./test.js
+test.js

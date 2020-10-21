@@ -94,4 +94,5 @@ module.exports = {
   addQuestions,
   addRelationQuestions,
   addPropertyQuestions,
+  validateVariableName,
 };
