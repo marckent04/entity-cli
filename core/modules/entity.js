@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const util = require("util");
 const exec = util.promisify(require("child_process").exec);
-const Str = require("string");
+const capitalize = require("lodash.capitalize");
 
 const {
   getSrcPathFormConfigFile,
@@ -13,16 +13,13 @@ const { linter } = require("./common/linter");
 class EntityManager {
   static directory = getSrcPathFormConfigFile();
   static async init(name) {
-    const file = path.join(
-      this.directory,
-      `${Str(name).capitalize().s}.entity.ts`
-    );
+    const file = path.join(this.directory, `${capitalize(name)}.entity.ts`);
 
-    const classDeclaration = `export class ${
-      Str(name).capitalize().s
-    } extends BaseEntity {`;
+    const classDeclaration = `export class ${capitalize(
+      name
+    )} extends BaseEntity {`;
 
-    const classRegex = new RegExp(`export class ${Str(name).capitalize().s} {`);
+    const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
     fs.renameSync(path.join(this.directory, `${name}.ts`), file);
 
@@ -49,16 +46,11 @@ class EntityManager {
     let src = "src/entities";
     if (file && file.src) src = file.src;
 
-    return await exec(
-      `typeorm entity:create -d ${src} -n ${Str(name).capitalize().s}`
-    );
+    return await exec(`typeorm entity:create -d ${src} -n ${capitalize(name)}`);
   }
 
   static update(name, content) {
-    const file = path.join(
-      this.directory,
-      `${Str(name).capitalize().s}.entity.ts`
-    );
+    const file = path.join(this.directory, `${capitalize(name)}.entity.ts`);
     fs.writeFileSync(file, linter(content));
   }
 
@@ -68,7 +60,7 @@ class EntityManager {
     if (!Array.isArray(nameOrContent)) {
       file = path.join(
         this.directory,
-        `${Str(nameOrContent).capitalize().s}.entity.ts`
+        `${capitalize(nameOrContent)}.entity.ts`
       );
       content = fs.readFileSync(file).toString().split("\n");
     }

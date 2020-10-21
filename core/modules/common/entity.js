@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const Str = require("string");
+const capitalize = require("lodash.capitalize");
+
 const { getDirectoryFromConfigFile } = require("./configFile");
 
 const directory = getDirectoryFromConfigFile();
@@ -26,9 +27,7 @@ const existingEntities = (currentEntity) => {
   return filterEntities(
     fs
       .readdirSync(directory)
-      .filter(
-        (entity) => entity != `${Str(currentEntity).capitalize().s}.entity.ts`
-      )
+      .filter((entity) => entity != `${capitalize(currentEntity)}.entity.ts`)
   );
 };
 

@@ -1,4 +1,4 @@
-const Str = require("string");
+const capitalize = require("lodash.capitalize");
 const inquirer = require("inquirer");
 
 const { entityCreationQuestions } = require("./questions");
@@ -11,7 +11,7 @@ const apCli = require("./addProperty");
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
     const { name } = answers;
-    if (!fileExists(Str(name).capitalize().s)) {
+    if (!fileExists(capitalize(name))) {
       const { stderr, stdout } = await EntityManager.create(name);
       EntityManager.init(name);
       if (stderr) throw stderr;

@@ -1,4 +1,5 @@
 const Str = require("string");
+const capitalize = require("lodash.capitalize");
 
 const { addEntityImport, addTypeOrmImport } = require("../../common/import");
 const EntityManager = require("../../entity-manager/TypeOrm");
@@ -6,8 +7,8 @@ const { typeORM } = require("../../common/destructuringBreakpoints");
 
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
-    entityName = Str(entityName).capitalize().s;
-    relationEntityName = Str(relationEntityName).capitalize().s;
+    entityName = capitalize(entityName);
+    relationEntityName = capitalize(relationEntityName);
 
     const one = {
       typeOrmImport: ["OneToMany"],
