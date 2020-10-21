@@ -1,4 +1,3 @@
-const Str = require("string");
 const capitalize = require("lodash.capitalize");
 
 const { addEntityImport, addTypeOrmImport } = require("../../common/import");
