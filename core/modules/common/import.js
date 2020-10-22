@@ -1,6 +1,6 @@
-const { entityDestructuring } = require("./entity");
+import { entityDestructuring } from "./entity";
 
-const addTypeOrmImport = (entityContent, toImport) => {
+export const addTypeOrmImport = (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
     toImport = toImport.map((imp) => `${imp},`);
   } else {
@@ -27,9 +27,9 @@ const formalizeImports = (currentImports, newImports) => {
   return Array.from(setImports);
 };
 
-const deleteTypeOrmImport = (imp) => {};
+// const deleteTypeOrmImport = (imp) => {};
 
-const addEntityImport = (entityContent, entityToImport, breakpoint) => {
+export const addEntityImport = (entityContent, entityToImport, breakpoint) => {
   let { imports, body } = entityDestructuring(entityContent, breakpoint);
 
   imports = [
@@ -41,9 +41,4 @@ const addEntityImport = (entityContent, entityToImport, breakpoint) => {
   return [...imports, ...body];
 };
 
-const existsEntityImport = (entity) => {};
-
-module.exports = {
-  addTypeOrmImport,
-  addEntityImport,
-};
+// const existsEntityImport = (entity) => {};

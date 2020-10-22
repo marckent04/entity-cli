@@ -1,15 +1,15 @@
-const {
+import {
   entityPropertyExists,
   getEntity,
   existingEntities,
-} = require("../../common/index");
+} from "../../common/index";
 
-const validateVariableName = (value) => {
+export const validateVariableName = (value) => {
   if (!isNaN(value[0])) return "Entrer un nom valide";
   return true;
 };
 
-const entityCreationQuestions = () => [
+export const entityCreationQuestions = () => [
   {
     type: "input",
     name: "name",
@@ -20,7 +20,7 @@ const entityCreationQuestions = () => [
   },
 ];
 
-const addQuestions = () => [
+export const addQuestions = () => [
   {
     type: "list",
     name: "action",
@@ -32,7 +32,7 @@ const addQuestions = () => [
   },
 ];
 
-const addRelationQuestions = (relationsChoices) => (entity) => [
+export const addRelationQuestions = (relationsChoices) => (entity) => [
   {
     type: "list",
     name: "entity",
@@ -53,7 +53,9 @@ const addRelationQuestions = (relationsChoices) => (entity) => [
   },
 ];
 
-const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
+export const addPropertyQuestions = (breakpoint, typeChoices) => (
+  entityName
+) => [
   {
     type: "input",
     name: "name",
@@ -88,11 +90,3 @@ const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
     default: false,
   },
 ];
-
-module.exports = {
-  entityCreationQuestions,
-  addQuestions,
-  addRelationQuestions,
-  addPropertyQuestions,
-  validateVariableName,
-};

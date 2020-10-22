@@ -1,9 +1,9 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 
-const { addPropertyQuestions } = require("./questions");
-const MakeProperty = require("../../make/typeorm/property");
-const addCli = require("./add");
-const EntityManager = require("../../entity-manager/TypeOrm");
+import { addPropertyQuestions } from "./questions";
+import MakeProperty from "../../make/typeorm/property";
+import addCli from "./add";
+import EntityManager from "../../entity-manager/TypeOrm";
 
 const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
@@ -23,4 +23,4 @@ const cli = (entityName, arCli) =>
     // if (answers.add) return addNewProperty(entityName)
   });
 
-module.exports = cli;
+export default cli;

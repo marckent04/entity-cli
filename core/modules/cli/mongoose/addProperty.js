@@ -1,8 +1,8 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 
-const { addPropertyQuestions } = require("./questions");
-const MakeProperty = require("../../make/mongoose/property");
-const EntityManager = require("../../entity-manager/Mongoose");
+import { addPropertyQuestions } from "./questions";
+import MakeProperty from "../../make/mongoose/property";
+import EntityManager from "../../entity-manager/Mongoose";
 
 const cli = (entityName) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
@@ -18,4 +18,4 @@ const cli = (entityName) =>
     // if (answers.add) return addNewProperty(entityName)
   });
 
-module.exports = cli;
+export default cli;

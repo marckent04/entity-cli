@@ -1,4 +1,4 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 
 /**
  *
@@ -17,4 +17,4 @@ const cli = (addQuestions) => (name, apCli, arCli) => {
   });
 };
 
-module.exports = cli;
+export default cli;

@@ -1,5 +1,5 @@
-const { addQuestions } = require("./questions");
-const inquirer = require("inquirer");
+import { addQuestions } from "./questions";
+import inquirer from "inquirer";
 
 /**
  *
@@ -9,7 +9,6 @@ const inquirer = require("inquirer");
  */
 function cli(name, apCli, arCli) {
   inquirer.prompt(addQuestions()).then(({ action }) => {
-    console.log(global.num);
     switch (action) {
       case "p":
         apCli(name, arCli);
@@ -21,4 +20,4 @@ function cli(name, apCli, arCli) {
   });
 }
 
-module.exports = cli;
+export default cli;

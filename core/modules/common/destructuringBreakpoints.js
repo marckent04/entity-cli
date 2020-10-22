@@ -1,11 +1,5 @@
-const typeORM = "@Entity()";
+export const typeORM = "@Entity()";
 
-const mongoose = "(new Schema\\({)$";
+export const mongoose = "(new Schema\\({)$";
 
-const sequelize = "";
-
-module.exports = {
-  typeORM,
-  mongoose,
-  sequelize,
-};
+export const sequelize = "";

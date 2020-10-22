@@ -1,12 +1,12 @@
-const capitalize = require("lodash.capitalize");
-const inquirer = require("inquirer");
+import capitalize from "lodash.capitalize";
+import inquirer from "inquirer";
 
-const { entityCreationQuestions } = require("./questions");
-const EntityManager = require("../../entity-manager/TypeOrm");
-const { fileExists } = require("../../common/common");
-const addCli = require("./add");
-const arCli = require("./addRelation");
-const apCli = require("./addProperty");
+import { entityCreationQuestions } from "./questions";
+import EntityManager from "../../entity-manager/TypeOrm";
+import { fileExists } from "../../common/common";
+import addCli from "./add";
+import arCli from "./addRelation";
+import apCli from "./addProperty";
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
@@ -23,4 +23,4 @@ const cli = async () =>
     addCli(name, apCli, arCli);
   });
 
-module.exports = cli;
+export default cli;

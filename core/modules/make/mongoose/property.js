@@ -1,4 +1,4 @@
-class Maker {
+export default class Maker {
   static common(name, type) {
     return [`${name}: ${type},`];
   }
@@ -18,4 +18,3 @@ class Maker {
     return this.common(name, "Date");
   }
 }
-module.exports = Maker;
