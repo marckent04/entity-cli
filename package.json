@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-    "start": "babel-node index.js"
+    "start": "babel-node index.js",
+    "testing": "babel-node test.js"
   },
   "author": "Marc-Henry Nanguy <marchenrynanguy1@gmail.com>",
   "license": "ISC",

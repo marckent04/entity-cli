@@ -1,10 +1,10 @@
-const capitalize = require("lodash.capitalize");
-const fs = require("fs");
-const path = require("path");
+import capitalize from "lodash.capitalize";
+import * as fs from "fs";
+import * as path from "path";
 
-const BaseEntityManager = require("./Base");
-const { getSrcPathFormConfigFile } = require("../common/configFile");
-const { linter } = require("../common/linter");
+import BaseEntityManager from "./Base";
+import { getSrcPathFormConfigFile } from "../common/configFile";
+import { linter } from "../common/linter";
 
 class MongooseManager extends BaseEntityManager {
   static init(name) {
@@ -13,11 +13,12 @@ class MongooseManager extends BaseEntityManager {
 
   static template(name) {
     return [
-      "import {Schema, Types} from 'mongoose'",
+      "import {Schema, Types, model } from 'mongoose'",
       "",
-      `export const ${capitalize(name)} = new Schema({`,
-      "id: Types.ObjectId,",
+      `const ${capitalize(name)} = new Schema({`,
+      "_id: Types.ObjectId,",
       "})",
+      `export model('${capitalize(name)}', ${capitalize(name)})`,
     ];
   }
 

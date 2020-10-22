@@ -4,10 +4,7 @@ const util = require("util");
 const capitalize = require("lodash.capitalize");
 const exec = util.promisify(require("child_process").exec);
 
-const {
-  getSrcPathFormConfigFile,
-  getConfigFile,
-} = require("../common/configFile");
+const { getSrcPathFormConfigFile } = require("../common/configFile");
 const { linter } = require("./common/linter");
 
 class EntityManager {
@@ -40,4 +37,4 @@ class EntityManager {
   }
 }
 
-module.exports = EntityManager;
+export default EntityManager;
