@@ -1,4 +1,4 @@
-class Maker {
+export default class Maker {
   static common(typeDb, name, mandatory = true, typeJs = null) {
     return [
       `\t@Column({type: "${typeDb}"${mandatory ? "" : ", nullable: true"}})`,
@@ -27,4 +27,3 @@ class Maker {
     return this.common("date", name, "Date");
   }
 }
-module.exports = Maker;

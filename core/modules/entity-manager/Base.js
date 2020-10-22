@@ -41,4 +41,4 @@ class BaseEntityManager {
   }
 }
 
-module.exports = BaseEntityManager;
+export default BaseEntityManager;

@@ -12,13 +12,14 @@ class MongooseManager extends BaseEntityManager {
   }
 
   static template(name) {
+    name = capitalize(name);
     return [
       "import {Schema, Types, model } from 'mongoose'",
       "",
-      `const ${capitalize(name)} = new Schema({`,
+      `const ${name} = new Schema({`,
       "_id: Types.ObjectId,",
       "})",
-      `export model('${capitalize(name)}', ${capitalize(name)})`,
+      `export const ${name}Model = model('${name}', ${name})`,
     ];
   }
 
@@ -36,4 +37,4 @@ class MongooseManager extends BaseEntityManager {
   }
 }
 
-module.exports = MongooseManager;
+export default MongooseManager;
