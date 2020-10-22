@@ -1,7 +1,5 @@
 "use strict";
 
-const entityFuncs = require("./entity");
+import * as entityFuncs from "./entity";
 
-module.exports = {
-  ...entityFuncs,
-};
+export default entityFuncs;

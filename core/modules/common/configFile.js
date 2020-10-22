@@ -1,39 +1,33 @@
-const { rootDir, defaultDirectory } = require("./common");
-const fs = require("fs");
-const path = require("path");
+import { rootDir, defaultDirectory } from "./common";
+import * as fs from "fs";
+import * as path from "path";
+
 const configFile = path.join(rootDir, "entity-cli.json");
 
 const configFileExists = () => {
   return fs.existsSync(configFile);
 };
 
-const getConfigFile = () => {
+export const getConfigFile = () => {
   if (configFileExists())
     return JSON.parse(fs.readFileSync(configFile).toString());
   return null;
 };
 
-const getSrcPathFormConfigFile = () => {
+export const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
   if (config && config.src) return path.join(rootDir, config.src);
   return defaultDirectory;
 };
 
-getDirectoryFromConfigFile = () => {
+export const getDirectoryFromConfigFile = () => {
   const config = getConfigFile();
   if (config && config.src) return path.join(rootDir, config.src);
   return defaultDirectory;
 };
 
-entityExistsFromConfigFile = (name) => {
+export const entityExistsFromConfigFile = (name) => {
   const dest = path.join(getDirectoryFromConfigFile(), `${name}.entity.ts`);
   if (fs.existsSync(dest)) return true;
   return false;
-};
-
-module.exports = {
-  getSrcPathFormConfigFile,
-  getConfigFile,
-  getDirectoryFromConfigFile,
-  entityExistsFromConfigFile,
 };

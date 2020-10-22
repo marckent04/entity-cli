@@ -1,6 +1,6 @@
-const { getConfigFile } = require("./core/modules/common/configFile");
-const typeOrmCli = require("./core/modules/cli/typeorm");
-const mongooseCli = require("./core/modules/cli/mongoose");
+import { getConfigFile } from "./core/modules/common/configFile";
+import typeOrmCli from "./core/modules/cli/typeorm";
+import mongooseCli from "./core/modules/cli/mongoose";
 
 const config = getConfigFile();
 

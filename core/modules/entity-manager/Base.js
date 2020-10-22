@@ -1,9 +1,9 @@
-const fs = require("fs");
-const path = require("path");
-const capitalize = require("lodash.capitalize");
-const findLastIndex = require("lodash.findlastindex");
-const { getSrcPathFormConfigFile } = require("../common/configFile");
-const { linter } = require("../common/linter");
+import * as fs from "fs";
+import * as path from "path";
+import capitalize from "lodash.capitalize";
+import findLastIndex from "lodash.findlastindex";
+import { getSrcPathFormConfigFile } from "../common/configFile";
+import { linter } from "../common/linter";
 
 class BaseEntityManager {
   static directory = getSrcPathFormConfigFile();
