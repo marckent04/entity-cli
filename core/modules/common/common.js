@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-// const rootDir = path.join(__dirname, "..", "..", "..", "..", "..");
+const rootDir = path.join(__dirname, "..", "..", "..", "..", "..");
 // const defaultDir = "."
-const rootDir = path.join(__dirname, "..", "..", "..");
+// const rootDir = path.join(__dirname, "..", "..", "..");
 const defaultDirectory = path.join(rootDir, "src", "entities");
 
 const fileExists = (name) => {
