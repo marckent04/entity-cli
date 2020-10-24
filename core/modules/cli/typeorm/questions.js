@@ -1,10 +1,10 @@
-const {
-  addQuestions,
-  addRelationQuestions: addRelationsConstructor,
-  entityCreationQuestions,
-  addPropertyQuestions: addPropertyConstructor,
-} = require("../common/questions");
-const { typeORM } = require("../../common/destructuringBreakpoints");
+import {
+  addRelationQuestions as addRelationsConstructor,
+  addPropertyQuestions as addPropertyConstructor,
+} from "../common/questions";
+import { typeORM } from "../../common/destructuringBreakpoints";
+
+export { addQuestions, entityCreationQuestions } from "../common/questions";
 
 const typeChoices = ["string", "number", "boolean", "Date", "text"];
 
@@ -15,12 +15,8 @@ const relationsChoices = [
   { value: "mtm", name: "Many-to-many" },
 ];
 
-const addRelationQuestions = addRelationsConstructor(relationsChoices);
-const addPropertyQuestions = addPropertyConstructor(typeORM, typeChoices);
-
-module.exports = {
-  addPropertyQuestions,
-  entityCreationQuestions,
-  addQuestions,
-  addRelationQuestions,
-};
+export const addRelationQuestions = addRelationsConstructor(relationsChoices);
+export const addPropertyQuestions = addPropertyConstructor(
+  typeORM,
+  typeChoices
+);

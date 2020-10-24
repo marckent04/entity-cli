@@ -1,15 +1,18 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
-const { addRelationQuestions } = require("./questions");
-const { getEntity } = require("../../common");
-const relations = require("../../make/typeorm/relations");
-const EntityManager = require("../../entity-manager/TypeOrm");
-const addCli = require("./add");
+import { addRelationQuestions } from "./questions";
+import { getEntity } from "../../common";
+import relations from "../../make/typeorm/relations";
+import EntityManager from "../../entity-manager/TypeOrm";
+import addCli from "./add";
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
 const cli = (entityName, apCli) =>
   inquirer.prompt(addRelationQuestions(entityName)).then((answers) => {
     const { entity, relation, add } = answers;
+    let result = null;
     try {
       switch (relation) {
         case "oto":
@@ -25,6 +28,7 @@ const cli = (entityName, apCli) =>
             entityName,
             entity
           );
+
           EntityManager.update(entityName, result.one);
           EntityManager.update(entity, result.many);
           break;
@@ -44,11 +48,11 @@ const cli = (entityName, apCli) =>
           break;
       }
 
-      console.log("relation etablie");
+      consola.success(chalk.green("relation etablie"));
       if (add) addCli(entityName, apCli, cli);
     } catch (error) {
-      console.log(error);
+      consola.error(error);
     }
   });
 
-module.exports = cli;
+export default cli;

@@ -1,9 +1,11 @@
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
-const { addPropertyQuestions } = require("./questions");
-const MakeProperty = require("../../make/typeorm/property");
-const addCli = require("./add");
-const EntityManager = require("../../entity-manager/TypeOrm");
+import { addPropertyQuestions } from "./questions";
+import MakeProperty from "../../make/typeorm/property";
+import addCli from "./add";
+import EntityManager from "../../entity-manager/TypeOrm";
 
 const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
@@ -16,11 +18,10 @@ const cli = (entityName, arCli) =>
       );
 
       if (add) addCli(entityName, cli, arCli);
-      else console.log("Good code to you");
+      else consola.info(chalk.blueBright("Good code to you"));
     } catch (error) {
-      console.log(error);
+      consola.error(error);
     }
-    // if (answers.add) return addNewProperty(entityName)
   });
 
-module.exports = cli;
+export default cli;

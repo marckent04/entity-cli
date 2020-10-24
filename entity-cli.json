@@ -1,3 +1,4 @@
 {
-  "orm": "mongoose"
+  "orm": "mongoose",
+  "language": "js"
 }

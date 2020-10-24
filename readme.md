@@ -2,6 +2,7 @@
 
 ## Features
 
+- support typeorm and mongoose
 - Generate entity
 - support OneToMany relation (typeorm)
 - support OneToOne relation (typeorm)
@@ -15,7 +16,7 @@
 ```
 "scripts" {
     ...
-    "entity-cli": "node ./node_modules/entity-cli/index.js"
+    "entity-cli": "babel-node ./node_modules/entity-cli/index.js"
 }
 ```
 

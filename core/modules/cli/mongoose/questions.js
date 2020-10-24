@@ -1,40 +1,39 @@
-const {
-  addRelationQuestions: addRelationsConstructor,
-  entityCreationQuestions,
-  addPropertyQuestions: addPropertyConstructor,
-} = require("../common/questions");
+import { validateVariableName } from "../common/questions";
+import { mongoose } from "../../common/destructuringBreakpoints";
+import { entityPropertyExists } from "../../common/entity";
+import { getEntity } from "../../common";
+export { entityCreationQuestions } from "../common/questions";
 
-const { validateVariableName } = require("../common/questions");
-const { mongoose } = require("../../common/destructuringBreakpoints");
+export const addPropertyQuestions = (entityName) => {
+  const typeChoices = ["String", "Number", "Boolean", "Date"];
 
-const typeChoices = ["String", "Number", "Boolean", "Date"];
+  return [
+    {
+      type: "input",
+      name: "name",
+      message: "property name",
+      validate: function (val) {
+        const validVar = validateVariableName(val);
+        if (validVar)
+          return entityPropertyExists(getEntity(entityName), mongoose, val);
 
-const addPropertyQuestions = (entityName) => [
-  {
-    type: "input",
-    name: "name",
-    message: "property name",
-    validate: function (val) {
-      return validateVariableName(val);
+        return "enter an valid name";
+      },
     },
-  },
-  {
-    type: "list",
-    name: "type",
-    message: "choose property type",
-    choices: typeChoices,
-    filter: function (val) {
-      return val.toLowerCase();
+    {
+      type: "list",
+      name: "type",
+      message: "choose property type",
+      choices: typeChoices,
+      filter: function (val) {
+        return val.toLowerCase();
+      },
     },
-  },
-  {
-    type: "confirm",
-    name: "add",
-    message: "Add new property ?",
-    default: false,
-  },
-];
-module.exports = {
-  addPropertyQuestions,
-  entityCreationQuestions,
+    {
+      type: "confirm",
+      name: "add",
+      message: "Add new property ?",
+      default: false,
+    },
+  ];
 };

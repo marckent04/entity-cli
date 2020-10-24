@@ -1,4 +1,4 @@
-const prettier = require("prettier");
+import prettier from "prettier";
 
 const config = {
   semi: false,
@@ -6,9 +6,7 @@ const config = {
   trailingComma: "all",
 };
 
-const linter = (content) => {
+export const linter = (content) => {
   if (Array.isArray(content)) content = content.join("\n");
   return prettier.format(content, config);
 };
-
-module.exports = { linter };

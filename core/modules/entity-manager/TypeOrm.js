@@ -1,13 +1,12 @@
-const util = require("util");
+import util from "util";
+import fs from "fs";
+import path from "path";
+import capitalize from "lodash.capitalize";
+import BaseEntityManager from "./Base";
+import { getConfigFile } from "../common/configFile";
+import { linter } from "../common/linter";
+
 const exec = util.promisify(require("child_process").exec);
-const fs = require("fs");
-const path = require("path");
-const capitalize = require("lodash.capitalize");
-
-const BaseEntityManager = require("./Base");
-const { getConfigFile } = require("../common/configFile");
-const { linter } = require("../common/linter");
-
 class TypeOrmManager extends BaseEntityManager {
   static init(name) {
     const file = super.init(name);
@@ -46,8 +45,8 @@ class TypeOrmManager extends BaseEntityManager {
   }
 
   static append(nameOrContent, newContent) {
-    super.append(nameOrContent, newContent, "});");
+    return super.append(nameOrContent, newContent, "}");
   }
 }
 
-module.exports = TypeOrmManager;
+export default TypeOrmManager;
