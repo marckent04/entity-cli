@@ -16,7 +16,10 @@ class TypeOrmManager extends BaseEntityManager {
 
     const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
-    fs.renameSync(path.join(this.directory, `${name}.ts`), file);
+    fs.renameSync(
+      path.join(this.directory, `${name}.${super.fileExtension}`),
+      file
+    );
 
     let content = fs.readFileSync(file).toString().split("\n");
 
