@@ -1,6 +1,7 @@
 import { rootDir, defaultDirectory } from "./common";
 import fs from "fs";
 import path from "path";
+import { config } from "process";
 
 const configFile = path.join(rootDir, "entity-cli.json");
 
@@ -30,4 +31,26 @@ export const entityExistsFromConfigFile = (name) => {
   const dest = path.join(getDirectoryFromConfigFile(), `${name}.entity.ts`);
   if (fs.existsSync(dest)) return true;
   return false;
+};
+
+const getOrm = () => {
+  const config = getConfigFile();
+  let orm = "typeorm";
+
+  if (config && config.orm) {
+    switch (config.orm) {
+      case "sequelize":
+      case "mongoose":
+        orm = config.orm;
+    }
+  }
+
+  return orm;
+};
+
+export const getFileExtension = () => {
+  const config = getConfigFile();
+  if (getOrm() != "typeorm" && config && config.lang && config.lang == "js")
+    return "js";
+  return "ts";
 };

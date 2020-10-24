@@ -2,7 +2,7 @@
 
 ## Features
 
-- support typeorm and mongoose
+- support typeorm (ts) and mongoose (js, ts)
 - Generate entity
 - support OneToMany relation (typeorm)
 - support OneToOne relation (typeorm)
@@ -37,9 +37,11 @@ put this content
 ```
 {
   "src": "put_entities_directory",
-  "orm": "type" //typeorm or mongoose
+  "orm": "type" //typeorm or mongoose,
+  "lang": "language" // js or ts
 }
 ```
 
 the default directory is : src/entities
-by default orm is : typeorm
+default orm : typeorm
+default language : ts

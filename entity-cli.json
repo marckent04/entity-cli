@@ -1,4 +1,4 @@
 {
   "orm": "mongoose",
-  "language": "js"
+  "lang": "js"
 }

@@ -26,7 +26,7 @@ class MongooseManager extends BaseEntityManager {
   static create(name) {
     const file = path.join(
       getSrcPathFormConfigFile(),
-      `${capitalize(name)}.entity.ts`
+      `${capitalize(name)}.entity.${super.fileExtension}`
     );
 
     fs.writeFileSync(file, this.init(name));
