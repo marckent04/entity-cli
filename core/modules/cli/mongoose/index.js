@@ -1,5 +1,7 @@
 import capitalize from "lodash.capitalize";
 import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
 import { entityCreationQuestions } from "./questions";
 import EntityManager from "../../entity-manager/Mongoose";
@@ -11,10 +13,8 @@ const cli = async () =>
     const { name } = answers;
     if (!fileExists(capitalize(name))) {
       EntityManager.create(name);
-      console.log("entity created");
-    } else {
-      console.log(`update ${name}`);
-    }
+      consola.success(chalk.green("entity created"));
+    } else consola.info(chalk.blueBright(`update ${name}`));
 
     apCli(name);
   });

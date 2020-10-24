@@ -1,4 +1,6 @@
 import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
 import { addPropertyQuestions } from "./questions";
 import MakeProperty from "../../make/typeorm/property";
@@ -16,11 +18,10 @@ const cli = (entityName, arCli) =>
       );
 
       if (add) addCli(entityName, cli, arCli);
-      else console.log("Good code to you");
+      else consola.info(chalk.blueBright("Good code to you"));
     } catch (error) {
-      console.log(error);
+      consola.error(error);
     }
-    // if (answers.add) return addNewProperty(entityName)
   });
 
 export default cli;

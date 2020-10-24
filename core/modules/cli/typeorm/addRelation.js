@@ -1,4 +1,6 @@
 import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
 import { addRelationQuestions } from "./questions";
 import { getEntity } from "../../common";
@@ -46,10 +48,10 @@ const cli = (entityName, apCli) =>
           break;
       }
 
-      console.log("relation etablie");
+      consola.success(chalk.green("relation etablie"));
       if (add) addCli(entityName, apCli, cli);
     } catch (error) {
-      console.log(error);
+      consola.error(error);
     }
   });
 
