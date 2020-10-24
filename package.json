@@ -29,6 +29,7 @@
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
     "inquirer": "^7.3.3",
+    "jest": "^26.6.1",
     "lodash.capitalize": "^4.2.1",
     "lodash.findlastindex": "^4.6.0",
     "mongoose": "^5.10.9",
