@@ -2,11 +2,11 @@ import inquirer from "inquirer";
 import consola from "consola";
 import chalk from "chalk";
 
-import { addRelationQuestions } from "./questions";
-import { getEntity } from "../../common";
-import relations from "../../make/typeorm/relations";
-import EntityManager from "../../entity-manager/TypeOrm";
-import addCli from "./add";
+import { addRelationQuestions } from "./questions.js";
+import { getEntity } from "../../common/index.js";
+import relations from "../../make/typeorm/relations.js";
+import EntityManager from "../../entity-manager/TypeOrm.js";
+import addCli from "./add.js";
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
 const cli = (entityName, apCli) =>

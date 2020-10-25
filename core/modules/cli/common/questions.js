@@ -2,7 +2,7 @@ import {
   entityPropertyExists,
   getEntity,
   existingEntities,
-} from "../../common/index";
+} from "../../common/index.js";
 
 export const validateVariableName = (value) => {
   if (!isNaN(value[0])) return "Entrer un nom valide";

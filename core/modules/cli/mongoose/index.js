@@ -3,10 +3,10 @@ import inquirer from "inquirer";
 import consola from "consola";
 import chalk from "chalk";
 
-import { entityCreationQuestions } from "./questions";
-import EntityManager from "../../entity-manager/Mongoose";
-import { fileExists } from "../../common/common";
-import apCli from "./addProperty";
+import { entityCreationQuestions } from "./questions.js";
+import EntityManager from "../../entity-manager/Mongoose.js";
+import { fileExists } from "../../common/common.js";
+import apCli from "./addProperty.js";
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {

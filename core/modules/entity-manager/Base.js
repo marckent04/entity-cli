@@ -5,8 +5,8 @@ import findLastIndex from "lodash.findlastindex";
 import {
   getSrcPathFormConfigFile,
   getFileExtension,
-} from "../common/configFile";
-import { linter } from "../common/linter";
+} from "../common/configFile.js";
+import { linter } from "../common/linter.js";
 
 class BaseEntityManager {
   static get directory() {
@@ -20,7 +20,7 @@ class BaseEntityManager {
   static init(name) {
     return path.join(
       this.directory,
-      `${capitalize(name)}.entity.${fileExtension}`
+      `${capitalize(name)}.entity.${this.fileExtension}`
     );
   }
 
@@ -29,7 +29,7 @@ class BaseEntityManager {
   static update(name, content) {
     const file = path.join(
       this.directory,
-      `${capitalize(name)}.entity.${fileExtension}`
+      `${capitalize(name)}.entity.${this.fileExtension}`
     );
     fs.writeFileSync(file, linter(content));
   }
@@ -41,7 +41,7 @@ class BaseEntityManager {
     if (!Array.isArray(nameOrContent)) {
       file = path.join(
         this.directory,
-        `${capitalize(nameOrContent)}.entity.${fileExtension}`
+        `${capitalize(nameOrContent)}.entity.${this.fileExtension}`
       );
       content = fs.readFileSync(file).toString().split("\n");
     }

@@ -1,4 +1,4 @@
-import { entityDestructuring } from "./entity";
+import { entityDestructuring } from "./entity.js";
 
 export const addTypeOrmImport = (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
