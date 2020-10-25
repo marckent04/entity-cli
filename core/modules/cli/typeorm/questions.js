@@ -1,10 +1,10 @@
 import {
   addRelationQuestions as addRelationsConstructor,
   addPropertyQuestions as addPropertyConstructor,
-} from "../common/questions";
-import { typeORM } from "../../common/destructuringBreakpoints";
+} from "../common/questions.js";
+import { typeORM } from "../../common/destructuringBreakpoints.js";
 
-export { addQuestions, entityCreationQuestions } from "../common/questions";
+export { addQuestions, entityCreationQuestions } from "../common/questions.js";
 
 const typeChoices = ["string", "number", "boolean", "Date", "text"];
 

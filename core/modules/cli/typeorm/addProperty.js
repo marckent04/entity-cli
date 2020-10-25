@@ -2,10 +2,10 @@ import inquirer from "inquirer";
 import consola from "consola";
 import chalk from "chalk";
 
-import { addPropertyQuestions } from "./questions";
-import MakeProperty from "../../make/typeorm/property";
-import addCli from "./add";
-import EntityManager from "../../entity-manager/TypeOrm";
+import { addPropertyQuestions } from "./questions.js";
+import MakeProperty from "../../make/typeorm/property.js";
+import addCli from "./add.js";
+import EntityManager from "../../entity-manager/TypeOrm.js";
 
 const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {

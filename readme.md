@@ -16,7 +16,7 @@
 ```
 "scripts" {
     ...
-    "entity-cli": "babel-node ./node_modules/entity-cli/index.js"
+    "entity-cli": "babel-node ./node_modules/entity-cli/index.mjs"
 }
 ```
 

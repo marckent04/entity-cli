@@ -2,11 +2,14 @@ import util from "util";
 import fs from "fs";
 import path from "path";
 import capitalize from "lodash.capitalize";
-import BaseEntityManager from "./Base";
-import { getConfigFile } from "../common/configFile";
-import { linter } from "../common/linter";
+import { exec as executable } from 'child_process';
 
-const exec = util.promisify(require("child_process").exec);
+import BaseEntityManager from "./Base.js";
+import { getConfigFile } from "../common/configFile.js";
+import { linter } from "../common/linter.js";
+
+const exec = util.promisify(executable);
+
 class TypeOrmManager extends BaseEntityManager {
   static init(name) {
     const file = super.init(name);

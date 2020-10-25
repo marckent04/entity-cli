@@ -1,6 +1,6 @@
 {
   "name": "entity-cli",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "generate entities by cli",
   "main": "index.js",
   "homepage": "https://www.npmjs.com/package/entity-cli#readme",

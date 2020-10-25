@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import capitalize from "lodash.capitalize";
-import { getDirectoryFromConfigFile } from "./configFile";
+import { getDirectoryFromConfigFile } from "./configFile.js";
 
 const directory = getDirectoryFromConfigFile();
 

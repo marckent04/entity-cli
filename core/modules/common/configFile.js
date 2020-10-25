@@ -1,7 +1,6 @@
-import { rootDir, defaultDirectory } from "./common";
+import { rootDir, defaultDirectory } from "./common.js";
 import fs from "fs";
 import path from "path";
-import { config } from "process";
 
 const configFile = path.join(rootDir, "entity-cli.json");
 
