@@ -1,3 +1,3 @@
 "use strict";
 
-export * from "./entity.js";
+export * from "./entity.mjs";

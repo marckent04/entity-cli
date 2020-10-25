@@ -1,4 +1,4 @@
-import { addQuestions } from "./questions.js";
+import { addQuestions } from "./questions.mjs";
 import inquirer from "inquirer";
 
 /**
