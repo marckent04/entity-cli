@@ -1,6 +1,6 @@
-import { getConfigFile } from "./core/modules/common/configFile.js";
-import typeOrmCli from "./core/modules/cli/typeorm/index.js";
-import mongooseCli from "./core/modules/cli/mongoose/index.js";
+import { getConfigFile } from "./core/modules/common/configFile.mjs";
+import typeOrmCli from "./core/modules/cli/typeorm/index.mjs";
+import mongooseCli from "./core/modules/cli/mongoose/index.mjs";
 import boxen from "boxen";
 import chalk from "chalk";
 

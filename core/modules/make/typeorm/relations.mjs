@@ -1,8 +1,8 @@
 import capitalize from "lodash.capitalize";
 
-import { addEntityImport, addTypeOrmImport } from "../../common/import.js";
-import EntityManager from "../../entity-manager/TypeOrm.js";
-import { typeORM } from "../../common/destructuringBreakpoints.js";
+import { addEntityImport, addTypeOrmImport } from "../../common/import.mjs";
+import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import { typeORM } from "../../common/destructuringBreakpoints.mjs";
 
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {

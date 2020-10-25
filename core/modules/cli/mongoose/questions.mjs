@@ -1,8 +1,8 @@
-import { validateVariableName } from "../common/questions.js";
-import { mongoose } from "../../common/destructuringBreakpoints.js";
-import { entityPropertyExists } from "../../common/entity.js";
-import { getEntity } from "../../common/index.js";
-export { entityCreationQuestions } from "../common/questions.js";
+import { validateVariableName } from "../common/questions.mjs";
+import { mongoose } from "../../common/destructuringBreakpoints.mjs";
+import { entityPropertyExists } from "../../common/entity.mjs";
+import { getEntity } from "../../common/index.mjs";
+export { entityCreationQuestions } from "../common/questions.mjs";
 
 export const addPropertyQuestions = (entityName) => {
   const typeChoices = ["String", "Number", "Boolean", "Date"];

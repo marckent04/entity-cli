@@ -2,11 +2,11 @@ import util from "util";
 import fs from "fs";
 import path from "path";
 import capitalize from "lodash.capitalize";
-import { exec as executable } from 'child_process';
+import { exec as executable } from "child_process";
 
-import BaseEntityManager from "./Base.js";
-import { getConfigFile } from "../common/configFile.js";
-import { linter } from "../common/linter.js";
+import BaseEntityManager from "./Base.mjs";
+import { getConfigFile } from "../common/configFile.mjs";
+import { linter } from "../common/linter.mjs";
 
 const exec = util.promisify(executable);
 

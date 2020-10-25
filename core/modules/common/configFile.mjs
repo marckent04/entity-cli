@@ -1,4 +1,4 @@
-import { rootDir, defaultDirectory } from "./common.js";
+import { rootDir, defaultDirectory } from "./common.mjs";
 import fs from "fs";
 import path from "path";
 

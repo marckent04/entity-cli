@@ -2,9 +2,9 @@ import inquirer from "inquirer";
 import consola from "consola";
 import chalk from "chalk";
 
-import { addPropertyQuestions } from "./questions.js";
-import MakeProperty from "../../make/mongoose/property.js";
-import EntityManager from "../../entity-manager/Mongoose.js";
+import { addPropertyQuestions } from "./questions.mjs";
+import MakeProperty from "../../make/mongoose/property.mjs";
+import EntityManager from "../../entity-manager/Mongoose.mjs";
 
 const cli = (entityName) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {

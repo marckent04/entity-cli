@@ -1,12 +1,12 @@
 import capitalize from "lodash.capitalize";
 import inquirer from "inquirer";
 
-import { entityCreationQuestions } from "./questions.js";
-import EntityManager from "../../entity-manager/TypeOrm.js";
-import { fileExists } from "../../common/common.js";
-import addCli from "./add.js";
-import arCli from "./addRelation.js";
-import apCli from "./addProperty.js";
+import { entityCreationQuestions } from "./questions.mjs";
+import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import { fileExists } from "../../common/common.mjs";
+import addCli from "./add.mjs";
+import arCli from "./addRelation.mjs";
+import apCli from "./addProperty.mjs";
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {

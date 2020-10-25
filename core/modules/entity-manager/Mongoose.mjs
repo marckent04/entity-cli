@@ -2,9 +2,9 @@ import capitalize from "lodash.capitalize";
 import * as fs from "fs";
 import * as path from "path";
 
-import BaseEntityManager from "./Base.js";
-import { getSrcPathFormConfigFile } from "../common/configFile.js";
-import { linter } from "../common/linter.js";
+import BaseEntityManager from "./Base.mjs";
+import { getSrcPathFormConfigFile } from "../common/configFile.mjs";
+import { linter } from "../common/linter.mjs";
 
 class MongooseManager extends BaseEntityManager {
   static init(name) {
