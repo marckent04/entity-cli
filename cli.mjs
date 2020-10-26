@@ -7,7 +7,7 @@ import chalk from "chalk";
 export const cli = () => {
   const config = getConfigFile();
 
-  const version = process.env.npm_package_version;
+  const version = "1.0.12";
   const orm = config && config.orm ? config.orm : "typeorm";
   const language = config && config.lang ? config.lang : "Ts";
 

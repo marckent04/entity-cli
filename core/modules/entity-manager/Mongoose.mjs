@@ -1,7 +1,7 @@
 import capitalize from "lodash.capitalize";
-import * as fs from "fs";
+import fs from "fs";
 import * as path from "path";
-
+import chalk from "chalk";
 import BaseEntityManager from "./Base.mjs";
 import { getSrcPathFormConfigFile } from "../common/configFile.mjs";
 import { linter } from "../common/linter.mjs";
@@ -28,8 +28,16 @@ class MongooseManager extends BaseEntityManager {
       getSrcPathFormConfigFile(),
       `${capitalize(name)}.entity.${super.fileExtension}`
     );
-
-    fs.writeFileSync(file, this.init(name));
+    // console.log("ici");
+    // console.log(file);
+    // console.log(this.init(name));
+    try {
+      fs.writeFileSync(file, this.init(name));
+    } catch (error) {
+      if (error.errno == -2) {
+        throw chalk.red("folder not found");
+      }
+    }
   }
 
   static append(nameOrContent, newContent) {

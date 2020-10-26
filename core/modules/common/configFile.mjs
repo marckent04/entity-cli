@@ -49,7 +49,7 @@ const getOrm = () => {
 
 export const getFileExtension = () => {
   const config = getConfigFile();
-  if (getOrm() != "typeorm" && config && config.lang && config.lang == "js")
+  if (getOrm() !== "typeorm" && config && config.lang && config.lang === "js")
     return "js";
   return "ts";
 };

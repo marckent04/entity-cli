@@ -2,20 +2,22 @@ import fs from "fs";
 import path from "path";
 import capitalize from "lodash.capitalize";
 import { getDirectoryFromConfigFile } from "./configFile.mjs";
+import {getFileExtension} from "./configFile.mjs";
 
 const directory = getDirectoryFromConfigFile();
 
+const fileExtension = getFileExtension()
 export const filterEntities = (files) => {
   return files
     .map((file) => {
-      if (file.split(".")[1] == "entity") return file.split(".")[0];
+      if (file.split(".")[1] === "entity") return file.split(".")[0];
     })
-    .filter((file) => file != undefined);
+    .filter((file) => file !== undefined);
 };
 
 export const getEntity = (name) => {
   return fs
-    .readFileSync(path.join(directory, `${name}.entity.ts`))
+    .readFileSync(path.join(directory, `${name}.entity.${fileExtension}`))
     .toString()
     .split("\n");
 };
@@ -26,7 +28,7 @@ export const existingEntities = (currentEntity) => {
   return filterEntities(
     fs
       .readdirSync(directory)
-      .filter((entity) => entity != `${capitalize(currentEntity)}.entity.ts`)
+      .filter((entity) => entity != `${capitalize(currentEntity)}.entity.${fileExtension}`)
   );
 };
 
