@@ -5,7 +5,8 @@ import {
 } from "../../common/index.mjs";
 
 export const validateVariableName = (value) => {
-  if (!isNaN(value[0])) return "Entrer un nom valide";
+  console.log(value.split(" ").length)
+  if (!isNaN(value[0]) || value.split(" ").length > 1) return "Entrer un nom valide";
   return true;
 };
 
@@ -14,9 +15,7 @@ export const entityCreationQuestions = () => [
     type: "input",
     name: "name",
     message: "Entity name",
-    validate: (val) => {
-      return validateVariableName(val);
-    },
+    validate: validateVariableName,
   },
 ];
 
@@ -60,13 +59,7 @@ export const addPropertyQuestions = (breakpoint, typeChoices) => (
     type: "input",
     name: "name",
     message: "property name",
-    validate: function (val) {
-      const validVar = validateVariableName(val);
-      if (validVar)
-        return entityPropertyExists(getEntity(entityName), breakpoint, val);
-
-      return "enter an valid name";
-    },
+    validate: validateVariableName,
   },
   {
     type: "list",

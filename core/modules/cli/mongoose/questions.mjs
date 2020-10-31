@@ -12,13 +12,7 @@ export const addPropertyQuestions = (entityName) => {
       type: "input",
       name: "name",
       message: "property name",
-      validate: function (val) {
-        const validVar = validateVariableName(val);
-        if (validVar)
-          return entityPropertyExists(getEntity(entityName), mongoose, val);
-
-        return "enter an valid name";
-      },
+      validate: validateVariableName
     },
     {
       type: "list",
