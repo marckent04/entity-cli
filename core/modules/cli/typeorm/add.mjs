@@ -1,5 +1,5 @@
-const { addQuestions } = require("./questions");
-const inquirer = require("inquirer");
+import { addQuestions } from "./questions.mjs";
+import inquirer from "inquirer";
 
 /**
  *
@@ -8,7 +8,7 @@ const inquirer = require("inquirer");
  * @param {*} arCli add relation cli
  */
 function cli(name, apCli, arCli) {
-  inquirer.prompt(addQuestions).then(({ action }) => {
+  inquirer.prompt(addQuestions()).then(({ action }) => {
     switch (action) {
       case "p":
         apCli(name, arCli);
@@ -20,4 +20,4 @@ function cli(name, apCli, arCli) {
   });
 }
 
-module.exports = cli;
+export default cli;

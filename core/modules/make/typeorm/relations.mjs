@@ -1,10 +1,13 @@
-const { addEntityImport, addTypeOrmImport } = require("../common/import");
-const manager = require("../entity");
-const Str = require("string");
+import capitalize from "lodash.capitalize";
+
+import { addEntityImport, addTypeOrmImport } from "../../common/import.mjs";
+import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import { typeORM } from "../../common/destructuringBreakpoints.mjs";
+
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
-    entityName = Str(entityName).capitalize().s;
-    relationEntityName = Str(relationEntityName).capitalize().s;
+    entityName = capitalize(entityName);
+    relationEntityName = capitalize(relationEntityName);
 
     const one = {
       typeOrmImport: ["OneToMany"],
@@ -41,16 +44,14 @@ class Maker {
   static common(entityContent, relationEntity, typeOrmImport, newContent) {
     const content = addEntityImport(
       addTypeOrmImport(entityContent, typeOrmImport),
-      relationEntity
+      relationEntity,
+      typeORM
     );
 
-    return manager.append(content, newContent.join("\n")).join("\n");
+    return EntityManager.append(content, newContent.join("\n")).join("\n");
   }
 
   static oto(entityContent, relationEntity) {
-    // console.log("----begin content ---");
-    // console.log(entityContent);
-    // console.log(" ----end content------");
     const newContent = [
       `\t@OneToOne(type => ${relationEntity})`,
       "\t@JoinColumn()",
@@ -76,12 +77,8 @@ class Maker {
     // throw new Error("Fonctionnalite pas encore disponible");
   }
 
-  static mto(name, required) {
-    throw new Error("Fonctionnalite pas encore disponible");
-  }
-
   static mtm(name, required) {
     throw new Error("Fonctionnalite pas encore disponible");
   }
 }
-module.exports = Maker;
+export default Maker;

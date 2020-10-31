@@ -2,4 +2,6 @@ node_modules
 src
 package-lock.json
 .DS_Store
-./test.js
+test.js
+test.mjs
+.idea
