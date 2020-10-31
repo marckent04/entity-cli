@@ -1,23 +1,35 @@
 import {
-  entityPropertyExists,
-  getEntity,
   existingEntities,
-} from "../../common/index.mjs";
+} from "../index.mjs";
+
+import {getModules} from "../features/module-mode.mjs"
 
 export const validateVariableName = (value) => {
-  console.log(value.split(" ").length)
   if (!isNaN(value[0]) || value.split(" ").length > 1) return "Entrer un nom valide";
   return true;
 };
 
-export const entityCreationQuestions = () => [
-  {
-    type: "input",
-    name: "name",
-    message: "Entity name",
-    validate: validateVariableName,
-  },
-];
+export const entityCreationQuestions = () => {
+  const modules = getModules()
+  if (modules.length > 0) {
+    return [
+      {
+        type: "list",
+        name: "name",
+        message: "Choose one module",
+        choices: modules,
+      },
+    ]
+  }
+  return [
+    {
+      type: "input",
+      name: "name",
+      message: "Entity name",
+      validate: validateVariableName,
+    },
+  ];
+}
 
 export const addQuestions = () => [
   {

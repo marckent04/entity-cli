@@ -4,8 +4,8 @@ import chalk from "chalk";
 
 import { addRelationQuestions } from "./questions.mjs";
 import { getEntity } from "../../common/index.mjs";
-import relations from "../../make/typeorm/relations.mjs";
-import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import relations from "../makers/relations.mjs";
+import EntityManager from "../EntityManager.mjs";
 import addCli from "./add.mjs";
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)

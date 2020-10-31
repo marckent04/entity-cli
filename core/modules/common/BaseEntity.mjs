@@ -5,8 +5,8 @@ import findLastIndex from "lodash.findlastindex";
 import {
   getSrcPathFormConfigFile,
   getFileExtension,
-} from "../common/configFile.mjs";
-import { linter } from "../common/linter.mjs";
+} from "./configFile.mjs";
+import { linter } from "./linter.mjs";
 
 class BaseEntityManager {
   static get directory() {

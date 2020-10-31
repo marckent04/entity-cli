@@ -2,7 +2,7 @@ import capitalize from "lodash.capitalize";
 import inquirer from "inquirer";
 
 import { entityCreationQuestions } from "./questions.mjs";
-import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import EntityManager from "../EntityManager.mjs";
 import { fileExists } from "../../common/common.mjs";
 import addCli from "./add.mjs";
 import arCli from "./addRelation.mjs";

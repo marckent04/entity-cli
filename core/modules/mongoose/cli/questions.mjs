@@ -1,8 +1,8 @@
-import { validateVariableName } from "../common/questions.mjs";
+import { validateVariableName } from "../../common/cli/questions.mjs";
 import { mongoose } from "../../common/destructuringBreakpoints.mjs";
 import { entityPropertyExists } from "../../common/entity.mjs";
 import { getEntity } from "../../common/index.mjs";
-export { entityCreationQuestions } from "../common/questions.mjs";
+export { entityCreationQuestions } from "../../common/cli/questions.mjs";
 
 export const addPropertyQuestions = (entityName) => {
   const typeChoices = ["String", "Number", "Boolean", "Date"];

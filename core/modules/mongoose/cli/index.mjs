@@ -4,7 +4,7 @@ import consola from "consola";
 import chalk from "chalk";
 
 import { entityCreationQuestions } from "./questions.mjs";
-import EntityManager from "../../entity-manager/Mongoose.mjs";
+import EntityManager from "../EntityManager.mjs";
 import { fileExists } from "../../common/common.mjs";
 import apCli from "./addProperty.mjs";
 

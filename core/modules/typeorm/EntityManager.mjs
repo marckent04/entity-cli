@@ -4,7 +4,7 @@ import path from "path";
 import capitalize from "lodash.capitalize";
 import { exec as executable } from "child_process";
 
-import BaseEntityManager from "./Base.mjs";
+import BaseEntityManager from "../common/BaseEntity.mjs";
 import { getConfigFile } from "../common/configFile.mjs";
 import { linter } from "../common/linter.mjs";
 
@@ -20,7 +20,7 @@ class TypeOrmManager extends BaseEntityManager {
     const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
     fs.renameSync(
-      path.join(this.directory, `${name}.${super.fileExtension}`),
+      path.join(this.directory, `${capitalize((name))}.${super.fileExtension}`),
       file
     );
 

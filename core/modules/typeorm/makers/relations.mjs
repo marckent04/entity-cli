@@ -1,7 +1,7 @@
 import capitalize from "lodash.capitalize";
 
 import { addEntityImport, addTypeOrmImport } from "../../common/import.mjs";
-import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import EntityManager from "../EntityManager.mjs";
 import { typeORM } from "../../common/destructuringBreakpoints.mjs";
 
 class Maker {
