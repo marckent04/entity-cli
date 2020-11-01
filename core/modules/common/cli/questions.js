@@ -1,32 +1,34 @@
-const {
-  existingEntities,
-} = require("../index");
+const { existingEntities } = require("../index");
 const { entityPropertyExists } = require("../../common/entity");
 const { getEntity } = require("../entity");
-const {getModules} = require("../features/module-mode");
-const {getModuleMode} = require("../configFile");
+const { getModules } = require("../features/module-mode");
+const { getModuleMode } = require("../configFile");
 
 const validateVariableName = (value) => {
-  if (!isNaN(value[0]) || value.split(" ").length > 1) return false;
-  return true;
+  return !(!isNaN(value[0]) || value.split(" ").length > 1);
+
 };
 
-export const validateProperty  = (propertyName, entityName, breakpoint) => {
+const validateProperty = (propertyName, entityName, breakpoint) => {
   const validName = validateVariableName(propertyName);
 
   if (validName) {
-    const propertyExists = entityPropertyExists(getEntity(entityName), breakpoint, propertyName);
+    const propertyExists = entityPropertyExists(
+      getEntity(entityName),
+      breakpoint,
+      propertyName
+    );
     if (propertyExists) {
-      return "Propriété existe deja"
+      return "Propriété existe deja";
     }
   } else {
-    return "Entrer un nom valide"
+    return "Entrer un nom valide";
   }
 
-  return true
+  return true;
 };
 
-export const entityCreationQuestions = () => {
+const entityCreationQuestions = () => {
   if (getModuleMode()) {
     return [
       {
@@ -35,7 +37,7 @@ export const entityCreationQuestions = () => {
         message: "Choose one module",
         choices: getModules(),
       },
-    ]
+    ];
   }
   return [
     {
@@ -47,7 +49,7 @@ export const entityCreationQuestions = () => {
   ];
 };
 
-export const addQuestions = () => [
+const addQuestions = () => [
   {
     type: "list",
     name: "action",
@@ -59,8 +61,8 @@ export const addQuestions = () => [
   },
 ];
 
-export const addRelationQuestions = (relationsChoices) => (entity) => {
-  const moduleMode =  getModuleMode();
+const addRelationQuestions = (relationsChoices) => (entity) => {
+  const moduleMode = getModuleMode();
   return [
     {
       type: "list",
@@ -80,10 +82,10 @@ export const addRelationQuestions = (relationsChoices) => (entity) => {
       message: "Add new property",
       default: false,
     },
-  ]
+  ];
 };
 
-export const addPropertyQuestions = (breakpoint, typeChoices) => (
+const addPropertyQuestions = (breakpoint, typeChoices) => (
   entityName
 ) => [
   {
@@ -114,3 +116,11 @@ export const addPropertyQuestions = (breakpoint, typeChoices) => (
     default: false,
   },
 ];
+
+module.exports = {
+  validateProperty,
+  entityCreationQuestions,
+  addQuestions,
+  addRelationQuestions,
+  addPropertyQuestions
+};

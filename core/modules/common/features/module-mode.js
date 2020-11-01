@@ -3,7 +3,7 @@ const path = require("path");
 const {getSrcPathFormConfigFile} = require("../configFile");
 
 
-export const getModules = () =>{
+const getModules = () =>{
     const src = getSrcPathFormConfigFile();
     try {
         return fs.readdirSync(src, {encoding: "utf8"})
@@ -14,3 +14,7 @@ export const getModules = () =>{
 };
 
 const getModuleEntities = () => {};
+
+module.exports = {
+    getModules
+}

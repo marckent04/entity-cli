@@ -6,6 +6,7 @@ const { exec : executable } = require("child_process");
 
 const BaseEntityManager = require("../common/BaseEntity");
 const { linter } = require("../common/linter");
+const {getModuleMode} = require("../common/configFile")
 
 const exec = util.promisify(executable);
 
@@ -19,7 +20,7 @@ class TypeOrmManager extends BaseEntityManager {
     const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
     fs.renameSync(
-      path.join(this.directory, name,`${capitalize((name))}.${super.fileExtension}`),
+      path.join(this.directory, getModuleMode() ? name : ".", `${capitalize((name))}.${super.fileExtension}`),
       file
     );
 

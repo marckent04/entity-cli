@@ -6,7 +6,11 @@ const config = {
   trailingComma: "all",
 };
 
-export const linter = (content) => {
+const linter = (content) => {
   if (Array.isArray(content)) content = content.join("\n");
   return prettier.format(content, config);
 };
+
+module.exports = {
+  linter
+}

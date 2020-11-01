@@ -7,7 +7,8 @@ const {getFileExtension} = require("./configFile");
 const directory = getSrcPathFormConfigFile();
 
 const fileExtension = getFileExtension()
-export const filterEntities = (files) => {
+
+const filterEntities = (files) => {
   return files
     .map((file) => {
       if (file.split(".")[1] === "entity") return file.split(".")[0];
@@ -15,7 +16,7 @@ export const filterEntities = (files) => {
     .filter((file) => file !== undefined);
 };
 
-export const getEntity = (name) => {
+const getEntity = (name) => {
   const mod = getModuleMode() ? name : "."
   return fs
     .readFileSync(path.join(directory, mod ,`${capitalize(name)}.entity.${fileExtension}`))
@@ -23,9 +24,9 @@ export const getEntity = (name) => {
     .split("\n");
 };
 
-export const updateEntity = (name, content) => {};
+const updateEntity = (name, content) => {};
 
-export const existingEntities = (currentEntity) => {
+const existingEntities = (currentEntity) => {
   return filterEntities(
     fs
       .readdirSync(directory)
@@ -33,19 +34,27 @@ export const existingEntities = (currentEntity) => {
   );
 };
 
-export const entityDestructuring = (entityContent, breakpoint) => {
+const entityDestructuring = (entityContent, breakpoint) => {
   const regex = new RegExp(breakpoint);
 
-  const seprator = entityContent.findIndex((line) => regex.test(line));
+  const separator = entityContent.findIndex((line) => regex.test(line));
 
   return {
-    consts: entityContent.slice(0, seprator).filter((line) => line != ""),
-    body: entityContent.slice(seprator),
+    imports: entityContent.slice(0, separator).filter((line) => line !== ""),
+    body: entityContent.slice(separator),
   };
 };
 
-export const entityPropertyExists = (entityContent, breakpoint, property) => {
+const entityPropertyExists = (entityContent, breakpoint, property) => {
   const test = new RegExp(`${property}:`);
   const { body } = entityDestructuring(entityContent, breakpoint);
   return body.find((line) => test.test(line));
 };
+
+module.exports = {
+  filterEntities,
+  getEntity,
+  existingEntities,
+  entityDestructuring,
+  entityPropertyExists
+}

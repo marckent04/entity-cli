@@ -2,7 +2,7 @@
   "name": "entity-cli",
   "version": "1.0.14",
   "description": "generate typeorm, mongoose entities by cli",
-  "main": "index.mjs",
+  "main": "index.js",
   "homepage": "https://www.npmjs.com/package/entity-cli#readme",
   "repository": {
     "type": "git",
@@ -14,8 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-    "start": "babel-node index.mjs",
-    "testing": "babel-node test.mjs"
+    "start": "babel-node index.js",
+    "testing": "babel-node test.js"
   },
   "author": {
     "name": "Marc-Henry Nanguy",

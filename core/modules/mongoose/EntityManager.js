@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const chalk = require("chalk");
 const BaseEntityManager = require("../common/BaseEntity");
-const { getSrcPathFormConfigFile } = require("../common/configFile");
 const { linter } = require("../common/linter");
 
 class MongooseManager extends BaseEntityManager {

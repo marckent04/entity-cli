@@ -2,9 +2,8 @@ const capitalize = require("lodash.capitalize")
 
 const { entityDestructuring } = require("./entity");
 const { getModuleMode } = require("./configFile");
-const consola = require("consola")
 
-export const addTypeOrmImport = (entityContent, toImport) => {
+const addTypeOrmImport = (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
     toImport = toImport.map((imp) => `${imp},`);
   } else {
@@ -30,23 +29,29 @@ const formalizeImports = (currentImports, newImports) => {
   ]);
   return Array.from(setImports);
 };
-
 // const deleteTypeOrmImport = (imp) => {};
+// const existsEntityImport = (entity) => {};
 
-export const addEntityImport = (entityContent, entityToImport, breakpoint) => {
-  let { consts, body } = entityDestructuring(entityContent, breakpoint);
+
+const addEntityImport = (entityContent, entityToImport, breakpoint) => {
+  let { imports, body } = entityDestructuring(entityContent, breakpoint);
   let src = `./${capitalize(entityToImport)}.entity`
   if (getModuleMode())
     src = `../${entityToImport}/${capitalize(entityToImport)}.entity`
 
-  consts = [
-    ...consts,
-    `const { ${capitalize(entityToImport)} } = require("${src}");`,
+  imports = [
+    ...imports,
+    `import { ${capitalize(entityToImport)} } from "./${capitalize(entityToImport)}.entity"`,
     "",
   ];
 
 
-  return [...consts, ...body];
+  return [...imports, ...body];
 };
 
-// const existsEntityImport = (entity) => {};
+
+
+module.exports = {
+  addTypeOrmImport,
+  addEntityImport
+}

@@ -18,9 +18,11 @@ class BaseEntityManager {
   static createOrInitSrc(name) {
     const file = getConfigFile();
     let src = ""
+    const moduleMode = getModuleMode()
     if (file && file.src) src = file.src;
-    src = path.join(getModuleMode() ? relativeModuleDirectory : relativeDefaultDirectory, name);
+    src = path.join(moduleMode ? relativeModuleDirectory : relativeDefaultDirectory, moduleMode ? name :'.');
     if (file && file.modulesDir) src = path.join(file.modulesDir, name);
+    console.log(src)
     return src
   }
 
