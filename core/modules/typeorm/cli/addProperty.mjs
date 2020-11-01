@@ -11,7 +11,7 @@ const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
     try {
       const { name, type, add, required } = answers;
-
+        console.log(name)
       EntityManager.append(
         entityName,
         MakeProperty[type](name, required).join("\n")

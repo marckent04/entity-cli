@@ -1,16 +1,26 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import capitalize from "lodash.capitalize";
 import findLastIndex from "lodash.findlastindex";
 import {
   getSrcPathFormConfigFile,
-  getFileExtension,
+  getFileExtension, getModuleMode, getConfigFile,
 } from "./configFile.mjs";
 import { linter } from "./linter.mjs";
+import {relativeDefaultDirectory, relativeModuleDirectory, rootDir} from "./constants.mjs";
 
 class BaseEntityManager {
   static get directory() {
     return getSrcPathFormConfigFile();
+  }
+
+  static createOrInitSrc(name) {
+    const file = getConfigFile();
+    let src = ""
+    if (file && file.src) src = file.src;
+    src = path.join(getModuleMode() ? relativeModuleDirectory : relativeDefaultDirectory, name);
+    if (file && file.modulesDir) src = path.join(file.modulesDir, name);
+    return src
   }
 
   static get fileExtension() {
@@ -19,7 +29,8 @@ class BaseEntityManager {
 
   static init(name) {
     return path.join(
-      this.directory,
+      rootDir,
+      this.createOrInitSrc(name),
       `${capitalize(name)}.entity.${this.fileExtension}`
     );
   }

@@ -5,7 +5,9 @@ import capitalize from "lodash.capitalize";
 import { exec as executable } from "child_process";
 
 import BaseEntityManager from "../common/BaseEntity.mjs";
-import { getConfigFile } from "../common/configFile.mjs";
+import { getConfigFile, getModuleMode } from "../common/configFile.mjs";
+import { relativeModuleDirectory, relativeDefaultDirectory } from "../common/constants.mjs";
+
 import { linter } from "../common/linter.mjs";
 
 const exec = util.promisify(executable);
@@ -20,7 +22,7 @@ class TypeOrmManager extends BaseEntityManager {
     const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
     fs.renameSync(
-      path.join(this.directory, `${capitalize((name))}.${super.fileExtension}`),
+      path.join(this.directory, name,`${capitalize((name))}.${super.fileExtension}`),
       file
     );
 
@@ -43,15 +45,14 @@ class TypeOrmManager extends BaseEntityManager {
   }
 
   static async create(name) {
-    const file = getConfigFile();
-    let src = "src/entities";
-    if (file && file.src) src = file.src;
 
+    const src = this.createOrInitSrc(name)
     return await exec(`typeorm entity:create -d ${src} -n ${capitalize(name)}`);
   }
 
   static append(nameOrContent, newContent) {
-    return super.append(nameOrContent, newContent, "}");
+
+   // return super.append(nameOrContent, newContent, "}");
   }
 }
 

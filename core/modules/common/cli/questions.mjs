@@ -3,6 +3,7 @@ import {
 } from "../index.mjs";
 
 import {getModules} from "../features/module-mode.mjs"
+import {getModuleMode} from "../configFile.mjs"
 
 export const validateVariableName = (value) => {
   if (!isNaN(value[0]) || value.split(" ").length > 1) return "Entrer un nom valide";
@@ -10,14 +11,13 @@ export const validateVariableName = (value) => {
 };
 
 export const entityCreationQuestions = () => {
-  const modules = getModules()
-  if (modules.length > 0) {
+  if (getModuleMode()) {
     return [
       {
         type: "list",
         name: "name",
         message: "Choose one module",
-        choices: modules,
+        choices: getModules(),
       },
     ]
   }

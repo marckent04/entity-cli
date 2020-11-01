@@ -1,6 +1,8 @@
-import { rootDir, defaultDirectory } from "./common.mjs";
 import fs from "fs";
 import path from "path";
+
+import { rootDir, defaultDirectory, moduleDefaultDirectory } from "./constants.mjs";
+
 
 const configFile = path.join(rootDir, "entity-cli.json");
 
@@ -29,15 +31,24 @@ export const getConfigFile = () => {
   return null;
 };
 
-export const getMode = () => {
+export const getModuleMode = () => {
   const file = getConfigFile()
-  return (file && file.mode && file.mode === "module") ? "module" : "single"
+  return !!(file && file.mode && (file.mode === "module"))
 }
 
 export const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
-  if (config && config.src) return path.join(rootDir, config.src);
-  return defaultDirectory;
+  if (getModuleMode())
+    return (config.modulesDir) ? path.join(rootDir, config.modulesDir): moduleDefaultDirectory
+
+  return (config && config.src) ? path.join(rootDir, config.src) : defaultDirectory;
+};
+export const getRelativePathFormConfigFile = () => {
+  const config = getConfigFile();
+  if (getModuleMode())
+    return (config.modulesDir) ? config.modulesDir: moduleDefaultDirectory
+
+  return (config && config.src) ? path.join(rootDir, config.src) : defaultDirectory;
 };
 
 export const getDirectoryFromConfigFile = () => {
