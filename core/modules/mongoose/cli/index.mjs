@@ -1,26 +1,22 @@
 import capitalize from "lodash.capitalize";
 import inquirer from "inquirer";
+import consola from "consola";
+import chalk from "chalk";
 
 import { entityCreationQuestions } from "./questions.mjs";
-import EntityManager from "../../entity-manager/TypeOrm.mjs";
+import EntityManager from "../EntityManager.mjs";
 import { fileExists } from "../../common/common.mjs";
-import addCli from "./add.mjs";
-import arCli from "./addRelation.mjs";
 import apCli from "./addProperty.mjs";
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
     const { name } = answers;
     if (!fileExists(capitalize(name))) {
-      const { stderr, stdout } = await EntityManager.create(name);
-      EntityManager.init(name);
-      if (stderr) throw stderr;
-      console.log(stdout);
-    } else {
-      console.log(`update ${name}`);
-    }
+      EntityManager.create(name);
+      consola.success(chalk.green("entity created"));
+    } else consola.info(chalk.blueBright(`update ${name}`));
 
-    addCli(name, apCli, arCli);
+    apCli(name);
   });
 
 export default cli;

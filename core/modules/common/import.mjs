@@ -1,4 +1,8 @@
+import capitalize from "lodash.capitalize"
+
 import { entityDestructuring } from "./entity.mjs";
+import { getModuleMode } from "./configFile.mjs";
+import consola from "consola"
 
 export const addTypeOrmImport = (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
@@ -31,12 +35,16 @@ const formalizeImports = (currentImports, newImports) => {
 
 export const addEntityImport = (entityContent, entityToImport, breakpoint) => {
   let { imports, body } = entityDestructuring(entityContent, breakpoint);
+  let src = `./${capitalize(entityToImport)}.entity`
+  if (getModuleMode())
+    src = `../${entityToImport}/${capitalize(entityToImport)}.entity`
 
   imports = [
     ...imports,
-    `import { ${entityToImport} } from "./${entityToImport}.entity"`,
+    `import { ${capitalize(entityToImport)} } from "${src}";`,
     "",
   ];
+
 
   return [...imports, ...body];
 };

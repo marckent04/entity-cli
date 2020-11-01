@@ -1,16 +1,27 @@
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 import capitalize from "lodash.capitalize";
 import findLastIndex from "lodash.findlastindex";
 import {
   getSrcPathFormConfigFile,
-  getFileExtension,
-} from "../common/configFile.mjs";
-import { linter } from "../common/linter.mjs";
+  getFileExtension, getModuleMode, getConfigFile,
+} from "./configFile.mjs";
+import { linter } from "./linter.mjs";
+import {relativeDefaultDirectory, relativeModuleDirectory, rootDir} from "./constants.mjs";
 
 class BaseEntityManager {
   static get directory() {
     return getSrcPathFormConfigFile();
+  }
+
+
+  static createOrInitSrc(name) {
+    const file = getConfigFile();
+    let src = ""
+    if (file && file.src) src = file.src;
+    src = path.join(getModuleMode() ? relativeModuleDirectory : relativeDefaultDirectory, name);
+    if (file && file.modulesDir) src = path.join(file.modulesDir, name);
+    return src
   }
 
   static get fileExtension() {
@@ -19,7 +30,8 @@ class BaseEntityManager {
 
   static init(name) {
     return path.join(
-      this.directory,
+      rootDir,
+      this.createOrInitSrc(name),
       `${capitalize(name)}.entity.${this.fileExtension}`
     );
   }
@@ -27,11 +39,22 @@ class BaseEntityManager {
   static create(name) {}
 
   static update(name, content) {
+    const mod = getModuleMode() ? name : "."
     const file = path.join(
       this.directory,
+      mod,
       `${capitalize(name)}.entity.${this.fileExtension}`
     );
     fs.writeFileSync(file, linter(content));
+  }
+
+  static createPath(entityName) {
+    const mod = getModuleMode() ? entityName : "."
+    return path.join(
+        this.directory,
+        mod,
+        `${capitalize(entityName)}.entity.${this.fileExtension}`
+    );
   }
 
   static append(nameOrContent, newContent, endTag) {
@@ -39,10 +62,7 @@ class BaseEntityManager {
     let content = nameOrContent;
     let file = null;
     if (!Array.isArray(nameOrContent)) {
-      file = path.join(
-        this.directory,
-        `${capitalize(nameOrContent)}.entity.${this.fileExtension}`
-      );
+      file = this.createPath(nameOrContent)
       content = fs.readFileSync(file).toString().split("\n");
     }
     // console.log(endTag);
