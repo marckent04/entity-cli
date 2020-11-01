@@ -51,7 +51,7 @@ it permits to organize the application structure.
 
 #### how to activate ?
 
-add ``"mode": "module"` to entity-cli.json
+add `"mode": "module"` to entity-cli.json
 
 add `"moduleSrc": "path to module dir"` to change the modules directory
 ```
