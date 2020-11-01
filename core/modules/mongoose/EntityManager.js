@@ -1,10 +1,10 @@
-const capitalize = require("lodash.capitalize";
-const fs = require("fs";
-const * as path = require("path";
-const chalk = require("chalk";
-const BaseEntityManager = require("../common/BaseEntity.mjs";
-const { getSrcPathFormConfigFile } = require("../common/configFile.mjs";
-const { linter } = require("../common/linter.mjs";
+const capitalize = require("lodash.capitalize");
+const fs = require("fs");
+const path = require("path");
+const chalk = require("chalk");
+const BaseEntityManager = require("../common/BaseEntity");
+const { getSrcPathFormConfigFile } = require("../common/configFile");
+const { linter } = require("../common/linter");
 
 class MongooseManager extends BaseEntityManager {
   static init(name) {
@@ -45,4 +45,4 @@ class MongooseManager extends BaseEntityManager {
   }
 }
 
-export default MongooseManager;
+module.exports = MongooseManager;

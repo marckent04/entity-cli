@@ -4,7 +4,6 @@
   "description": "generate typeorm, mongoose entities by cli",
   "main": "index.mjs",
   "homepage": "https://www.npmjs.com/package/entity-cli#readme",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marckent04/entity-cli.git"

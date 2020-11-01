@@ -1,4 +1,4 @@
-const prettier = require("prettier";
+const prettier = require("prettier");
 
 const config = {
   semi: false,

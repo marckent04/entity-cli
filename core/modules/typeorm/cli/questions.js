@@ -1,10 +1,10 @@
 const {
-  addRelationQuestions as addRelationsConstructor,
-  addPropertyQuestions as addPropertyConstructor,
-} = require("../../common/cli/questions.mjs";
-const { typeORM } = require("../../common/destructuringBreakpoints.mjs";
+  addRelationQuestions : addRelationsConstructor,
+  addPropertyQuestions : addPropertyConstructor,
+} = require("../../common/cli/questions");
+const { typeORM } = require("../../common/destructuringBreakpoints");
 
-export { addQuestions, entityCreationQuestions } = require("../../common/cli/questions.mjs";
+export const { addQuestions, entityCreationQuestions } = require("../../common/cli/questions");
 
 const typeChoices = ["string", "number", "boolean", "Date", "text"];
 

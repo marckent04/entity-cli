@@ -1,8 +1,8 @@
-const fs = require("fs";
-const path = require("path";
-const capitalize = require("lodash.capitalize";
-const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile.mjs";
-const {getFileExtension} = require("./configFile.mjs";
+const fs = require("fs");
+const path = require("path");
+const capitalize = require("lodash.capitalize");
+const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile");
+const {getFileExtension} = require("./configFile");
 
 const directory = getSrcPathFormConfigFile();
 

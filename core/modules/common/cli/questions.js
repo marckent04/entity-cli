@@ -1,10 +1,10 @@
 const {
   existingEntities,
-} = require("../index.mjs";
-const { entityPropertyExists } = require("../../common/entity.mjs";
-const { getEntity } = require("../entity.mjs";
-const {getModules} = require("../features/module-mode.mjs"
-const {getModuleMode} = require("../configFile.mjs"
+} = require("../index");
+const { entityPropertyExists } = require("../../common/entity");
+const { getEntity } = require("../entity");
+const {getModules} = require("../features/module-mode");
+const {getModuleMode} = require("../configFile");
 
 const validateVariableName = (value) => {
   if (!isNaN(value[0]) || value.split(" ").length > 1) return false;
@@ -12,10 +12,10 @@ const validateVariableName = (value) => {
 };
 
 export const validateProperty  = (propertyName, entityName, breakpoint) => {
-  const validName = validateVariableName(propertyName)
+  const validName = validateVariableName(propertyName);
 
   if (validName) {
-    const propertyExists = entityPropertyExists(getEntity(entityName), breakpoint, propertyName)
+    const propertyExists = entityPropertyExists(getEntity(entityName), breakpoint, propertyName);
     if (propertyExists) {
       return "Propriété existe deja"
     }
@@ -24,7 +24,7 @@ export const validateProperty  = (propertyName, entityName, breakpoint) => {
   }
 
   return true
-}
+};
 
 export const entityCreationQuestions = () => {
   if (getModuleMode()) {
@@ -45,7 +45,7 @@ export const entityCreationQuestions = () => {
       validate: validateVariableName,
     },
   ];
-}
+};
 
 export const addQuestions = () => [
   {
@@ -60,7 +60,7 @@ export const addQuestions = () => [
 ];
 
 export const addRelationQuestions = (relationsChoices) => (entity) => {
-  const moduleMode =  getModuleMode()
+  const moduleMode =  getModuleMode();
   return [
     {
       type: "list",

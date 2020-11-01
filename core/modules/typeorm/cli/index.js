@@ -1,11 +1,11 @@
-const inquirer = require("inquirer";
-const consola = require("consola"
-const { entityCreationQuestions } = require("./questions.mjs";
-const EntityManager = require("../EntityManager.mjs";
-const { fileExists } = require("../../common/common.mjs";
-const addCli = require("./add.mjs";
-const arCli = require("./addRelation.mjs";
-const apCli = require("./addProperty.mjs";
+const inquirer = require("inquirer");
+const consola = require("consola")
+const { entityCreationQuestions } = require("./questions");
+const EntityManager = require("../EntityManager");
+const { fileExists } = require("../../common/common");
+const addCli = require("./add");
+const arCli = require("./addRelation");
+const apCli = require("./addProperty");
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async ({name}) => {
@@ -21,4 +21,4 @@ const cli = async () =>
 
   });
 
-export default cli;
+module.exports =  cli;
