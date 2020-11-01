@@ -1,8 +1,8 @@
-const capitalize = require("lodash.capitalize"
+const capitalize = require("lodash.capitalize")
 
-const { entityDestructuring } = require("./entity.mjs";
-const { getModuleMode } = require("./configFile.mjs";
-const consola = require("consola"
+const { entityDestructuring } = require("./entity");
+const { getModuleMode } = require("./configFile");
+const consola = require("consola")
 
 export const addTypeOrmImport = (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
@@ -41,7 +41,7 @@ export const addEntityImport = (entityContent, entityToImport, breakpoint) => {
 
   consts = [
     ...consts,
-    `const { ${capitalize(entityToImport)} } = require("${src}";`,
+    `const { ${capitalize(entityToImport)} } = require("${src}");`,
     "",
   ];
 

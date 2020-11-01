@@ -1,9 +1,9 @@
-const capitalize = require("lodash.capitalize";
+const capitalize = require("lodash.capitalize");
 
-const { addEntityImport, addTypeOrmImport } = require("../../common/const.mjs";
-const EntityManager = require("../EntityManager.mjs";
-const { typeORM } = require("../../common/destructuringBreakpoints.mjs";
-const {getModuleMode} = require("../../common/configFile.mjs"
+const { addEntityImport, addTypeOrmImport } = require("../../common/const");
+const EntityManager = require("../EntityManager");
+const { typeORM } = require("../../common/destructuringBreakpoints");
+const {getModuleMode} = require("../../common/configFile")
 
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
@@ -80,4 +80,4 @@ class Maker {
     throw new Error("Fonctionnalite pas encore disponible");
   }
 }
-export default Maker;
+module.exports =  Maker;

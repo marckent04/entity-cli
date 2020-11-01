@@ -1,7 +1,7 @@
-const fs = require("fs";
-const path = require("path";
+const fs = require("fs");
+const path = require("path");
 
-const { rootDir, defaultDirectory, moduleDefaultDirectory } = require("./constants.mjs";
+const { rootDir, defaultDirectory, moduleDefaultDirectory } = require("./constants");
 
 
 const configFile = path.join(rootDir, "entity-cli.json");

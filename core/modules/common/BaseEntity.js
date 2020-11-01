@@ -1,13 +1,13 @@
-const fs = require("fs";
-const path = require("path";
-const capitalize = require("lodash.capitalize";
-const findLastIndex = require("lodash.findlastindex";
+const fs = require("fs");
+const path = require("path");
+const capitalize = require("lodash.capitalize");
+const findLastIndex = require("lodash.findlastindex");
 const {
   getSrcPathFormConfigFile,
   getFileExtension, getModuleMode, getConfigFile,
-} = require("./configFile.mjs";
-const { linter } = require("./linter.mjs";
-const {relativeDefaultDirectory, relativeModuleDirectory, rootDir} = require("./constants.mjs";
+} = require("./configFile");
+const { linter } = require("./linter");
+const {relativeDefaultDirectory, relativeModuleDirectory, rootDir} = require("./constants");
 
 class BaseEntityManager {
   static get directory() {
@@ -74,4 +74,4 @@ class BaseEntityManager {
   }
 }
 
-export default BaseEntityManager;
+module.exports =  BaseEntityManager;

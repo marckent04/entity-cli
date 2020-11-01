@@ -1,10 +1,10 @@
-const inquirer = require("inquirer";
-const consola = require("consola";
-const chalk = require("chalk";
+const inquirer = require("inquirer");
+const consola = require("consola");
+const chalk = require("chalk");
 
-const { addPropertyQuestions } = require("./questions.mjs";
-const MakeProperty = require("../makers/property.mjs";
-const EntityManager = require("../EntityManager.mjs";
+const { addPropertyQuestions } = require("./questions");
+const MakeProperty = require("../makers/property");
+const EntityManager = require("../EntityManager");
 
 const cli = (entityName) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
@@ -20,4 +20,4 @@ const cli = (entityName) =>
     // if (answers.add) return addNewProperty(entityName)
   });
 
-export default cli;
+module.exports =  cli;

@@ -1,4 +1,4 @@
-export default class Maker {
+module.exports =  class Maker {
   static common(name, type) {
     return [`${name}: ${type},`];
   }

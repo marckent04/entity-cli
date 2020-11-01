@@ -1,4 +1,4 @@
-export default class Maker {
+module.exports =  class Maker {
   static common(typeDb, name, mandatory = true, typeJs = null) {
     return [
       `\t@Column({type: "${typeDb}"${mandatory ? "" : ", nullable: true"}})`,

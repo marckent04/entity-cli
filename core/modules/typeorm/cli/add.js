@@ -1,5 +1,5 @@
-const { addQuestions } = require("./questions.mjs";
-const inquirer = require("inquirer";
+const { addQuestions } = require("./questions");
+const inquirer = require("inquirer");
 
 /**
  *
@@ -20,4 +20,4 @@ function cli(name, apCli, arCli) {
   });
 }
 
-export default cli;
+module.exports =  cli;

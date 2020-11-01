@@ -1,12 +1,12 @@
-const inquirer = require("inquirer";
-const consola = require("consola";
-const chalk = require("chalk";
+const inquirer = require("inquirer");
+const consola = require("consola");
+const chalk = require("chalk");
 
-const { addRelationQuestions } = require("./questions.mjs";
-const { getEntity } = require("../../common/index.mjs";
-const relations = require("../makers/relations.mjs";
-const EntityManager = require("../EntityManager.mjs";
-const addCli = require("./add.mjs";
+const { addRelationQuestions } = require("./questions");
+const { getEntity } = require("../../common/index");
+const relations = require("../makers/relations");
+const EntityManager = require("../EntityManager");
+const addCli = require("./add");
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
 const cli = (entityName, apCli) =>
@@ -55,4 +55,4 @@ const cli = (entityName, apCli) =>
     }
   });
 
-export default cli;
+module.exports =  cli;

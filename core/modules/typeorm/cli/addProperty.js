@@ -1,11 +1,11 @@
-const inquirer = require("inquirer";
-const consola = require("consola";
-const chalk = require("chalk";
+const inquirer = require("inquirer");
+const consola = require("consola");
+const chalk = require("chalk");
 
-const { addPropertyQuestions } = require("./questions.mjs";
-const MakeProperty = require("../makers/property.mjs";
-const addCli = require("./add.mjs";
-const EntityManager = require("../EntityManager.mjs";
+const { addPropertyQuestions } = require("./questions");
+const MakeProperty = require("../makers/property");
+const addCli = require("./add");
+const EntityManager = require("../EntityManager");
 
 const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
@@ -23,4 +23,4 @@ const cli = (entityName, arCli) =>
     }
   });
 
-export default cli;
+module.exports =  cli;

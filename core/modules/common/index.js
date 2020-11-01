@@ -1,3 +1,3 @@
 "use strict";
 
-export * = require("./entity.mjs";
+module.exports = require("./entity");

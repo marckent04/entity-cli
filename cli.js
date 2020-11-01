@@ -1,8 +1,8 @@
-const { getConfigFile } = require("./core/modules/common/configFile.mjs";
-const typeOrmCli = require("./core/modules/typeorm/cli/index.mjs";
-const mongooseCli = require("./core/modules/mongoose/cli/index.mjs";
-const boxen = require("boxen";
-const chalk = require("chalk";
+const { getConfigFile } = require("./core/modules/common/configFile");
+const typeOrmCli = require("./core/modules/typeorm/cli/index");
+const mongooseCli = require("./core/modules/mongoose/cli/index");
+const boxen = require("boxen");
+const chalk = require("chalk");
 
 export const cli = () => {
   const config = getConfigFile();

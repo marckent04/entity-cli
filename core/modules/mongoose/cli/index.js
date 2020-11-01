@@ -1,12 +1,12 @@
-const capitalize = require("lodash.capitalize";
-const inquirer = require("inquirer";
-const consola = require("consola";
-const chalk = require("chalk";
+const capitalize = require("lodash.capitalize");
+const inquirer = require("inquirer");
+const consola = require("consola");
+const chalk = require("chalk");
 
-const { entityCreationQuestions } = require("./questions.mjs";
-const EntityManager = require("../EntityManager.mjs";
-const { fileExists } = require("../../common/common.mjs";
-const apCli = require("./addProperty.mjs";
+const { entityCreationQuestions } = require("./questions");
+const EntityManager = require("../EntityManager");
+const { fileExists } = require("../../common/common");
+const apCli = require("./addProperty");
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
@@ -19,4 +19,4 @@ const cli = async () =>
     apCli(name);
   });
 
-export default cli;
+module.exports =  cli;

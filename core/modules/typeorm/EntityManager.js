@@ -1,11 +1,11 @@
-const util = require("util";
-const fs = require("fs";
-const path = require("path";
-const capitalize = require("lodash.capitalize";
-const { exec as executable } = require("child_process";
+const util = require("util");
+const fs = require("fs");
+const path = require("path");
+const capitalize = require("lodash.capitalize");
+const { exec : executable } = require("child_process");
 
-const BaseEntityManager = require("../common/BaseEntity.mjs";
-const { linter } = require("../common/linter.mjs";
+const BaseEntityManager = require("../common/BaseEntity");
+const { linter } = require("../common/linter");
 
 const exec = util.promisify(executable);
 
@@ -26,7 +26,7 @@ class TypeOrmManager extends BaseEntityManager {
     let content = fs.readFileSync(file).toString().split("\n");
 
     content[0] =
-      'const {Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, BaseEntity } = require("typeorm"';
+      'const {Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, BaseEntity } = require("typeorm")';
 
     content.splice(
       5,
@@ -52,4 +52,4 @@ class TypeOrmManager extends BaseEntityManager {
   }
 }
 
-export default TypeOrmManager;
+module.exports =  TypeOrmManager;
