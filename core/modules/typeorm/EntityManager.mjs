@@ -5,9 +5,6 @@ import capitalize from "lodash.capitalize";
 import { exec as executable } from "child_process";
 
 import BaseEntityManager from "../common/BaseEntity.mjs";
-import { getConfigFile, getModuleMode } from "../common/configFile.mjs";
-import { relativeModuleDirectory, relativeDefaultDirectory } from "../common/constants.mjs";
-
 import { linter } from "../common/linter.mjs";
 
 const exec = util.promisify(executable);
@@ -51,8 +48,7 @@ class TypeOrmManager extends BaseEntityManager {
   }
 
   static append(nameOrContent, newContent) {
-
-   // return super.append(nameOrContent, newContent, "}");
+    return super.append(nameOrContent, newContent, "}");
   }
 }
 

@@ -14,6 +14,7 @@ class BaseEntityManager {
     return getSrcPathFormConfigFile();
   }
 
+
   static createOrInitSrc(name) {
     const file = getConfigFile();
     let src = ""
@@ -38,11 +39,22 @@ class BaseEntityManager {
   static create(name) {}
 
   static update(name, content) {
+    const mod = getModuleMode() ? name : "."
     const file = path.join(
       this.directory,
+      mod,
       `${capitalize(name)}.entity.${this.fileExtension}`
     );
     fs.writeFileSync(file, linter(content));
+  }
+
+  static createPath(entityName) {
+    const mod = getModuleMode() ? entityName : "."
+    return path.join(
+        this.directory,
+        mod,
+        `${capitalize(entityName)}.entity.${this.fileExtension}`
+    );
   }
 
   static append(nameOrContent, newContent, endTag) {
@@ -50,10 +62,7 @@ class BaseEntityManager {
     let content = nameOrContent;
     let file = null;
     if (!Array.isArray(nameOrContent)) {
-      file = path.join(
-        this.directory,
-        `${capitalize(nameOrContent)}.entity.${this.fileExtension}`
-      );
+      file = this.createPath(nameOrContent)
       content = fs.readFileSync(file).toString().split("\n");
     }
     // console.log(endTag);
