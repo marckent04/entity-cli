@@ -1,11 +1,11 @@
-import inquirer from "inquirer";
-import consola from "consola"
-import { entityCreationQuestions } from "./questions.mjs";
-import EntityManager from "../EntityManager.mjs";
-import { fileExists } from "../../common/common.mjs";
-import addCli from "./add.mjs";
-import arCli from "./addRelation.mjs";
-import apCli from "./addProperty.mjs";
+const inquirer = require("inquirer";
+const consola = require("consola"
+const { entityCreationQuestions } = require("./questions.mjs";
+const EntityManager = require("../EntityManager.mjs";
+const { fileExists } = require("../../common/common.mjs";
+const addCli = require("./add.mjs";
+const arCli = require("./addRelation.mjs";
+const apCli = require("./addProperty.mjs";
 
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async ({name}) => {

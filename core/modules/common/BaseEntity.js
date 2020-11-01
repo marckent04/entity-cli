@@ -1,13 +1,13 @@
-import fs from "fs";
-import path from "path";
-import capitalize from "lodash.capitalize";
-import findLastIndex from "lodash.findlastindex";
-import {
+const fs = require("fs";
+const path = require("path";
+const capitalize = require("lodash.capitalize";
+const findLastIndex = require("lodash.findlastindex";
+const {
   getSrcPathFormConfigFile,
   getFileExtension, getModuleMode, getConfigFile,
-} from "./configFile.mjs";
-import { linter } from "./linter.mjs";
-import {relativeDefaultDirectory, relativeModuleDirectory, rootDir} from "./constants.mjs";
+} = require("./configFile.mjs";
+const { linter } = require("./linter.mjs";
+const {relativeDefaultDirectory, relativeModuleDirectory, rootDir} = require("./constants.mjs";
 
 class BaseEntityManager {
   static get directory() {

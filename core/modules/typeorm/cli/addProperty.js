@@ -1,11 +1,11 @@
-import inquirer from "inquirer";
-import consola from "consola";
-import chalk from "chalk";
+const inquirer = require("inquirer";
+const consola = require("consola";
+const chalk = require("chalk";
 
-import { addPropertyQuestions } from "./questions.mjs";
-import MakeProperty from "../makers/property.mjs";
-import addCli from "./add.mjs";
-import EntityManager from "../EntityManager.mjs";
+const { addPropertyQuestions } = require("./questions.mjs";
+const MakeProperty = require("../makers/property.mjs";
+const addCli = require("./add.mjs";
+const EntityManager = require("../EntityManager.mjs";
 
 const cli = (entityName, arCli) =>
   inquirer.prompt(addPropertyQuestions(entityName)).then((answers) => {
