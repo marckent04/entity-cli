@@ -1,7 +1,7 @@
-import path from "path";
-import {fileURLToPath} from "url";
+const path = require("path";
+const {fileURLToPath} = require("url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = path.dirname(fileURLToPath(const.meta.url));
 // export const rootDir = path.join(__dirname, "..", "..", "..", "..", "..");
 export const rootDir = path.join(__dirname, "..", "..", "..");
 export const defaultDirectory = path.join(rootDir, "src", "entities");

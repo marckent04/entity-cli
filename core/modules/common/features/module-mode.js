@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path"
-import {getSrcPathFormConfigFile} from "../configFile.mjs"
+const fs = require("fs";
+const path = require("path"
+const {getSrcPathFormConfigFile} = require("../configFile.mjs"
 
 
 export const getModules = () =>{

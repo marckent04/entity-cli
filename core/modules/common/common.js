@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
-import {getSrcPathFormConfigFile, getModuleMode } from "./configFile.mjs"
-import capitalize from "lodash.capitalize";
+const fs = require("fs";
+const path = require("path";
+const {getSrcPathFormConfigFile, getModuleMode } = require("./configFile.mjs"
+const capitalize = require("lodash.capitalize";
 
 
 export const fileExists = (name) => {

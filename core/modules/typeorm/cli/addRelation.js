@@ -1,12 +1,12 @@
-import inquirer from "inquirer";
-import consola from "consola";
-import chalk from "chalk";
+const inquirer = require("inquirer";
+const consola = require("consola";
+const chalk = require("chalk";
 
-import { addRelationQuestions } from "./questions.mjs";
-import { getEntity } from "../../common/index.mjs";
-import relations from "../makers/relations.mjs";
-import EntityManager from "../EntityManager.mjs";
-import addCli from "./add.mjs";
+const { addRelationQuestions } = require("./questions.mjs";
+const { getEntity } = require("../../common/index.mjs";
+const relations = require("../makers/relations.mjs";
+const EntityManager = require("../EntityManager.mjs";
+const addCli = require("./add.mjs";
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
 const cli = (entityName, apCli) =>

@@ -1,5 +1,5 @@
-import { addQuestions } from "./questions.mjs";
-import inquirer from "inquirer";
+const { addQuestions } = require("./questions.mjs";
+const inquirer = require("inquirer";
 
 /**
  *
