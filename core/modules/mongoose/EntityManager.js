@@ -13,7 +13,7 @@ class MongooseManager extends BaseEntityManager {
   static template(name) {
     name = capitalize(name);
     return [
-      "const {Schema, Types, model } from 'mongoose'",
+      "import {Schema, Types, model } from 'mongoose'",
       "",
       `const ${name} = new Schema({`,
       "_id: Types.ObjectId,",

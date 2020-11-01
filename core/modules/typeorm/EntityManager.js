@@ -2,11 +2,11 @@ const util = require("util");
 const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
-const { exec : executable } = require("child_process");
+const { exec: executable } = require("child_process");
 
 const BaseEntityManager = require("../common/BaseEntity");
 const { linter } = require("../common/linter");
-const {getModuleMode} = require("../common/configFile")
+const { getModuleMode } = require("../common/configFile");
 
 const exec = util.promisify(executable);
 
@@ -20,14 +20,18 @@ class TypeOrmManager extends BaseEntityManager {
     const classRegex = new RegExp(`export class ${capitalize(name)} {`);
 
     fs.renameSync(
-      path.join(this.directory, getModuleMode() ? name : ".", `${capitalize((name))}.${super.fileExtension}`),
+      path.join(
+        this.directory,
+        getModuleMode() ? name : ".",
+        `${capitalize(name)}.${super.fileExtension}`
+      ),
       file
     );
 
     let content = fs.readFileSync(file).toString().split("\n");
 
     content[0] =
-      'const {Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, BaseEntity } = require("typeorm")';
+      'import {Entity, Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn, BaseEntity } from "typeorm"';
 
     content.splice(
       5,
@@ -43,8 +47,7 @@ class TypeOrmManager extends BaseEntityManager {
   }
 
   static async create(name) {
-
-    const src = this.createOrInitSrc(name)
+    const src = this.createOrInitSrc(name);
     return await exec(`typeorm entity:create -d ${src} -n ${capitalize(name)}`);
   }
 
@@ -53,4 +56,4 @@ class TypeOrmManager extends BaseEntityManager {
   }
 }
 
-module.exports =  TypeOrmManager;
+module.exports = TypeOrmManager;
