@@ -1,10 +1,10 @@
-import {
+const {
   existingEntities,
-} from "../index.mjs";
-import { entityPropertyExists } from "../../common/entity.mjs";
-import { getEntity } from "../entity.mjs";
-import {getModules} from "../features/module-mode.mjs"
-import {getModuleMode} from "../configFile.mjs"
+} = require("../index.mjs";
+const { entityPropertyExists } = require("../../common/entity.mjs";
+const { getEntity } = require("../entity.mjs";
+const {getModules} = require("../features/module-mode.mjs"
+const {getModuleMode} = require("../configFile.mjs"
 
 const validateVariableName = (value) => {
   if (!isNaN(value[0]) || value.split(" ").length > 1) return false;

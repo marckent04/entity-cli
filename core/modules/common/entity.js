@@ -1,8 +1,8 @@
-import fs from "fs";
-import path from "path";
-import capitalize from "lodash.capitalize";
-import { getSrcPathFormConfigFile, getModuleMode } from "./configFile.mjs";
-import {getFileExtension} from "./configFile.mjs";
+const fs = require("fs";
+const path = require("path";
+const capitalize = require("lodash.capitalize";
+const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile.mjs";
+const {getFileExtension} = require("./configFile.mjs";
 
 const directory = getSrcPathFormConfigFile();
 
@@ -39,7 +39,7 @@ export const entityDestructuring = (entityContent, breakpoint) => {
   const seprator = entityContent.findIndex((line) => regex.test(line));
 
   return {
-    imports: entityContent.slice(0, seprator).filter((line) => line != ""),
+    consts: entityContent.slice(0, seprator).filter((line) => line != ""),
     body: entityContent.slice(seprator),
   };
 };

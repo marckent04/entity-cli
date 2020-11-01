@@ -1,6 +1,6 @@
-import {mongoose} from "../../common/destructuringBreakpoints.mjs"
-export { entityCreationQuestions } from "../../common/cli/questions.mjs";
-import {validateProperty} from "../../common/cli/questions.mjs"
+const {mongoose} = require("../../common/destructuringBreakpoints.mjs"
+export { entityCreationQuestions } = require("../../common/cli/questions.mjs";
+const {validateProperty} = require("../../common/cli/questions.mjs"
 export const addPropertyQuestions = (entityName) => {
   const typeChoices = ["String", "Number", "Boolean", "Date"];
 

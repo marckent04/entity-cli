@@ -1,8 +1,8 @@
-import { getConfigFile } from "./core/modules/common/configFile.mjs";
-import typeOrmCli from "./core/modules/typeorm/cli/index.mjs";
-import mongooseCli from "./core/modules/mongoose/cli/index.mjs";
-import boxen from "boxen";
-import chalk from "chalk";
+const { getConfigFile } = require("./core/modules/common/configFile.mjs";
+const typeOrmCli = require("./core/modules/typeorm/cli/index.mjs";
+const mongooseCli = require("./core/modules/mongoose/cli/index.mjs";
+const boxen = require("boxen";
+const chalk = require("chalk";
 
 export const cli = () => {
   const config = getConfigFile();

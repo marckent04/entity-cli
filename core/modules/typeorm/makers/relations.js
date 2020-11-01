@@ -1,9 +1,9 @@
-import capitalize from "lodash.capitalize";
+const capitalize = require("lodash.capitalize";
 
-import { addEntityImport, addTypeOrmImport } from "../../common/import.mjs";
-import EntityManager from "../EntityManager.mjs";
-import { typeORM } from "../../common/destructuringBreakpoints.mjs";
-import {getModuleMode} from "../../common/configFile.mjs"
+const { addEntityImport, addTypeOrmImport } = require("../../common/const.mjs";
+const EntityManager = require("../EntityManager.mjs";
+const { typeORM } = require("../../common/destructuringBreakpoints.mjs";
+const {getModuleMode} = require("../../common/configFile.mjs"
 
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
