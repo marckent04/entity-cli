@@ -6,12 +6,12 @@ import { getEntity } from "../entity.mjs";
 import {getModules} from "../features/module-mode.mjs"
 import {getModuleMode} from "../configFile.mjs"
 
-export const validateVariableName = (value) => {
+const validateVariableName = (value) => {
   if (!isNaN(value[0]) || value.split(" ").length > 1) return false;
   return true;
 };
 
-const validateProperty  = (propertyName, entityName, breakpoint) => {
+export const validateProperty  = (propertyName, entityName, breakpoint) => {
   const validName = validateVariableName(propertyName)
 
   if (validName) {

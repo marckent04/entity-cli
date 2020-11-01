@@ -25,7 +25,7 @@ class MongooseManager extends BaseEntityManager {
 
   static create(name) {
     const file = path.join(
-      getSrcPathFormConfigFile(),
+      this.createOrInitSrc(name),
       `${capitalize(name)}.entity.${super.fileExtension}`
     );
     // console.log("ici");
