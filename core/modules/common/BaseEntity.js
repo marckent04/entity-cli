@@ -4,26 +4,33 @@ const capitalize = require("lodash.capitalize");
 const findLastIndex = require("lodash.findlastindex");
 const {
   getSrcPathFormConfigFile,
-  getFileExtension, getModuleMode, getConfigFile,
+  getFileExtension,
+  getModuleMode,
+  getConfigFile,
 } = require("./configFile");
 const { linter } = require("./linter");
-const {relativeDefaultDirectory, relativeModuleDirectory, rootDir} = require("./constants");
+const {
+  relativeDefaultDirectory,
+  relativeModuleDirectory,
+  rootDir,
+} = require("./constants");
 
 class BaseEntityManager {
   static get directory() {
     return getSrcPathFormConfigFile();
   }
 
-
   static createOrInitSrc(name) {
     const file = getConfigFile();
-    let src = ""
-    const moduleMode = getModuleMode()
+    let src = "";
+    const moduleMode = getModuleMode();
     if (file && file.src) src = file.src;
-    src = path.join(moduleMode ? relativeModuleDirectory : relativeDefaultDirectory, moduleMode ? name :'.');
+    src = path.join(
+      moduleMode ? relativeModuleDirectory : relativeDefaultDirectory,
+      moduleMode ? name : "."
+    );
     if (file && file.modulesDir) src = path.join(file.modulesDir, name);
-    console.log(src)
-    return src
+    return src;
   }
 
   static get fileExtension() {
@@ -41,7 +48,7 @@ class BaseEntityManager {
   static create(name) {}
 
   static update(name, content) {
-    const mod = getModuleMode() ? name : "."
+    const mod = getModuleMode() ? name : ".";
     const file = path.join(
       this.directory,
       mod,
@@ -51,11 +58,11 @@ class BaseEntityManager {
   }
 
   static createPath(entityName) {
-    const mod = getModuleMode() ? entityName : "."
+    const mod = getModuleMode() ? entityName : ".";
     return path.join(
-        this.directory,
-        mod,
-        `${capitalize(entityName)}.entity.${this.fileExtension}`
+      this.directory,
+      mod,
+      `${capitalize(entityName)}.entity.${this.fileExtension}`
     );
   }
 
@@ -64,16 +71,14 @@ class BaseEntityManager {
     let content = nameOrContent;
     let file = null;
     if (!Array.isArray(nameOrContent)) {
-      file = this.createPath(nameOrContent)
+      file = this.createPath(nameOrContent);
       content = fs.readFileSync(file).toString().split("\n");
     }
-    // console.log(endTag);
     const lastIndex = findLastIndex(content, (line) => regex.test(line));
-    // console.log(lastIndex);
     content.splice(lastIndex, 0, newContent);
     if (file) fs.writeFileSync(file, linter(content));
     else return content;
   }
 }
 
-module.exports =  BaseEntityManager;
+module.exports = BaseEntityManager;

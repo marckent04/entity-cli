@@ -16,7 +16,8 @@ class MongooseManager extends BaseEntityManager {
       "import {Schema, Types, model } from 'mongoose'",
       "",
       `const ${name} = new Schema({`,
-      "_id: Types.ObjectId,",
+      "updatedAt: { type: Date, default: Date.now }",
+      "createdAt: { type: Date, default: Date.now }",
       "})",
       `export const ${name}Model = model('${name}', ${name})`,
     ];
@@ -27,9 +28,6 @@ class MongooseManager extends BaseEntityManager {
       this.createOrInitSrc(name),
       `${capitalize(name)}.entity.${super.fileExtension}`
     );
-    // console.log("ici");
-    // console.log(file);
-    // console.log(this.init(name));
     try {
       fs.writeFileSync(file, this.init(name));
     } catch (error) {
