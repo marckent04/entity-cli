@@ -17,4 +17,12 @@ module.exports = class Maker {
   static date(name) {
     return this.common(name, "Date");
   }
-}
+
+  static objectid(name) {
+    return this.common(name, "Types.ObjectId");
+  }
+
+  static buffer(name) {
+    return this.common(name, "Buffer");
+  }
+};

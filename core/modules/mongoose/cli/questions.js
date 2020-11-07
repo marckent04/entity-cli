@@ -1,9 +1,16 @@
-const {mongoose} = require("../../common/destructuringBreakpoints");
+const { mongoose } = require("../../common/destructuringBreakpoints");
 const { entityCreationQuestions } = require("../../common/cli/questions");
-const {validateProperty} = require("../../common/cli/questions");
+const { validateProperty } = require("../../common/cli/questions");
 
 const addPropertyQuestions = (entityName) => {
-  const typeChoices = ["String", "Number", "Boolean", "Date"];
+  const typeChoices = [
+    "String",
+    "Number",
+    "Boolean",
+    "Date",
+    "ObjectId",
+    "Buffer",
+  ];
 
   return [
     {
@@ -11,8 +18,7 @@ const addPropertyQuestions = (entityName) => {
       name: "name",
       message: "property name",
       validate: (value) => validateProperty(value, entityName, mongoose),
-
-},
+    },
     {
       type: "list",
       name: "type",
@@ -33,5 +39,5 @@ const addPropertyQuestions = (entityName) => {
 
 module.exports = {
   entityCreationQuestions,
-  addPropertyQuestions
-}
+  addPropertyQuestions,
+};
