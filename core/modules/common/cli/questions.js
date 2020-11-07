@@ -1,12 +1,11 @@
 const { existingEntities } = require("../index");
 const { entityPropertyExists } = require("../../common/entity");
 const { getEntity } = require("../entity");
-const { getModules } = require("../features/module-mode");
+const { getModules, getRelationModules } = require("../features/module-mode");
 const { getModuleMode } = require("../configFile");
 
 const validateVariableName = (value) => {
   return !(!isNaN(value[0]) || value.split(" ").length > 1);
-
 };
 
 const validateProperty = (propertyName, entityName, breakpoint) => {
@@ -68,7 +67,9 @@ const addRelationQuestions = (relationsChoices) => (entity) => {
       type: "list",
       name: "entity",
       message: moduleMode ? "Choose a module" : "Choose the entity",
-      choices: moduleMode ? getModules() : existingEntities(entity),
+      choices: moduleMode
+        ? getRelationModules(entity)
+        : existingEntities(entity),
     },
     {
       type: "list",
@@ -85,9 +86,7 @@ const addRelationQuestions = (relationsChoices) => (entity) => {
   ];
 };
 
-const addPropertyQuestions = (breakpoint, typeChoices) => (
-  entityName
-) => [
+const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
   {
     type: "input",
     name: "name",
@@ -122,5 +121,5 @@ module.exports = {
   entityCreationQuestions,
   addQuestions,
   addRelationQuestions,
-  addPropertyQuestions
+  addPropertyQuestions,
 };
