@@ -45,7 +45,23 @@ class BaseEntityManager {
     );
   }
 
-  static create(name) {}
+  static initJs(name) {}
+
+  static create(name) {
+    const file = path.join(
+      this.createOrInitSrc(name),
+      `${capitalize(name)}.entity.${this.fileExtension}`
+    );
+
+    try {
+      fs.writeFileSync(file, this.init(name));
+    } catch (error) {
+      if (error.errno === -2) {
+        throw chalk.red("folder not found");
+      }
+      throw chalk.red("error during entity file generation");
+    }
+  }
 
   static update(name, content) {
     const mod = getModuleMode() ? name : ".";
