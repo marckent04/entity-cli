@@ -2,9 +2,9 @@
 
 ## Features
 
-- support typeorm (ts) and mongoose (js, ts)
+- support typeorm (ts), sequelize (ts) and mongoose (js, ts)
 - Generate entity
-- support OneToMany relation (typeorm)
+- support OneToMany relation (typeorm, sequelize)
 - support OneToOne relation (typeorm)
 - support string, number, boolean type
 - additionally supports Buffer, ObjectId type for mongoose
@@ -24,7 +24,26 @@
 }
 ```
 
-## Configuration
+## How to use
+
+for configuration go to [Configuration section](#configuration)
+
+### Sequelize
+
+- #### Typescript
+  - Follow instructions for Install sequelize-typescript on [Sequelize-typescript homepage](https://www.npmjs.com/package/sequelize-typescript)
+
+### typeorm
+
+- #### Typescript
+  - Follow instructions for Install typeorm on [Typeorm homepage](https://www.npmjs.com/package/typeorm)
+
+### Mongoose
+
+- #### Typescript / Javascript
+  - Follow instructions for Install mongoose on [Mongoose homepage](https://www.npmjs.com/package/mongoose)
+
+## <a id="configuration">Configuration</a>
 
 create an `entity-cli.json` file in your project root directory
 
@@ -33,7 +52,7 @@ put this content
 ```
 {
   "src": "put_entities_directory",
-  "orm": "type" //typeorm or mongoose,
+  "orm": "type" //typeorm or mongoose or sequelize,
   "lang": "language" // js or ts
 }
 ```

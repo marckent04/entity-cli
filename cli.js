@@ -1,6 +1,8 @@
 const { getConfigFile } = require("./core/modules/common/configFile");
 const typeOrmCli = require("./core/modules/typeorm/cli/index");
 const mongooseCli = require("./core/modules/mongoose/cli/index");
+const sequelizeCli = require("./core/modules/sequelize/cli/index");
+
 const boxen = require("boxen");
 const chalk = require("chalk");
 
@@ -31,7 +33,7 @@ const cli = () => {
   if (config && config.orm) {
     switch (config.orm) {
       case "sequelize":
-        console.log("sequelize Soon");
+        sequelizeCli();
         break;
       case "mongoose":
         mongooseCli();
