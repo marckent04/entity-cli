@@ -1,30 +1,33 @@
 const capitalize = require("lodash.capitalize");
 
-const { addEntityImport, addOrmImport } = require("../../common/import");
+const { addOrmImport, addEntityImport } = require("../../common/import");
+
 const EntityManager = require("../EntityManager");
-const { typeORM } = require("../../common/destructuringBreakpoints");
+const { sequelize } = require("../../common/destructuringBreakpoints");
 
 class Maker {
   static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
     const one = {
-      typeOrmImport: ["OneToMany"],
+      ormImport: ["HasMany"],
       newContent: [
-        `\n\t@OneToMany(type =>  ${capitalize(
-          relationEntityName
-        )},  ${relationEntityName.toLowerCase()} => ${relationEntityName.toLowerCase()}.${entityName.toLowerCase()})`,
-        `\t${relationEntityName.toLowerCase()}s: ${capitalize(
+        "",
+        `@HasMany(() =>  ${capitalize(relationEntityName)})`,
+        `${relationEntityName.toLowerCase()}s: ${capitalize(
           relationEntityName
         )}[];`,
       ],
     };
 
     const many = {
-      typeOrmImport: ["ManyToOne"],
+      ormImport: ["ForeignKey", "BelongsTo"],
       newContent: [
-        `\n\t@ManyToOne(type => ${capitalize(
-          entityName
-        )}, ${entityName.toLowerCase()} => ${entityName.toLowerCase()}.${relationEntityName.toLowerCase()}s)`,
-        `\t${entityName.toLowerCase()}: ${capitalize(entityName)}`,
+        "",
+        `@ForeignKey(() => ${capitalize(entityName)})`,
+        "@Column",
+        `${entityName.toLowerCase()}Id: number;`,
+        "",
+        `@BelongsTo(() => ${capitalize(entityName)})`,
+        `${entityName.toLowerCase()}: ${capitalize(entityName)}`,
       ],
     };
 
@@ -32,36 +35,39 @@ class Maker {
       one: this.common(
         oneContent,
         relationEntityName,
-        one.typeOrmImport,
+        one.ormImport,
         one.newContent
       ),
       many: this.common(
         manyContent,
         entityName,
-        many.typeOrmImport,
+        many.ormImport,
         many.newContent
       ),
     };
   }
-  static addTypeOrmImport = (entityContent, toImport) => {
-    return addOrmImport("typeorm")(entityContent, toImport);
-  };
 
-  static common(entityContent, relationEntity, typeOrmImport, newContent) {
+  static addSequelizeImportTs(entityContent, ormImport) {
+    return addOrmImport("sequelize-typescript")(entityContent, ormImport);
+  }
+
+  static common(entityContent, relationEntity, ormImport, newContent) {
     const content = addEntityImport(
-      addTypeOrmImport(entityContent, typeOrmImport),
+      this.addSequelizeImportTs(entityContent, ormImport),
       relationEntity,
-      typeORM
+      sequelize
     );
 
     return EntityManager.append(content, newContent.join("\n")).join("\n");
   }
 
   static oto(entityContent, relationEntity) {
+    throw new Error("Fonctionnalite pas encore disponible");
+
     const newContent = [
-      `\t@OneToOne(type => ${capitalize(relationEntity)})`,
-      "\t@JoinColumn()",
-      `\t${relationEntity.toLowerCase()}: ${capitalize(relationEntity)};`,
+      `@OneToOne(type => ${capitalize(relationEntity)})`,
+      "@JoinColumn()",
+      `${relationEntity.toLowerCase()}: ${capitalize(relationEntity)};`,
     ];
 
     return this.common(

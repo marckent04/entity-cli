@@ -2,10 +2,10 @@ const typeORM = "@Entity()";
 
 const mongoose = "(new Schema\\({)$";
 
-const sequelize = "";
+const sequelize = "@Table";
 
 module.exports = {
-    typeORM,
-    mongoose,
-    sequelize
-}
+  typeORM,
+  mongoose,
+  sequelize,
+};

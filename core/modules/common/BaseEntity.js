@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
 const findLastIndex = require("lodash.findlastindex");
+const chalk = require("chalk");
 const {
   getSrcPathFormConfigFile,
   getFileExtension,
@@ -86,10 +87,12 @@ class BaseEntityManager {
     const regex = new RegExp(endTag);
     let content = nameOrContent;
     let file = null;
+
     if (!Array.isArray(nameOrContent)) {
       file = this.createPath(nameOrContent);
       content = fs.readFileSync(file).toString().split("\n");
     }
+
     const lastIndex = findLastIndex(content, (line) => regex.test(line));
     content.splice(lastIndex, 0, newContent);
     if (file) fs.writeFileSync(file, linter(content));
