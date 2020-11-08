@@ -23,6 +23,10 @@ class MongooseManager extends BaseEntityManager {
     ];
   }
 
+  static templateJs(name) {
+
+  }
+
   static create(name) {
     const file = path.join(
       this.createOrInitSrc(name),

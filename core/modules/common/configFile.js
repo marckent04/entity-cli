@@ -1,7 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
-const { rootDir, defaultDirectory, moduleDefaultDirectory } = require("./constants");
+const {
+  rootDir,
+  defaultDirectory,
+  moduleDefaultDirectory,
+} = require("./constants");
 
 const configFile = path.join(rootDir, "entity-cli.json");
 
@@ -31,24 +35,30 @@ const getConfigFile = () => {
 };
 
 const getModuleMode = () => {
-  const file = getConfigFile()
-  return !!(file && file.mode && (file.mode === "module"))
-}
+  const file = getConfigFile();
+  return !!(file && file.mode && file.mode === "module");
+};
 
 const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
   if (getModuleMode())
-    return (config.modulesDir) ? path.join(rootDir, config.modulesDir): moduleDefaultDirectory
+    return config.modulesDir
+      ? path.join(rootDir, config.modulesDir)
+      : moduleDefaultDirectory;
 
-  return (config && config.src) ? path.join(rootDir, config.src) : defaultDirectory;
+  return config && config.src
+    ? path.join(rootDir, config.src)
+    : defaultDirectory;
 };
 
 const getRelativePathFormConfigFile = () => {
   const config = getConfigFile();
   if (getModuleMode())
-    return (config.modulesDir) ? config.modulesDir: moduleDefaultDirectory
+    return config.modulesDir ? config.modulesDir : moduleDefaultDirectory;
 
-  return (config && config.src) ? path.join(rootDir, config.src) : defaultDirectory;
+  return config && config.src
+    ? path.join(rootDir, config.src)
+    : defaultDirectory;
 };
 
 const getDirectoryFromConfigFile = () => {
@@ -65,14 +75,22 @@ const entityExistsFromConfigFile = (name) => {
 
 const getFileExtension = () => {
   const config = getConfigFile();
-  if (getOrm() !== "typeorm" && config && config.lang && config.lang === "js")
-    return "js";
+  if (config && config.lang && config.lang === "js") return "js";
   return "ts";
 };
 
 const getModuleSrc = () => {
-  const file = getConfigFile()
-  return (file && file.moduleSrc) ? file.moduleSrc : "."
-}
+  const file = getConfigFile();
+  return file && file.moduleSrc ? file.moduleSrc : ".";
+};
 
-module.exports = {getConfigFile, getModuleMode, getSrcPathFormConfigFile, getDirectoryFromConfigFile, getFileExtension, getRelativePathFormConfigFile, entityExistsFromConfigFile, getModuleSrc}
+module.exports = {
+  getConfigFile,
+  getModuleMode,
+  getSrcPathFormConfigFile,
+  getDirectoryFromConfigFile,
+  getFileExtension,
+  getRelativePathFormConfigFile,
+  entityExistsFromConfigFile,
+  getModuleSrc,
+};
