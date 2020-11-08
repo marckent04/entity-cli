@@ -7,7 +7,7 @@ const chalk = require("chalk");
 const cli = () => {
   const config = getConfigFile();
 
-  const version = "1.1.0";
+  const version = "1.1.2";
   const orm = config && config.orm ? config.orm : "typeorm";
   const language = config && config.lang ? config.lang : "Ts";
 
@@ -45,6 +45,6 @@ const cli = () => {
   }
 };
 
-module.exports  = {
-  cli
-}
+module.exports = {
+  cli,
+};
