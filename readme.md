@@ -68,12 +68,12 @@ it permits to organize the application structure.
 
 add `"mode": "module"` to entity-cli.json
 
-add `"moduleSrc": "path to module dir"` to change the modules directory
+add `"modulesDir": "path to module dir"` to change the modules directory
 
 ```
 {
   "mode": "module",
-  "moduleSrc": "path to module dir"
+  "modulesDir": "path to module dir"
 }
 ```
 
