@@ -42,7 +42,7 @@ class BaseEntityManager {
     return path.join(
       rootDir,
       this.createOrInitSrc(name),
-      `${capitalize(name)}.entity.${this.fileExtension}`
+      `${name}.entity.${this.fileExtension}`
     );
   }
 
@@ -51,7 +51,7 @@ class BaseEntityManager {
   static create(name) {
     const file = path.join(
       this.createOrInitSrc(name),
-      `${capitalize(name)}.entity.${this.fileExtension}`
+      `${name}.entity.${this.fileExtension}`
     );
 
     try {
@@ -69,8 +69,9 @@ class BaseEntityManager {
     const file = path.join(
       this.directory,
       mod,
-      `${capitalize(name)}.entity.${this.fileExtension}`
+      `${name}.entity.${this.fileExtension}`
     );
+    console.log(content);
     fs.writeFileSync(file, linter(content));
   }
 

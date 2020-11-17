@@ -41,14 +41,18 @@ const getModuleMode = () => {
 
 const getSrcPathFormConfigFile = () => {
   const config = getConfigFile();
-  if (getModuleMode())
-    return config.modulesDir
-      ? path.join(rootDir, config.modulesDir)
-      : moduleDefaultDirectory;
 
-  return config && config.src
-    ? path.join(rootDir, config.src)
-    : defaultDirectory;
+  const src =
+    config && config.src ? path.join(rootDir, config.src) : defaultDirectory;
+
+  if (getModuleMode()) {
+    if (src != defaultDirectory)
+      return config.modulesDir
+        ? path.join(rootDir, config.modulesDir, src)
+        : moduleDefaultDirectory;
+  }
+
+  return src;
 };
 
 const getRelativePathFormConfigFile = () => {

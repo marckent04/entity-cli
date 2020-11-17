@@ -2,11 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
 const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile");
-const {getFileExtension} = require("./configFile");
+const { getFileExtension } = require("./configFile");
 
 const directory = getSrcPathFormConfigFile();
 
-const fileExtension = getFileExtension()
+const fileExtension = getFileExtension();
 
 const filterEntities = (files) => {
   return files
@@ -17,9 +17,11 @@ const filterEntities = (files) => {
 };
 
 const getEntity = (name) => {
-  const mod = getModuleMode() ? name : "."
+  const mod = getModuleMode() ? name : ".";
   return fs
-    .readFileSync(path.join(directory, mod ,`${capitalize(name)}.entity.${fileExtension}`))
+    .readFileSync(
+      path.join(directory, mod, `${capitalize(name)}.entity.${fileExtension}`)
+    )
     .toString()
     .split("\n");
 };
@@ -30,7 +32,7 @@ const existingEntities = (currentEntity) => {
   return filterEntities(
     fs
       .readdirSync(directory)
-      .filter((entity) => entity !== `${capitalize(currentEntity)}.entity.${fileExtension}`)
+      .filter((entity) => entity !== `${currentEntity}.entity.${fileExtension}`)
   );
 };
 
@@ -56,5 +58,5 @@ module.exports = {
   getEntity,
   existingEntities,
   entityDestructuring,
-  entityPropertyExists
-}
+  entityPropertyExists,
+};

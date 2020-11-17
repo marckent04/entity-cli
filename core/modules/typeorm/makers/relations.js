@@ -49,7 +49,7 @@ class Maker {
 
   static common(entityContent, relationEntity, typeOrmImport, newContent) {
     const content = addEntityImport(
-      addTypeOrmImport(entityContent, typeOrmImport),
+      this.addTypeOrmImport(entityContent, typeOrmImport),
       relationEntity,
       typeORM
     );

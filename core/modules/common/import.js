@@ -32,15 +32,14 @@ const formalizeImports = (currentImports, newImports) => {
 
 const addEntityImport = (entityContent, entityToImport, breakpoint) => {
   let { imports, body } = entityDestructuring(entityContent, breakpoint);
-  let src = `./${capitalize(entityToImport)}.entity`;
-  if (getModuleMode())
-    src = `../${entityToImport}/${capitalize(entityToImport)}.entity`;
+  let src = `./${entityToImport}.entity`;
+  if (getModuleMode()) src = `../${entityToImport}/${entityToImport}.entity`;
 
   imports = [
     ...imports,
-    `import { ${capitalize(entityToImport)} } from "./${capitalize(
+    `import { ${capitalize(
       entityToImport
-    )}.entity"`,
+    )} } from "./${entityToImport}.entity"`,
     "",
   ];
 
