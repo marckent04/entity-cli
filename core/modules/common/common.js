@@ -3,8 +3,11 @@ const path = require("path");
 const { getEntitiesLocation } = require("./configFile");
 const {} = require("./constants");
 
-const fileExists = async (name) => {
-  const dest = path.join(await getEntitiesLocation(), `${name}.entity.ts`);
+const fileExists = async (name, module = null) => {
+  const dest = path.join(
+    await getEntitiesLocation(module),
+    `${name}.entity.ts`
+  );
   return fs.existsSync(dest);
 };
 

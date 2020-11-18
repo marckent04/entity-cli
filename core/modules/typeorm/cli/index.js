@@ -13,7 +13,7 @@ const cli = async () =>
   inquirer
     .prompt(await entityCreationQuestions())
     .then(async ({ name, module }) => {
-      const exists = await fileExists(name);
+      const exists = await fileExists(name, module);
 
       if (module) await storage.updateItem("currentModule", module);
 

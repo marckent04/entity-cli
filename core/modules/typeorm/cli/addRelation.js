@@ -22,7 +22,6 @@ const cli = (entityName, apCli) => {
 
     const currentEntityPath = await createPath(entityName, currentModule);
 
-    console.log(currentEntityPath, targetEntityPath);
     let result = null;
 
     try {
@@ -38,22 +37,25 @@ const cli = (entityName, apCli) => {
           );
           break;
         case "otm":
-          result = relations.otm(
-            getEntity(currentEntityPath.file),
-            getEntity(targetEntityPath.file),
+          result = await relations.otm(
+            await getEntity(currentEntityPath.file),
+            await getEntity(targetEntityPath.file),
             entityName,
-            entity
+            entity,
+            path.relative(currentEntityPath.folder, targetEntityPath.file),
+            path.relative(targetEntityPath.folder, currentEntityPath.file)
           );
-
           await EntityManager.update(currentEntityPath.file, result.one);
           await EntityManager.update(targetEntityPath.file, result.many);
           break;
         case "mto":
-          result = relations.otm(
-            getEntity(targetEntityPath.file),
-            getEntity(currentEntityPath.file),
+          result = await relations.otm(
+            await getEntity(targetEntityPath.file),
+            await getEntity(currentEntityPath.file),
             entity,
-            entityName
+            entityName,
+            path.relative(targetEntityPath.folder, currentEntityPath.file),
+            path.relative(currentEntityPath.folder, targetEntityPath.file)
           );
 
           await EntityManager.update(currentEntityPath.file, result.many);

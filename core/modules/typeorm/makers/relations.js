@@ -5,7 +5,14 @@ const EntityManager = require("../EntityManager");
 const { typeORM } = require("../../common/destructuringBreakpoints");
 
 class Maker {
-  static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
+  static async otmCommon(
+    oneContent,
+    manyContent,
+    entityName,
+    relationEntityName,
+    oneRelativePath,
+    manyRelativePath
+  ) {
     const one = {
       typeOrmImport: ["OneToMany"],
       newContent: [
@@ -29,17 +36,19 @@ class Maker {
     };
 
     return {
-      one: this.common(
+      one: await this.common(
         oneContent,
         relationEntityName,
         one.typeOrmImport,
-        one.newContent
+        one.newContent,
+        oneRelativePath
       ),
-      many: this.common(
+      many: await this.common(
         manyContent,
         entityName,
         many.typeOrmImport,
-        many.newContent
+        many.newContent,
+        manyRelativePath
       ),
     };
   }
@@ -81,12 +90,21 @@ class Maker {
     );
   }
 
-  static otm(entityContent, relationContent, entity, relationEntity) {
-    return this.otmCommon(
+  static async otm(
+    entityContent,
+    relationContent,
+    entity,
+    relationEntity,
+    oneRelativePath,
+    manyRelativePath
+  ) {
+    return await this.otmCommon(
       entityContent,
       relationContent,
       entity,
-      relationEntity
+      relationEntity,
+      oneRelativePath,
+      manyRelativePath
     );
 
     // throw new Error("Fonctionnalite pas encore disponible");

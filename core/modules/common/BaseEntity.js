@@ -51,7 +51,6 @@ class BaseEntityManager {
   }
 
   static update(entityPath, content) {
-    console.log(content);
     fs.writeFileSync(entityPath, linter(content));
   }
 

@@ -49,7 +49,7 @@ const cli = (entityName, apCli) =>
           break;
       }
 
-      consola.success(chalk.green("relation etablie"));
+      consola.success(chalk.green("relation etablished"));
       if (add) addCli(entityName, apCli, cli);
     } catch (error) {
       consola.error(error);
