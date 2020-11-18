@@ -1,5 +1,5 @@
-const capitalize = require("lodash.capitalize");
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
+
 const consola = require("consola");
 const chalk = require("chalk");
 
@@ -9,7 +9,7 @@ const { fileExists } = require("../../common/common");
 const apCli = require("./addProperty");
 
 const cli = async () =>
-  inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
+  inquirer.prompt(await entityCreationQuestions()).then(async (answers) => {
     const { name } = answers;
     const exists = await fileExists(name);
 

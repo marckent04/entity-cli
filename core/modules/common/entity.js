@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
+const storage = require("node-persist");
+
 const {
   getSrcPathFormConfigFile,
   getModuleMode,
@@ -32,12 +34,16 @@ const getEntity = (name) => {
 
 const updateEntity = (name, content) => {};
 
-const existingEntities = (currentEntity) => {
-  return filterEntities(
-    fs
-      .readdirSync(directory)
-      .filter((entity) => entity !== `${currentEntity}.entity.${fileExtension}`)
-  );
+const existingEntities = async (currentEntity, module = null, all = false) => {
+  let entities = fs.readdirSync(await getEntitiesLocation(module));
+
+  if (!all) {
+    entities = entities.filter(
+      (entity) => entity !== `${currentEntity}.entity.${fileExtension}`
+    );
+  }
+
+  return filterEntities(entities);
 };
 
 const entityDestructuring = (entityContent, breakpoint) => {

@@ -1,4 +1,4 @@
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
 const consola = require("consola");
 const { entityCreationQuestions } = require("./questions");
 const EntityManager = require("../EntityManager");
@@ -8,7 +8,7 @@ const arCli = require("./addRelation");
 const apCli = require("./addProperty");
 
 const cli = async () =>
-  inquirer.prompt(entityCreationQuestions()).then(async ({ name }) => {
+  inquirer.prompt(await entityCreationQuestions()).then(async ({ name }) => {
     if (!fileExists(name)) {
       await EntityManager.create(name);
     } else {

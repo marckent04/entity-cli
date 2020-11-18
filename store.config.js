@@ -26,7 +26,7 @@ const destroy = async () => {
 
 const init = async () => {
   await storage.init(config);
-  await storage.setItem("currentModule", "");
+  await storage.setItem("currentModule", ".");
 };
 
 module.exports = { init, destroy };

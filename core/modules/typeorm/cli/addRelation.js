@@ -1,4 +1,5 @@
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
+
 const consola = require("consola");
 const chalk = require("chalk");
 
@@ -9,7 +10,7 @@ const EntityManager = require("../EntityManager");
 const addCli = require("./add");
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
-const cli = (entityName, apCli) =>
+const cli = (entityName, apCli) => {
   inquirer.prompt(addRelationQuestions(entityName)).then(async (answers) => {
     const { entity, relation, add } = answers;
     let result = null;
@@ -54,5 +55,6 @@ const cli = (entityName, apCli) =>
       consola.error(error);
     }
   });
+};
 
 module.exports = cli;

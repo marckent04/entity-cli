@@ -1,4 +1,5 @@
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
+
 const consola = require("consola");
 const chalk = require("chalk");
 

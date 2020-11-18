@@ -1,5 +1,5 @@
 const { addQuestions } = require("./questions");
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
 
 /**
  *
@@ -20,4 +20,4 @@ function cli(name, apCli, arCli) {
   });
 }
 
-module.exports =  cli;
+module.exports = cli;

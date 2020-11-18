@@ -1,4 +1,4 @@
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
 const consola = require("consola");
 const storage = require("node-persist");
 
@@ -10,18 +10,20 @@ const arCli = require("./addRelation");
 const apCli = require("./addProperty");
 
 const cli = async () =>
-  inquirer.prompt(entityCreationQuestions()).then(async ({ name, module }) => {
-    const exists = await fileExists(name);
+  inquirer
+    .prompt(await entityCreationQuestions())
+    .then(async ({ name, module }) => {
+      const exists = await fileExists(name);
 
-    if (module) await storage.updateItem("currentModule", module);
+      if (module) await storage.updateItem("currentModule", module);
 
-    if (!exists) {
-      await EntityManager.create(name);
-    } else {
-      consola.info(`update ${name}`);
-    }
+      if (!exists) {
+        await EntityManager.create(name);
+      } else {
+        consola.info(`update ${name}`);
+      }
 
-    addCli(name, apCli, arCli);
-  });
+      addCli(name, apCli, arCli);
+    });
 
 module.exports = cli;

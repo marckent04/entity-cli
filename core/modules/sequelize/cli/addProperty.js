@@ -1,4 +1,5 @@
-const inquirer = require("inquirer");
+const { inquirer } = require("../../common/cli");
+
 const consola = require("consola");
 const chalk = require("chalk");
 
@@ -23,4 +24,4 @@ const cli = (entityName, arCli) =>
     }
   });
 
-module.exports =  cli;
+module.exports = cli;

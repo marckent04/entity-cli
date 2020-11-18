@@ -1,3 +1,5 @@
+const storage = require("node-persist");
+
 const { existingEntities } = require("../index");
 const { entityPropertyExists } = require("../../common/entity");
 const { getEntity } = require("../entity");
@@ -27,13 +29,23 @@ const validateProperty = (propertyName, entityName, breakpoint) => {
   return true;
 };
 
-const entityCreationQuestions = () => {
+const entityCreationQuestions = async () => {
   let questions = [
     {
-      type: "input",
+      type: "autocomplete",
       name: "name",
       message: "Entity name",
       validate: validateVariableName,
+      source: async (previous, input) => {
+        const { module } = previous;
+        const regex = new RegExp(input, "gi");
+        const entities = await existingEntities(module, module, true);
+        console.log(entities);
+        return [];
+        // return existingEntities(module, module, true).filter((entity) =>
+        //   entity.match(regex)
+        // );
+      },
     },
   ];
   if (getModuleMode()) {
@@ -62,20 +74,28 @@ const addQuestions = () => [
 
 const addRelationQuestions = (relationsChoices) => (entity) => {
   const moduleQuestion = {
-    type: "list",
-    name: "relation",
+    type: "autocomplete",
+    name: "module",
     message: "Choose a module",
-    choices: getRelationModules(entity),
-    filter: (v) => {
-      console.log(v);
+    source: function (_, input) {
+      const regex = new RegExp(input, "gi");
+      return getRelationModules(entity).filter((module) => module.match(regex));
+    },
+    validate: async ({ value }) => {
+      await storage.setItem("targetModule", value);
+      return true;
     },
   };
   const questions = [
     {
-      type: "list",
+      type: "autocomplete",
       name: "entity",
       message: "Choose the entity",
-      choices: existingEntities(entity),
+      source: async (previous, _) => {
+        const { module } = previous;
+        const entities = await existingEntities(entity, module);
+        return entities;
+      },
     },
     {
       type: "list",
