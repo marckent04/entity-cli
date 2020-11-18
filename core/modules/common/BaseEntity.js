@@ -50,14 +50,9 @@ class BaseEntityManager {
     }
   }
 
-  static async update(name, content) {
-    const mod = getModuleMode() ? name : ".";
-    const file = path.join(
-      await this.directory(),
-      mod,
-      `${name}.entity.${this.fileExtension}`
-    );
-    fs.writeFileSync(file, linter(content));
+  static update(entityPath, content) {
+    console.log(content);
+    fs.writeFileSync(entityPath, linter(content));
   }
 
   static async createPath(entityName) {
@@ -78,7 +73,7 @@ class BaseEntityManager {
     }
 
     const lastIndex = findLastIndex(content, (line) => regex.test(line));
-    content.splice(lastIndex, 0, newContent);
+    content.splice(lastIndex, 0, ...newContent);
     if (file) fs.writeFileSync(file, linter(content));
     else return content;
   }

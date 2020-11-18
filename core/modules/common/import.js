@@ -11,6 +11,7 @@ const addOrmImport = (ormImport) => (entityContent, toImport) => {
   }
 
   const regex = new RegExp(`(["|']${ormImport}["|']?;)$`);
+  // console.log(entityContent);
   const index = entityContent.findIndex((line) => regex.test(line));
 
   if (index > -1) {
@@ -30,16 +31,17 @@ const formalizeImports = (currentImports, newImports) => {
   return Array.from(setImports);
 };
 
-const addEntityImport = (entityContent, entityToImport, breakpoint) => {
+const addEntityImport = (
+  entityContent,
+  entityToImport,
+  breakpoint,
+  entityToImportPath
+) => {
   let { imports, body } = entityDestructuring(entityContent, breakpoint);
-  let src = `./${entityToImport}.entity`;
-  if (getModuleMode()) src = `../${entityToImport}/${entityToImport}.entity`;
 
   imports = [
     ...imports,
-    `import { ${capitalize(
-      entityToImport
-    )} } from "./${entityToImport}.entity"`,
+    `import { ${capitalize(entityToImport)} } from "${entityToImportPath}"`,
     "",
   ];
 

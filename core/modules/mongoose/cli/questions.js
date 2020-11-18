@@ -17,7 +17,8 @@ const addPropertyQuestions = (entityName) => {
       type: "input",
       name: "name",
       message: "property name",
-      validate: (value) => validateProperty(value, entityName, mongoose),
+      validate: async (value) =>
+        await validateProperty(value, entityName, mongoose),
     },
     {
       type: "list",

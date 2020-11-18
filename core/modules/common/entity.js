@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
 const storage = require("node-persist");
+const { createPath } = require("./common");
+const consola = require("consola");
 
 const {
   getSrcPathFormConfigFile,
@@ -22,14 +24,12 @@ const filterEntities = (files) => {
     .filter((file) => file !== undefined);
 };
 
-const getEntity = (name) => {
-  const mod = getModuleMode() ? name : ".";
-  return fs
-    .readFileSync(
-      path.join(directory, mod, `${capitalize(name)}.entity.${fileExtension}`)
-    )
-    .toString()
-    .split("\n");
+const getEntity = async (path) => {
+  // console.log("one: " + name);
+  // console.log("two: " + (await getEntitiesLocation()));
+  // const mod = getModuleMode() ? name : ".";
+  // .readFileSync(path.join(directory, mod, `${name}.entity.${fileExtension}`))
+  return fs.readFileSync(path).toString().split("\n");
 };
 
 const updateEntity = (name, content) => {};

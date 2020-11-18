@@ -19,7 +19,7 @@ const cli = (entityName, apCli) =>
         case "oto":
           await EntityManager.update(
             entityName,
-            relations.oto(getEntity(entityName), entity)
+            await relations.oto(getEntity(entityName), entity)
           );
           break;
         case "otm":

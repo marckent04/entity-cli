@@ -47,28 +47,37 @@ class Maker {
     return addOrmImport("typeorm")(entityContent, toImport);
   };
 
-  static common(entityContent, relationEntity, typeOrmImport, newContent) {
+  static async common(
+    entityContent,
+    relationEntity,
+    typeOrmImport,
+    newContent,
+    entityToImportRelativePath
+  ) {
     const content = addEntityImport(
       this.addTypeOrmImport(entityContent, typeOrmImport),
       relationEntity,
-      typeORM
+      typeORM,
+      entityToImportRelativePath
     );
 
-    return EntityManager.append(content, newContent.join("\n")).join("\n");
+    const result = await EntityManager.append(content, newContent);
+    return result.join("\n");
   }
 
-  static oto(entityContent, relationEntity) {
+  static async oto(entityContent, relationEntity, entityToImportRelativePath) {
     const newContent = [
       `\t@OneToOne(type => ${capitalize(relationEntity)})`,
       "\t@JoinColumn()",
       `\t${relationEntity.toLowerCase()}: ${capitalize(relationEntity)};`,
     ];
 
-    return this.common(
+    return await this.common(
       entityContent,
       relationEntity,
       ["OneToOne", "JoinColumn"],
-      newContent
+      newContent,
+      entityToImportRelativePath
     );
   }
 

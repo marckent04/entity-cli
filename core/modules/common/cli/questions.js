@@ -6,16 +6,16 @@ const { getEntity } = require("../entity");
 const { getModules, getRelationModules } = require("../features/module-mode");
 const { getModuleMode } = require("../configFile");
 
-const validateVariableName = (value) => {
+const validateVariableName = ({ value }) => {
   return !(!isNaN(value[0]) || value.split(" ").length > 1);
 };
 
-const validateProperty = (propertyName, entityName, breakpoint) => {
+const validateProperty = async (propertyName, entityName, breakpoint) => {
   const validName = validateVariableName(propertyName);
 
   if (validName) {
     const propertyExists = entityPropertyExists(
-      getEntity(entityName),
+      await getEntity(entityName),
       breakpoint,
       propertyName
     );
@@ -36,15 +36,12 @@ const entityCreationQuestions = async () => {
       name: "name",
       message: "Entity name",
       validate: validateVariableName,
+      emptyText: "No entity found, but you can create it now",
       source: async (previous, input) => {
         const { module } = previous;
         const regex = new RegExp(input, "gi");
         const entities = await existingEntities(module, module, true);
-        console.log(entities);
-        return [];
-        // return existingEntities(module, module, true).filter((entity) =>
-        //   entity.match(regex)
-        // );
+        return entities.filter((entity) => entity.match(regex));
       },
     },
   ];
@@ -123,7 +120,8 @@ const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
     type: "input",
     name: "name",
     message: "property name",
-    validate: (value) => validateProperty(value, entityName, breakpoint),
+    validate: async (value) =>
+      await validateProperty(value, entityName, breakpoint),
   },
   {
     type: "list",
