@@ -70,9 +70,8 @@ class BaseEntityManager {
       file = await this.createPath(nameOrContent);
       content = fs.readFileSync(file).toString().split("\n");
     }
-
     const lastIndex = findLastIndex(content, (line) => regex.test(line));
-    content.splice(lastIndex, 0, ...newContent);
+    content.splice(lastIndex, 0, newContent);
     if (file) fs.writeFileSync(file, linter(content));
     else return content;
   }

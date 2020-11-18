@@ -1,6 +1,7 @@
 const storage = require("node-persist");
 
 const { existingEntities } = require("../index");
+const { createPath } = require("../common");
 const { entityPropertyExists } = require("../../common/entity");
 const { getEntity } = require("../entity");
 const { getModules, getRelationModules } = require("../features/module-mode");
@@ -11,19 +12,21 @@ const validateVariableName = ({ value }) => {
 };
 
 const validateProperty = async (propertyName, entityName, breakpoint) => {
-  const validName = validateVariableName(propertyName);
+  const module = await storage.getItem("currentModule");
 
+  const validName = validateVariableName({ value: propertyName });
+  const entityPath = await createPath(entityName, module);
   if (validName) {
     const propertyExists = entityPropertyExists(
-      await getEntity(entityName),
+      await getEntity(entityPath.file),
       breakpoint,
       propertyName
     );
     if (propertyExists) {
-      return "Propriété existe deja";
+      return "Property already defined";
     }
   } else {
-    return "Entrer un nom valide";
+    return "Enter a valid name";
   }
 
   return true;

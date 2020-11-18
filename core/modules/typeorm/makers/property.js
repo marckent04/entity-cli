@@ -1,8 +1,8 @@
-module.exports =  class Maker {
+module.exports = class Maker {
   static common(typeDb, name, mandatory = true, typeJs = null) {
     return [
-      `\t@Column({type: "${typeDb}"${mandatory ? "" : ", nullable: true"}})`,
-      `\t${name}: ${typeJs || typeDb}\n`,
+      `@Column({type: "${typeDb}"${mandatory ? "" : ", nullable: true"}})`,
+      `${name}: ${typeJs || typeDb}\n`,
     ];
   }
   static string(name, required) {
@@ -26,4 +26,4 @@ module.exports =  class Maker {
   static date(name) {
     return this.common("date", name, "Date");
   }
-}
+};
