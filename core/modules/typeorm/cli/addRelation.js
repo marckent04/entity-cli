@@ -10,13 +10,13 @@ const addCli = require("./add");
 
 //entity : entite avec laquelle on etablie la relation (nom variable a cahnger)
 const cli = (entityName, apCli) =>
-  inquirer.prompt(addRelationQuestions(entityName)).then((answers) => {
+  inquirer.prompt(addRelationQuestions(entityName)).then(async (answers) => {
     const { entity, relation, add } = answers;
     let result = null;
     try {
       switch (relation) {
         case "oto":
-          EntityManager.update(
+          await EntityManager.update(
             entityName,
             relations.oto(getEntity(entityName), entity)
           );
@@ -29,8 +29,8 @@ const cli = (entityName, apCli) =>
             entity
           );
 
-          EntityManager.update(entityName, result.one);
-          EntityManager.update(entity, result.many);
+          await EntityManager.update(entityName, result.one);
+          await EntityManager.update(entity, result.many);
           break;
         case "mto":
           result = relations.otm(
@@ -40,8 +40,8 @@ const cli = (entityName, apCli) =>
             entityName
           );
 
-          EntityManager.update(entityName, result.many);
-          EntityManager.update(entity, result.one);
+          await EntityManager.update(entityName, result.many);
+          await EntityManager.update(entity, result.one);
 
           break;
         default:
@@ -55,4 +55,4 @@ const cli = (entityName, apCli) =>
     }
   });
 
-module.exports =  cli;
+module.exports = cli;

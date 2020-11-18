@@ -11,12 +11,14 @@ const apCli = require("./addProperty");
 const cli = async () =>
   inquirer.prompt(entityCreationQuestions()).then(async (answers) => {
     const { name } = answers;
-    if (!fileExists(capitalize(name))) {
-      EntityManager.create(name);
+    const exists = await fileExists(name);
+
+    if (!exists) {
+      await EntityManager.create(name);
       consola.success(chalk.green("entity created"));
     } else consola.info(chalk.blueBright(`update ${name}`));
 
     apCli(name);
   });
 
-module.exports =  cli;
+module.exports = cli;

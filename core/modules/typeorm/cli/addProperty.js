@@ -23,4 +23,4 @@ const cli = (entityName, arCli) =>
     }
   });
 
-module.exports =  cli;
+module.exports = cli;

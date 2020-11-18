@@ -23,14 +23,12 @@ class MongooseManager extends BaseEntityManager {
     ];
   }
 
-  static templateJs(name) {
+  static templateJs(name) {}
 
-  }
-
-  static create(name) {
+  static async create(name) {
     const file = path.join(
-      this.createOrInitSrc(name),
-      `${capitalize(name)}.entity.${super.fileExtension}`
+      await this.directory(),
+      `${name}.entity.${super.fileExtension}`
     );
     try {
       fs.writeFileSync(file, this.init(name));

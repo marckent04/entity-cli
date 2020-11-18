@@ -1,7 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const capitalize = require("lodash.capitalize");
-const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile");
+const {
+  getSrcPathFormConfigFile,
+  getModuleMode,
+  getEntitiesLocation,
+} = require("./configFile");
 const { getFileExtension } = require("./configFile");
 
 const directory = getSrcPathFormConfigFile();

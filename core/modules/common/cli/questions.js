@@ -28,17 +28,7 @@ const validateProperty = (propertyName, entityName, breakpoint) => {
 };
 
 const entityCreationQuestions = () => {
-  if (getModuleMode()) {
-    return [
-      {
-        type: "list",
-        name: "name",
-        message: "Choose one module",
-        choices: getModules(),
-      },
-    ];
-  }
-  return [
+  let questions = [
     {
       type: "input",
       name: "name",
@@ -46,6 +36,16 @@ const entityCreationQuestions = () => {
       validate: validateVariableName,
     },
   ];
+  if (getModuleMode()) {
+    questions.unshift({
+      type: "list",
+      name: "module",
+      message: "Choose one module",
+      choices: getModules(),
+    });
+  }
+
+  return questions;
 };
 
 const addQuestions = () => [
@@ -61,15 +61,21 @@ const addQuestions = () => [
 ];
 
 const addRelationQuestions = (relationsChoices) => (entity) => {
-  const moduleMode = getModuleMode();
-  return [
+  const moduleQuestion = {
+    type: "list",
+    name: "relation",
+    message: "Choose a module",
+    choices: getRelationModules(entity),
+    filter: (v) => {
+      console.log(v);
+    },
+  };
+  const questions = [
     {
       type: "list",
       name: "entity",
-      message: moduleMode ? "Choose a module" : "Choose the entity",
-      choices: moduleMode
-        ? getRelationModules(entity)
-        : existingEntities(entity),
+      message: "Choose the entity",
+      choices: existingEntities(entity),
     },
     {
       type: "list",
@@ -84,6 +90,12 @@ const addRelationQuestions = (relationsChoices) => (entity) => {
       default: false,
     },
   ];
+
+  if (getModuleMode()) {
+    questions.unshift(moduleQuestion);
+  }
+
+  return questions;
 };
 
 const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
