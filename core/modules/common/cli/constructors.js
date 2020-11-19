@@ -11,7 +11,7 @@ const { fileExists } = require("../../common/common");
 
 const createImport = (from, to) => {
   const removeExtensionregex = /(.ts|.js)$/i;
-  const relativePathRegex = /^\.\//;
+  const relativePathRegex = /^\.?\.\//;
   let importPath = path.relative(from, to).replace(removeExtensionregex, "");
   if (!relativePathRegex.test(importPath))
     importPath = ["./", ...importPath].join("");
@@ -33,7 +33,17 @@ const addPropertyConstructor = ({
         makerProperty[type](name, required).join("\n")
       );
       consola.success(chalk.green(`the ${name} column has been created `));
-      if (add) addCli(entityName, cli, arCli);
+      if (add)
+        addCli(
+          entityName,
+          addPropertyConstructor({
+            entityManager,
+            addCli,
+            makerProperty,
+            questions,
+          }),
+          arCli
+        );
     } catch (error) {
       consola.error(error);
     }

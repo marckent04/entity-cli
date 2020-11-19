@@ -16,10 +16,10 @@ class Maker {
     const one = {
       typeOrmImport: ["OneToMany"],
       newContent: [
-        `\n\t@OneToMany(type =>  ${capitalize(
+        `@OneToMany(type =>  ${capitalize(
           relationEntityName
         )},  ${relationEntityName.toLowerCase()} => ${relationEntityName.toLowerCase()}.${entityName.toLowerCase()})`,
-        `\t${relationEntityName.toLowerCase()}s: ${capitalize(
+        `${relationEntityName.toLowerCase()}s: ${capitalize(
           relationEntityName
         )}[];`,
       ],

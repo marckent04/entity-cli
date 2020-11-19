@@ -1,20 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const capitalize = require("lodash.capitalize");
 const findLastIndex = require("lodash.findlastindex");
 const chalk = require("chalk");
-const {
-  getEntitiesLocation,
-  getFileExtension,
-  getModuleMode,
-  getConfigFile,
-} = require("./configFile");
+const { getEntitiesLocation, getFileExtension } = require("./configFile");
 const { linter } = require("./linter");
-const {
-  relativeDefaultDirectory,
-  relativeModuleDirectory,
-  rootDir,
-} = require("./constants");
 
 class BaseEntityManager {
   static async directory() {
@@ -65,6 +54,10 @@ class BaseEntityManager {
     const regex = new RegExp(endTag);
     let content = nameOrContent;
     let file = null;
+
+    if (Array.isArray(newContent)) {
+      newContent = newContent.join("\n");
+    }
 
     if (!Array.isArray(nameOrContent)) {
       file = await this.createPath(nameOrContent);

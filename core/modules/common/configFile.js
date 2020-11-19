@@ -53,9 +53,11 @@ const getSrcPathFormConfigFile = () => {
 
 const getEntitiesLocation = async (mod = null) => {
   const directoryPath = getSrcPathFormConfigFile();
+  let src = ".";
   if (!mod) mod = await storage.getItem("currentModule");
   const config = getConfigFile();
-  const src = config ? config.src : ".";
+  if (config && config.src) src = config.src;
+
   if (getModuleMode()) return path.join(directoryPath, mod, src);
   return directoryPath;
 };

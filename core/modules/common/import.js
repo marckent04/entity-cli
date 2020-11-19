@@ -1,7 +1,6 @@
 const capitalize = require("lodash.capitalize");
 
 const { entityDestructuring } = require("./entity");
-const { getModuleMode } = require("./configFile");
 
 const addOrmImport = (ormImport) => (entityContent, toImport) => {
   if (Array.isArray(toImport)) {
@@ -10,14 +9,13 @@ const addOrmImport = (ormImport) => (entityContent, toImport) => {
     toImport = [`${toImport},`];
   }
 
-  const regex = new RegExp(`(["|']${ormImport}["|']?;)$`);
+  const regex = new RegExp(`(("|')${ormImport}("|');?)$`);
   // console.log(entityContent);
   const index = entityContent.findIndex((line) => regex.test(line));
-
   if (index > -1) {
-    if (index > 1)
+    if (index > 1) {
       toImport.forEach((imp) => entityContent.splice(index, 0, imp));
-    else throw "const.js ligne 20 ";
+    } else throw "const.js ligne 20 ";
   }
 
   return entityContent.map((elt) => elt.trim());
@@ -38,7 +36,6 @@ const addEntityImport = (
   entityToImportPath
 ) => {
   let { imports, body } = entityDestructuring(entityContent, breakpoint);
-
   imports = [
     ...imports,
     `import { ${capitalize(entityToImport)} } from "${entityToImportPath}"`,
