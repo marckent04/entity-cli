@@ -1,6 +1,6 @@
 # Entity CLI
 
-## What's new in version 1.0.5 ?
+## What's new in version 1.0.6 ?
 
 - you can specify the folder where are located your entities inside the module dir
 - autocomplete feature in your entities research
