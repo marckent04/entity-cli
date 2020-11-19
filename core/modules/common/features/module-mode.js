@@ -1,12 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 const { getSrcPathFormConfigFile } = require("../configFile");
-
 const getModules = () => {
-  const src = getSrcPathFormConfigFile();
   try {
+    const src = getSrcPathFormConfigFile();
     return fs
-      .readdirSync(src, { encoding: "utf8" })
+      .readdirSync(src, {
+        encoding: "utf8",
+      })
       .filter((file) => fs.lstatSync(path.join(src, file)).isDirectory());
   } catch (_) {
     return [];
@@ -15,6 +16,7 @@ const getModules = () => {
 
 const getRelationModules = (entity) => {
   const src = getSrcPathFormConfigFile();
+
   try {
     return fs
       .readdirSync(src, { encoding: "utf8" })
@@ -25,9 +27,15 @@ const getRelationModules = (entity) => {
   }
 };
 
-const getModuleEntities = () => {};
+const getEntitiesDir = (module = "", moduleDir = ".", srcDir = "") => {
+  const src = srcDir || ".";
+  return path.join(moduleDir, module, src);
+};
+
+const getModuleEntities = (module) => {};
 
 module.exports = {
   getModules,
   getRelationModules,
+  getEntitiesDir,
 };

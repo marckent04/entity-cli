@@ -1,51 +1,69 @@
+const storage = require("node-persist");
+
 const { existingEntities } = require("../index");
+const { createPath } = require("../common");
 const { entityPropertyExists } = require("../../common/entity");
 const { getEntity } = require("../entity");
 const { getModules, getRelationModules } = require("../features/module-mode");
 const { getModuleMode } = require("../configFile");
 
-const validateVariableName = (value) => {
+const validateVariableName = ({ value }) => {
   return !(!isNaN(value[0]) || value.split(" ").length > 1);
 };
 
-const validateProperty = (propertyName, entityName, breakpoint) => {
-  const validName = validateVariableName(propertyName);
+const validateProperty = async (propertyName, entityName, breakpoint) => {
+  const module = await storage.getItem("currentModule");
 
+  const validName = validateVariableName({ value: propertyName });
+  const entityPath = await createPath(entityName, module);
   if (validName) {
     const propertyExists = entityPropertyExists(
-      getEntity(entityName),
+      await getEntity(entityPath.file),
       breakpoint,
       propertyName
     );
     if (propertyExists) {
-      return "Propriété existe deja";
+      return "Property already defined";
     }
   } else {
-    return "Entrer un nom valide";
+    return "Enter a valid name";
   }
 
   return true;
 };
 
-const entityCreationQuestions = () => {
-  if (getModuleMode()) {
-    return [
-      {
-        type: "list",
-        name: "name",
-        message: "Choose one module",
-        choices: getModules(),
-      },
-    ];
-  }
-  return [
+const entityCreationQuestions = async () => {
+  let questions = [
     {
-      type: "input",
+      type: "autocomplete",
       name: "name",
       message: "Entity name",
       validate: validateVariableName,
+      emptyText: "No entity found, but you can create it now",
+      source: async (previous, input) => {
+        const { module } = previous;
+        const regex = new RegExp(input, "gi");
+        const entities = await existingEntities(module, module, true);
+        const filterEntities = entities.filter((entity) => entity.match(regex));
+
+        return filterEntities.length > 0
+          ? filterEntities
+          : input
+          ? [input]
+          : [];
+      },
     },
   ];
+  if (getModuleMode()) {
+    questions.unshift({
+      type: "list",
+      name: "module",
+      message: "Choose one module",
+      choices: getModules(),
+    });
+  }
+
+  return questions;
 };
 
 const addQuestions = () => [
@@ -61,15 +79,29 @@ const addQuestions = () => [
 ];
 
 const addRelationQuestions = (relationsChoices) => (entity) => {
-  const moduleMode = getModuleMode();
-  return [
+  const moduleQuestion = {
+    type: "autocomplete",
+    name: "module",
+    message: "Choose a module",
+    source: function (_, input) {
+      const regex = new RegExp(input, "gi");
+      return getRelationModules(entity).filter((module) => module.match(regex));
+    },
+    validate: async ({ value }) => {
+      await storage.setItem("targetModule", value);
+      return true;
+    },
+  };
+  const questions = [
     {
-      type: "list",
+      type: "autocomplete",
       name: "entity",
-      message: moduleMode ? "Choose a module" : "Choose the entity",
-      choices: moduleMode
-        ? getRelationModules(entity)
-        : existingEntities(entity),
+      message: "Choose the entity",
+      source: async (previous, _) => {
+        const { module } = previous;
+        const entities = await existingEntities(entity, module);
+        return entities;
+      },
     },
     {
       type: "list",
@@ -84,6 +116,12 @@ const addRelationQuestions = (relationsChoices) => (entity) => {
       default: false,
     },
   ];
+
+  if (getModuleMode()) {
+    questions.unshift(moduleQuestion);
+  }
+
+  return questions;
 };
 
 const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
@@ -91,7 +129,8 @@ const addPropertyQuestions = (breakpoint, typeChoices) => (entityName) => [
     type: "input",
     name: "name",
     message: "property name",
-    validate: (value) => validateProperty(value, entityName, breakpoint),
+    validate: async (value) =>
+      await validateProperty(value, entityName, breakpoint),
   },
   {
     type: "list",

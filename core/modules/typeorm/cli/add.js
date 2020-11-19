@@ -20,4 +20,4 @@ function cli(name, apCli, arCli) {
   });
 }
 
-module.exports =  cli;
+module.exports = cli;

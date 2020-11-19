@@ -1,23 +1,25 @@
 const fs = require("fs");
 const path = require("path");
-const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile");
-const capitalize = require("lodash.capitalize");
+const { getEntitiesLocation } = require("./configFile");
+const {} = require("./constants");
 
-const fileExists = (name) => {
-  let dest = path.join(
-    getSrcPathFormConfigFile(),
-    `${capitalize(name)}.entity.ts`
+const fileExists = async (name, module = null) => {
+  const dest = path.join(
+    await getEntitiesLocation(module),
+    `${name}.entity.ts`
   );
-  if (getModuleMode())
-    dest = path.join(
-      getSrcPathFormConfigFile(),
-      name,
-      `${capitalize(name)}.entity.ts`
-    );
-
   return fs.existsSync(dest);
 };
 
+const createPath = async (entityName, module = null) => {
+  const folder = path.join(await getEntitiesLocation(module));
+
+  return {
+    file: path.join(folder, `${entityName}.entity.ts`),
+    folder,
+  };
+};
 module.exports = {
   fileExists,
+  createPath,
 };

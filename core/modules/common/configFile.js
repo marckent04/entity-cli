@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+const storage = require("node-persist");
 const {
   rootDir,
   defaultDirectory,
@@ -51,6 +51,15 @@ const getSrcPathFormConfigFile = () => {
     : defaultDirectory;
 };
 
+const getEntitiesLocation = async (mod = null) => {
+  const directoryPath = getSrcPathFormConfigFile();
+  if (!mod) mod = await storage.getItem("currentModule");
+  const config = getConfigFile();
+  const src = config.src ?? ".";
+  if (getModuleMode()) return path.join(directoryPath, mod, src);
+  return directoryPath;
+};
+
 const getRelativePathFormConfigFile = () => {
   const config = getConfigFile();
   if (getModuleMode())
@@ -93,4 +102,5 @@ module.exports = {
   getRelativePathFormConfigFile,
   entityExistsFromConfigFile,
   getModuleSrc,
+  getEntitiesLocation,
 };

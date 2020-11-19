@@ -5,7 +5,14 @@ const EntityManager = require("../EntityManager");
 const { typeORM } = require("../../common/destructuringBreakpoints");
 
 class Maker {
-  static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
+  static async otmCommon(
+    oneContent,
+    manyContent,
+    entityName,
+    relationEntityName,
+    oneRelativePath,
+    manyRelativePath
+  ) {
     const one = {
       typeOrmImport: ["OneToMany"],
       newContent: [
@@ -29,55 +36,76 @@ class Maker {
     };
 
     return {
-      one: this.common(
+      one: await this.common(
         oneContent,
         relationEntityName,
         one.typeOrmImport,
-        one.newContent
+        one.newContent,
+        oneRelativePath
       ),
-      many: this.common(
+      many: await this.common(
         manyContent,
         entityName,
         many.typeOrmImport,
-        many.newContent
+        many.newContent,
+        manyRelativePath
       ),
     };
   }
+
   static addTypeOrmImport = (entityContent, toImport) => {
     return addOrmImport("typeorm")(entityContent, toImport);
   };
 
-  static common(entityContent, relationEntity, typeOrmImport, newContent) {
+  static async common(
+    entityContent,
+    relationEntity,
+    typeOrmImport,
+    newContent,
+    entityToImportRelativePath
+  ) {
     const content = addEntityImport(
-      addTypeOrmImport(entityContent, typeOrmImport),
+      this.addTypeOrmImport(entityContent, typeOrmImport),
       relationEntity,
-      typeORM
+      typeORM,
+      entityToImportRelativePath
     );
 
-    return EntityManager.append(content, newContent.join("\n")).join("\n");
+    const result = await EntityManager.append(content, newContent);
+    return result.join("\n");
   }
 
-  static oto(entityContent, relationEntity) {
+  static async oto(entityContent, relationEntity, entityToImportRelativePath) {
     const newContent = [
       `\t@OneToOne(type => ${capitalize(relationEntity)})`,
       "\t@JoinColumn()",
       `\t${relationEntity.toLowerCase()}: ${capitalize(relationEntity)};`,
     ];
 
-    return this.common(
+    return await this.common(
       entityContent,
       relationEntity,
       ["OneToOne", "JoinColumn"],
-      newContent
+      newContent,
+      entityToImportRelativePath
     );
   }
 
-  static otm(entityContent, relationContent, entity, relationEntity) {
-    return this.otmCommon(
+  static async otm(
+    entityContent,
+    relationContent,
+    entity,
+    relationEntity,
+    oneRelativePath,
+    manyRelativePath
+  ) {
+    return await this.otmCommon(
       entityContent,
       relationContent,
       entity,
-      relationEntity
+      relationEntity,
+      oneRelativePath,
+      manyRelativePath
     );
 
     // throw new Error("Fonctionnalite pas encore disponible");

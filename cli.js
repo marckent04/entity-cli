@@ -2,7 +2,6 @@ const { getConfigFile } = require("./core/modules/common/configFile");
 const typeOrmCli = require("./core/modules/typeorm/cli/index");
 const mongooseCli = require("./core/modules/mongoose/cli/index");
 const sequelizeCli = require("./core/modules/sequelize/cli/index");
-
 const boxen = require("boxen");
 const chalk = require("chalk");
 

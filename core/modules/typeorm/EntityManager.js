@@ -26,8 +26,8 @@ class TypeOrmManager extends BaseEntityManager {
     ];
   }
 
-  static append(nameOrContent, newContent) {
-    return super.append(nameOrContent, newContent, "}");
+  static async append(nameOrContent, newContent) {
+    return await super.append(nameOrContent, newContent, "}");
   }
 }
 

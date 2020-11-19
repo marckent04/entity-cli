@@ -16,30 +16,14 @@ class MongooseManager extends BaseEntityManager {
       "import {Schema, Types, model } from 'mongoose'",
       "",
       `const ${name} = new Schema({`,
-      "updatedAt: { type: Date, default: Date.now }",
+      "updatedAt: { type: Date, default: Date.now },",
       "createdAt: { type: Date, default: Date.now }",
       "})",
       `export const ${name}Model = model('${name}', ${name})`,
     ];
   }
 
-  static templateJs(name) {
-
-  }
-
-  static create(name) {
-    const file = path.join(
-      this.createOrInitSrc(name),
-      `${capitalize(name)}.entity.${super.fileExtension}`
-    );
-    try {
-      fs.writeFileSync(file, this.init(name));
-    } catch (error) {
-      if (error.errno === -2) {
-        throw chalk.red("folder not found");
-      }
-    }
-  }
+  static templateJs(name) {}
 
   static append(nameOrContent, newContent) {
     super.append(nameOrContent, newContent, "}\\)");

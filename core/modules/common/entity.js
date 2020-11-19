@@ -1,12 +1,16 @@
 const fs = require("fs");
-const path = require("path");
-const capitalize = require("lodash.capitalize");
-const { getSrcPathFormConfigFile, getModuleMode } = require("./configFile");
-const {getFileExtension} = require("./configFile");
+const consola = require("consola");
+const chalk = require("chalk");
+
+const {
+  getSrcPathFormConfigFile,
+  getEntitiesLocation,
+} = require("./configFile");
+const { getFileExtension } = require("./configFile");
 
 const directory = getSrcPathFormConfigFile();
 
-const fileExtension = getFileExtension()
+const fileExtension = getFileExtension();
 
 const filterEntities = (files) => {
   return files
@@ -16,22 +20,33 @@ const filterEntities = (files) => {
     .filter((file) => file !== undefined);
 };
 
-const getEntity = (name) => {
-  const mod = getModuleMode() ? name : "."
-  return fs
-    .readFileSync(path.join(directory, mod ,`${capitalize(name)}.entity.${fileExtension}`))
-    .toString()
-    .split("\n");
+const getEntity = async (path) => {
+  // console.log("one: " + name);
+  // console.log("two: " + (await getEntitiesLocation()));
+  // const mod = getModuleMode() ? name : ".";
+  // .readFileSync(path.join(directory, mod, `${name}.entity.${fileExtension}`))
+  return fs.readFileSync(path).toString().split("\n");
 };
 
 const updateEntity = (name, content) => {};
 
-const existingEntities = (currentEntity) => {
-  return filterEntities(
-    fs
-      .readdirSync(directory)
-      .filter((entity) => entity !== `${capitalize(currentEntity)}.entity.${fileExtension}`)
-  );
+const existingEntities = async (currentEntity, module = null, all = false) => {
+  let entities;
+  const src = await getEntitiesLocation(module);
+
+  try {
+    entities = fs.readdirSync(src);
+  } catch (error) {
+    consola.error(chalk.red(src + " not found"));
+    process.exit();
+  }
+  if (!all) {
+    entities = entities.filter(
+      (entity) => entity !== `${currentEntity}.entity.${fileExtension}`
+    );
+  }
+
+  return filterEntities(entities);
 };
 
 const entityDestructuring = (entityContent, breakpoint) => {
@@ -56,5 +71,5 @@ module.exports = {
   getEntity,
   existingEntities,
   entityDestructuring,
-  entityPropertyExists
-}
+  entityPropertyExists,
+};
