@@ -16,7 +16,7 @@ class MongooseManager extends BaseEntityManager {
       "import {Schema, Types, model } from 'mongoose'",
       "",
       `const ${name} = new Schema({`,
-      "updatedAt: { type: Date, default: Date.now }",
+      "updatedAt: { type: Date, default: Date.now },",
       "createdAt: { type: Date, default: Date.now }",
       "})",
       `export const ${name}Model = model('${name}', ${name})`,
@@ -24,20 +24,6 @@ class MongooseManager extends BaseEntityManager {
   }
 
   static templateJs(name) {}
-
-  static async create(name) {
-    const file = path.join(
-      await this.directory(),
-      `${name}.entity.${super.fileExtension}`
-    );
-    try {
-      fs.writeFileSync(file, this.init(name));
-    } catch (error) {
-      if (error.errno === -2) {
-        throw chalk.red("folder not found");
-      }
-    }
-  }
 
   static append(nameOrContent, newContent) {
     super.append(nameOrContent, newContent, "}\\)");

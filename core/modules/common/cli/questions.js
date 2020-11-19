@@ -44,7 +44,13 @@ const entityCreationQuestions = async () => {
         const { module } = previous;
         const regex = new RegExp(input, "gi");
         const entities = await existingEntities(module, module, true);
-        return entities.filter((entity) => entity.match(regex));
+        const filterEntities = entities.filter((entity) => entity.match(regex));
+
+        return filterEntities.length > 0
+          ? filterEntities
+          : input
+          ? [input]
+          : [];
       },
     },
   ];

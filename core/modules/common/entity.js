@@ -1,13 +1,9 @@
 const fs = require("fs");
-const path = require("path");
-const capitalize = require("lodash.capitalize");
-const storage = require("node-persist");
-const { createPath } = require("./common");
 const consola = require("consola");
+const chalk = require("chalk");
 
 const {
   getSrcPathFormConfigFile,
-  getModuleMode,
   getEntitiesLocation,
 } = require("./configFile");
 const { getFileExtension } = require("./configFile");
@@ -35,8 +31,15 @@ const getEntity = async (path) => {
 const updateEntity = (name, content) => {};
 
 const existingEntities = async (currentEntity, module = null, all = false) => {
-  let entities = fs.readdirSync(await getEntitiesLocation(module));
+  let entities;
+  const src = await getEntitiesLocation(module);
 
+  try {
+    entities = fs.readdirSync(src);
+  } catch (error) {
+    consola.error(chalk.red(src + " not found"));
+    process.exit();
+  }
   if (!all) {
     entities = entities.filter(
       (entity) => entity !== `${currentEntity}.entity.${fileExtension}`

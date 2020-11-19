@@ -1,7 +1,7 @@
 const storage = require("node-persist");
 
 const config = {
-  dir: "./core",
+  dir: "./store",
 
   stringify: JSON.stringify,
 

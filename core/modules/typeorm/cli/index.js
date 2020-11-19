@@ -1,29 +1,14 @@
-const { inquirer } = require("../../common/cli");
-const consola = require("consola");
-const storage = require("node-persist");
-
-const { entityCreationQuestions } = require("./questions");
+const { baseCliConstructor } = require("../../common/cli/constructors");
 const EntityManager = require("../EntityManager");
-const { fileExists } = require("../../common/common");
 const addCli = require("./add");
 const arCli = require("./addRelation");
 const apCli = require("./addProperty");
 
-const cli = async () =>
-  inquirer
-    .prompt(await entityCreationQuestions())
-    .then(async ({ name, module }) => {
-      const exists = await fileExists(name, module);
-
-      if (module) await storage.updateItem("currentModule", module);
-
-      if (!exists) {
-        await EntityManager.create(name);
-      } else {
-        consola.info(`update ${name}`);
-      }
-
-      addCli(name, apCli, arCli);
-    });
+const cli = baseCliConstructor({
+  entityManager: EntityManager,
+  addCli,
+  addPropertyCli: apCli,
+  addRelationCli: arCli,
+});
 
 module.exports = cli;
