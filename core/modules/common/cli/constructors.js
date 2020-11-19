@@ -24,7 +24,6 @@ const addPropertyConstructor = ({
       );
       consola.success(chalk.green(`the ${name} column has been created `));
       if (add) addCli(entityName, cli, arCli);
-      else consola.info(chalk.blueBright("Good code to you"));
     } catch (error) {
       consola.error(error);
     }

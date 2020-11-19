@@ -52,6 +52,7 @@ class Maker {
       ),
     };
   }
+
   static addTypeOrmImport = (entityContent, toImport) => {
     return addOrmImport("typeorm")(entityContent, toImport);
   };

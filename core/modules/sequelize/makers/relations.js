@@ -6,7 +6,14 @@ const EntityManager = require("../EntityManager");
 const { sequelize } = require("../../common/destructuringBreakpoints");
 
 class Maker {
-  static otmCommon(oneContent, manyContent, entityName, relationEntityName) {
+  static async otmCommon(
+    oneContent,
+    manyContent,
+    entityName,
+    relationEntityName,
+    oneRelativePath,
+    manyRelativePath
+  ) {
     const one = {
       ormImport: ["HasMany"],
       newContent: [
@@ -32,17 +39,19 @@ class Maker {
     };
 
     return {
-      one: this.common(
+      one: await this.common(
         oneContent,
         relationEntityName,
         one.ormImport,
-        one.newContent
+        one.newContent,
+        oneRelativePath
       ),
-      many: this.common(
+      many: await this.common(
         manyContent,
         entityName,
         many.ormImport,
-        many.newContent
+        many.newContent,
+        manyRelativePath
       ),
     };
   }
@@ -51,14 +60,22 @@ class Maker {
     return addOrmImport("sequelize-typescript")(entityContent, ormImport);
   }
 
-  static common(entityContent, relationEntity, ormImport, newContent) {
+  static async common(
+    entityContent,
+    relationEntity,
+    ormImport,
+    newContent,
+    entityToImportRelativePath
+  ) {
     const content = addEntityImport(
       this.addSequelizeImportTs(entityContent, ormImport),
       relationEntity,
-      sequelize
+      sequelize,
+      entityToImportRelativePath
     );
-
-    return EntityManager.append(content, newContent.join("\n")).join("\n");
+    console.log(content);
+    console.log(newContent);
+    return await EntityManager.append(content, newContent.join("\n"));
   }
 
   static oto(entityContent, relationEntity) {
@@ -78,12 +95,21 @@ class Maker {
     );
   }
 
-  static otm(entityContent, relationContent, entity, relationEntity) {
-    return this.otmCommon(
+  static async otm(
+    entityContent,
+    relationContent,
+    entity,
+    relationEntity,
+    oneRelativePath,
+    manyRelativePath
+  ) {
+    return await this.otmCommon(
       entityContent,
       relationContent,
       entity,
-      relationEntity
+      relationEntity,
+      oneRelativePath,
+      manyRelativePath
     );
 
     // throw new Error("Fonctionnalite pas encore disponible");

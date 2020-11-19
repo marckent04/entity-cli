@@ -1,5 +1,7 @@
 const { init } = require("./store.config");
 const { cli } = require("./cli");
+const consola = require("consola");
+const chalk = require("chalk");
 
 (async () => {
   await init();
@@ -7,5 +9,5 @@ const { cli } = require("./cli");
 })();
 
 process.on("exit", () => {
-  console.log("good code");
+  consola.info(chalk.blueBright("Good code to you"));
 });

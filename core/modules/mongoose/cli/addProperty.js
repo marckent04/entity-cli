@@ -14,7 +14,6 @@ const cli = (entityName) =>
       EntityManager.append(entityName, MakeProperty[type.toLowerCase()](name));
       consola.success(chalk.green(`the ${name} column has been created `));
       if (add) cli(entityName);
-      else consola.info(chalk.blueBright("Good code to you"));
     } catch (error) {
       consola.error(error);
     }
