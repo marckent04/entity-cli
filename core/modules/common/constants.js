@@ -1,7 +1,7 @@
 const path = require("path");
 
-// const rootDir = path.join(__dirname, "..", "..", "..", "..", "..");
-const rootDir = path.join(__dirname, "..", "..", "..");
+const rootDir = path.join(__dirname, "..", "..", "..", "..", "..");
+// const rootDir = path.join(__dirname, "..", "..", "..");
 
 const defaultDirectory = path.join(rootDir, "src", "entities");
 const relativeDefaultDirectory = path.join("src", "entities");
