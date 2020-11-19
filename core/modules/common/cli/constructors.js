@@ -9,6 +9,16 @@ const { createPath } = require("../common");
 const { entityCreationQuestions } = require("./questions");
 const { fileExists } = require("../../common/common");
 
+const createImport = (from, to) => {
+  const removeExtensionregex = /(.ts|.js)$/i;
+  const relativePathRegex = /^\.\//;
+  let importPath = path.relative(from, to).replace(removeExtensionregex, "");
+  if (!relativePathRegex.test(importPath))
+    importPath = ["./", ...importPath].join("");
+
+  return importPath;
+};
+
 const addPropertyConstructor = ({
   entityManager,
   makerProperty,
@@ -54,7 +64,7 @@ const addRelationConstructor = ({
             await relationsMaker.oto(
               await getEntity(currentEntityPath.file),
               entity,
-              path.relative(currentEntityPath.folder, targetEntityPath.file)
+              createImport(currentEntityPath.folder, targetEntityPath.file)
             )
           );
           break;
@@ -64,8 +74,8 @@ const addRelationConstructor = ({
             await getEntity(targetEntityPath.file),
             entityName,
             entity,
-            path.relative(currentEntityPath.folder, targetEntityPath.file),
-            path.relative(targetEntityPath.folder, currentEntityPath.file)
+            createImport(currentEntityPath.folder, targetEntityPath.file),
+            createImport(targetEntityPath.folder, currentEntityPath.file)
           );
           await entityManager.update(currentEntityPath.file, result.one);
           await entityManager.update(targetEntityPath.file, result.many);
@@ -76,8 +86,8 @@ const addRelationConstructor = ({
             await getEntity(currentEntityPath.file),
             entity,
             entityName,
-            path.relative(targetEntityPath.folder, currentEntityPath.file),
-            path.relative(currentEntityPath.folder, targetEntityPath.file)
+            createImport(targetEntityPath.folder, currentEntityPath.file),
+            createImport(currentEntityPath.folder, targetEntityPath.file)
           );
 
           await entityManager.update(currentEntityPath.file, result.many);

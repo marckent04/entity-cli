@@ -70,6 +70,8 @@ add `"mode": "module"` to entity-cli.json
 
 add `"modulesDir": "path to module dir"` to change the modules directory
 
+when the module mode is activate, the src key in entity-cli.json represents the folder where are entities inside the module
+
 ```
 {
   "mode": "module",

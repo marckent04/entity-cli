@@ -73,8 +73,6 @@ class Maker {
       sequelize,
       entityToImportRelativePath
     );
-    console.log(content);
-    console.log(newContent);
     return await EntityManager.append(content, newContent.join("\n"));
   }
 
