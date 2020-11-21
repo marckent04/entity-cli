@@ -1,42 +1,19 @@
 const { mongoose } = require("../../common/destructuringBreakpoints");
 const { entityCreationQuestions } = require("../../common/cli/questions");
-const { validateProperty } = require("../../common/cli/questions");
+const {
+  addPropertyQuestions: addPropertyConstructor,
+} = require("../../common/cli/questions");
 
-const addPropertyQuestions = (entityName) => {
-  const typeChoices = [
-    "String",
-    "Number",
-    "Boolean",
-    "Date",
-    "ObjectId",
-    "Buffer",
-  ];
+const typeChoices = [
+  "String",
+  "Number",
+  "Boolean",
+  "Date",
+  "ObjectId",
+  "Buffer",
+];
 
-  return [
-    {
-      type: "input",
-      name: "name",
-      message: "property name",
-      validate: async (value) =>
-        await validateProperty(value, entityName, mongoose),
-    },
-    {
-      type: "list",
-      name: "type",
-      message: "choose property type",
-      choices: typeChoices,
-      filter: function (val) {
-        return val.toLowerCase();
-      },
-    },
-    {
-      type: "confirm",
-      name: "add",
-      message: "Add new property ?",
-      default: false,
-    },
-  ];
-};
+const addPropertyQuestions = addPropertyConstructor(mongoose, typeChoices);
 
 module.exports = {
   entityCreationQuestions,

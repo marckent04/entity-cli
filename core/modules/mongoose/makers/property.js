@@ -1,28 +1,33 @@
 module.exports = class Maker {
-  static common(name, type) {
-    return [`${name}: ${type},`];
+  static common(name, type, required) {
+    return [
+      `${name}: {
+      type: ${type},
+      require: ${required}
+    },`,
+    ];
   }
-  static string(name) {
-    return this.common(name, "String");
-  }
-
-  static boolean(name) {
-    return this.common(name, "Boolean");
-  }
-
-  static number(name) {
-    return this.common(name, "Number");
+  static string(name, required) {
+    return this.common(name, "String", required);
   }
 
-  static date(name) {
-    return this.common(name, "Date");
+  static boolean(name, required) {
+    return this.common(name, "Boolean", required);
   }
 
-  static objectid(name) {
-    return this.common(name, "Types.ObjectId");
+  static number(name, required) {
+    return this.common(name, "Number", required);
   }
 
-  static buffer(name) {
-    return this.common(name, "Buffer");
+  static date(name, required) {
+    return this.common(name, "Date", required);
+  }
+
+  static objectid(name, required) {
+    return this.common(name, "mongoose.Types.ObjectId", required);
+  }
+
+  static buffer(name, required) {
+    return this.common(name, "Buffer", required);
   }
 };

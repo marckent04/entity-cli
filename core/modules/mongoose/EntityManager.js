@@ -13,9 +13,9 @@ class MongooseManager extends BaseEntityManager {
   static template(name) {
     name = capitalize(name);
     return [
-      "import {Schema, Types } from 'mongoose'",
+      "import * as mongoose from 'mongoose'",
       "",
-      `export const ${name} = new Schema({`,
+      `export const ${name} = new mongoose.Schema({`,
       "updatedAt: { type: Date, default: Date.now },",
       "createdAt: { type: Date, default: Date.now }",
       "})",
