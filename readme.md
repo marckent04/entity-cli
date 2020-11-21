@@ -5,6 +5,7 @@
 - you can specify the folder where are located your entities inside the module dir
 - autocomplete feature in your entities research
 - you can manage many entities by module
+- works properly with nest resource
 
 ## Features
 

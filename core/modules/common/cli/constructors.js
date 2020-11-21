@@ -7,7 +7,7 @@ const { inquirer } = require("./index");
 const { getEntity } = require("../index");
 const { createPath } = require("../common");
 const { entityCreationQuestions } = require("./questions");
-const { fileExists } = require("../../common/common");
+const { fileExists, canBeInit } = require("../../common/common");
 
 const createImport = (from, to) => {
   const removeExtensionregex = /(.ts|.js)$/i;
@@ -132,7 +132,12 @@ const baseCliConstructor = ({
       if (!exists) {
         await entityManager.create(name);
       } else {
-        consola.info(`update ${name}`);
+        if (await canBeInit(name)) {
+          await entityManager.create(name);
+          consola.info(`entity ${name} initialized`);
+        } else {
+          consola.info(`update ${name}`);
+        }
       }
 
       addCli(name, addPropertyCli, addRelationCli);
