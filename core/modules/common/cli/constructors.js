@@ -132,7 +132,7 @@ const baseCliConstructor = ({
       if (!exists) {
         await entityManager.create(name);
       } else {
-        if (await canBeInit(name)) {
+        if (await canBeInit(name, module)) {
           await entityManager.create(name);
           consola.info(`entity ${name} initialized`);
         } else {
