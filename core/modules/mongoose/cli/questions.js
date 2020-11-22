@@ -1,7 +1,13 @@
 const { mongoose } = require("../../common/destructuringBreakpoints");
 const { entityCreationQuestions } = require("../../common/cli/questions");
+const { getModuleMode } = require("../../common/configFile");
+const { getRelationModules } = require("../../common/features/module-mode");
+const { existingEntities } = require("../../common/index");
+
+const storage = require("node-persist");
 const {
   addPropertyQuestions: addPropertyConstructor,
+  addQuestions,
 } = require("../../common/cli/questions");
 
 const typeChoices = [
@@ -44,7 +50,7 @@ const addRelationQuestions = (entity) => {
       type: "list",
       name: "relation",
       message: "Relationship",
-      choices: ["ref"],
+      choices: ["hasMany", "hasOne"],
     },
     {
       type: "confirm",
@@ -64,4 +70,6 @@ const addRelationQuestions = (entity) => {
 module.exports = {
   entityCreationQuestions,
   addPropertyQuestions,
+  addQuestions,
+  addRelationQuestions,
 };

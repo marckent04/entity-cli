@@ -105,6 +105,9 @@ const addRelationConstructor = ({
 
           break;
         default:
+          if (relationsMaker[relation]) {
+            entityManager.append(entityName, relationsMaker[relation](entity));
+          }
           break;
       }
 
