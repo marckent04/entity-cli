@@ -6,6 +6,7 @@
 - autocomplete feature in your entities research
 - you can manage many entities by module
 - works properly with nest resource
+- make relations in mongoose
 
 ## Features
 

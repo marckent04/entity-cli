@@ -1,7 +1,7 @@
 const storage = require("node-persist");
 
 const config = {
-  dir: "./store",
+  dir: "./node_modules/entity-cli",
 
   stringify: JSON.stringify,
 
