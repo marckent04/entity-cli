@@ -105,6 +105,9 @@ const addRelationConstructor = ({
 
           break;
         default:
+          if (relationsMaker[relation]) {
+            entityManager.append(entityName, relationsMaker[relation](entity));
+          }
           break;
       }
 
@@ -132,7 +135,7 @@ const baseCliConstructor = ({
       if (!exists) {
         await entityManager.create(name);
       } else {
-        if (await canBeInit(name)) {
+        if (await canBeInit(name, module)) {
           await entityManager.create(name);
           consola.info(`entity ${name} initialized`);
         } else {

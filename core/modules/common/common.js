@@ -11,7 +11,7 @@ const fileExists = async (name, module = null) => {
   return fs.existsSync(dest);
 };
 
-const canBeInit = async (name) => {
+const canBeInit = async (name, module = null) => {
   const dest = path.join(
     await getEntitiesLocation(module),
     `${name}.entity.ts`
