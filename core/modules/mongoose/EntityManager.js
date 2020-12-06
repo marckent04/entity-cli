@@ -1,16 +1,10 @@
 const capitalize = require("lodash.capitalize");
-const fs = require("fs");
-const path = require("path");
-const chalk = require("chalk");
 const BaseEntityManager = require("../common/BaseEntity");
 const { linter } = require("../common/linter");
 
 class MongooseManager extends BaseEntityManager {
-  static init(name) {
-    return linter(this.template(name));
-  }
 
-  static template(name) {
+  static templateTs(name) {
     name = capitalize(name);
     return [
       "import * as mongoose from 'mongoose'",
@@ -23,7 +17,18 @@ class MongooseManager extends BaseEntityManager {
     ];
   }
 
-  static templateJs(name) {}
+  static templateJs(name) {
+    name = capitalize(name);
+    return [
+      "const mongoose = require('mongoose')",
+      "",
+      `const ${name} = new mongoose.Schema({`,
+      "updatedAt: { type: Date, default: Date.now },",
+      "createdAt: { type: Date, default: Date.now }",
+      "})",
+     `exports.${name} = ${name}`
+    ];
+  }
 
   static append(nameOrContent, newContent) {
     super.append(nameOrContent, newContent, "}\\)");

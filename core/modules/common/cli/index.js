@@ -5,4 +5,4 @@ inquirer.registerPrompt(
   require("inquirer-autocomplete-prompt")
 );
 
-module.exports = { inquirer };
+exports.inquirer = inquirer;

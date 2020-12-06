@@ -14,14 +14,18 @@ class BaseEntityManager {
     return getFileExtension();
   }
 
-  static async init(name) {
-    return path.join(
-      await this.directory(),
-      `${name}.entity.${this.fileExtension}`
-    );
+  static init(name) {
+    if (this.fileExtension == "js") return linter(this.templateJs(name));
+    return linter(this.templateTs(name));
   }
 
-  static initJs(name) {}
+  static templateJs(name) {
+    throw "Not exists"
+  }
+
+  static templateTs(name) {
+    throw "Not exists"
+  }
 
   static async create(name) {
     const file = path.join(
@@ -32,6 +36,7 @@ class BaseEntityManager {
     try {
       fs.writeFileSync(file, this.init(name));
     } catch (error) {
+      console.log(error);
       if (error.errno === -2) {
         throw chalk.red("folder not found");
       }

@@ -1,12 +1,15 @@
 const fs = require("fs");
 const path = require("path");
-const { getEntitiesLocation } = require("./configFile");
+const { getEntitiesLocation, getFileExtension } = require("./configFile");
 const capitalize = require("lodash.capitalize");
+
+
+const fileExtesion = getFileExtension()
 
 const fileExists = async (name, module = null) => {
   const dest = path.join(
     await getEntitiesLocation(module),
-    `${name}.entity.ts`
+    `${name}.entity.${fileExtesion}`
   );
   return fs.existsSync(dest);
 };
@@ -14,7 +17,7 @@ const fileExists = async (name, module = null) => {
 const canBeInit = async (name, module = null) => {
   const dest = path.join(
     await getEntitiesLocation(module),
-    `${name}.entity.ts`
+    `${name}.entity.${fileExtesion}`
   );
   const baseContent = `export class ${capitalize(name)} {}\n`;
 
@@ -27,7 +30,7 @@ const createPath = async (entityName, module = null) => {
   const folder = path.join(await getEntitiesLocation(module));
 
   return {
-    file: path.join(folder, `${entityName}.entity.ts`),
+    file: path.join(folder, `${entityName}.entity.${fileExtesion}`),
     folder,
   };
 };
