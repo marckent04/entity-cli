@@ -1,7 +1,3 @@
-const capitalize = require("lodash.capitalize");
-const fs = require("fs");
-const path = require("path");
-const chalk = require("chalk");
 const BaseEntityManager = require("../common/BaseEntity");
 const { linter } = require("../common/linter");
 
@@ -10,20 +6,32 @@ class MongooseManager extends BaseEntityManager {
     return linter(this.template(name));
   }
 
-  static template(name) {
-    name = capitalize(name);
-    return [
-      "import * as mongoose from 'mongoose'",
-      "",
-      `export const ${name} = new mongoose.Schema({`,
-      "updatedAt: { type: Date, default: Date.now },",
-      "createdAt: { type: Date, default: Date.now }",
-      "})",
-      // `export const ${name}Model = model('${name}', ${name})`,
-    ];
+  static templateJs(name) {
+    return `
+      import * as mongoose from 'mongoose'
+      
+      export const ${name} = new mongoose.Schema({
+        updatedAt: { type: Date, default: Date.now },
+       createdAt: { type: Date, default: Date.now }
+      })
+    `;
   }
 
-  static templateJs(name) {}
+  static templateTs(name) {
+    return `
+      import * as mongoose from 'mongoose'
+      
+      export interface ${name}Interface extends mongoose.Document {
+        updatedAt: Date;
+        createdAt: Date;
+      }
+
+      export const ${name} = new mongoose.Schema({
+        updatedAt: { type: Date, default: Date.now },
+        createdAt: { type: Date, default: Date.now }
+      })
+    `;
+  }
 
   static append(nameOrContent, newContent) {
     super.append(nameOrContent, newContent, "}\\)");

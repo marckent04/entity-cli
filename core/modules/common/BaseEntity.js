@@ -4,6 +4,7 @@ const findLastIndex = require("lodash.findlastindex");
 const chalk = require("chalk");
 const { getEntitiesLocation, getFileExtension } = require("./configFile");
 const { linter } = require("./linter");
+const capitalize = require("lodash.capitalize");
 
 class BaseEntityManager {
   static async directory() {
@@ -21,7 +22,12 @@ class BaseEntityManager {
     );
   }
 
-  static initJs(name) {}
+  static template(name) {
+    return Reflect.get(
+      this,
+      `template${capitalize(this.fileExtension)}`
+    )(capitalize(name));
+  }
 
   static async create(name) {
     const file = path.join(
@@ -35,6 +41,7 @@ class BaseEntityManager {
       if (error.errno === -2) {
         throw chalk.red("folder not found");
       }
+      throw error;
       throw chalk.red("error during entity file generation");
     }
   }
