@@ -1,11 +1,15 @@
 module.exports = class Maker {
   static common(name, type, required) {
-    return [
-      `${name}: {
-      type: ${type},
-      require: ${required}
-    },`,
-    ];
+    const handlerType = ["mongoose.Types.ObjectId", "Buffer", "Date"];
+
+    const modelType = handlerType.includes(type) ? type : type.toLowerCase();
+    return {
+      entity: `${name}: {
+        type: ${type},
+        require: ${required}
+      },`,
+      model: `${name}: ${modelType}`,
+    };
   }
   static string(name, required) {
     return this.common(name, "String", required);

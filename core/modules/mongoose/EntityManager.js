@@ -1,6 +1,7 @@
 const BaseEntityManager = require("../common/BaseEntity");
 const { linter } = require("../common/linter");
-
+const fs = require("fs");
+const capitalize = require("lodash.capitalize");
 class MongooseManager extends BaseEntityManager {
   static init(name) {
     return linter(this.template(name));
@@ -34,7 +35,37 @@ class MongooseManager extends BaseEntityManager {
   }
 
   static append(nameOrContent, newContent) {
-    super.append(nameOrContent, newContent, "}\\)");
+    super.append(nameOrContent, newContent.entity, "}\\)");
+
+    if (super.fileExtension == "ts") {
+      this.appendInterface(nameOrContent, newContent.model);
+    }
+  }
+
+  static async appendInterface(nameOrContent, newContent) {
+    let file = null;
+    let content = null;
+
+    const regex = new RegExp(
+      `export interface ${capitalize(
+        nameOrContent
+      )}Interface extends mongoose.Document {`
+    );
+
+    if (Array.isArray(newContent)) {
+      newContent = newContent.join("\n");
+    }
+
+    if (!Array.isArray(nameOrContent)) {
+      file = await this.createPath(nameOrContent);
+      content = fs.readFileSync(file).toString().split("\n");
+    }
+    const index = content.findIndex((line) => regex.test(line));
+
+    content.splice(index + 1, 0, newContent);
+
+    if (file) fs.writeFileSync(file, linter(content));
+    else return content;
   }
 }
 

@@ -28,10 +28,7 @@ const addPropertyConstructor = ({
   inquirer.prompt(questions(entityName)).then(async (answers) => {
     try {
       const { name, type, add, required } = answers;
-      entityManager.append(
-        entityName,
-        makerProperty[type](name, required).join("\n")
-      );
+      entityManager.append(entityName, makerProperty[type](name, required));
       consola.success(chalk.green(`the ${name} column has been created `));
       if (add)
         addCli(
