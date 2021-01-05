@@ -1,24 +1,33 @@
 const capitalize = require("lodash.capitalize");
-
-class Maker {
+const propertyMaker = require("./property");
+class Maker extends propertyMaker {
   static hasMany(entity) {
-    return `
-    ${entity}s: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: '${capitalize(entity)}',
-    },
-  ]`;
+    const modelType = "[any]";
+    return {
+      entity: `
+        ${entity}s: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: '${capitalize(entity)}',
+          },
+        ]`,
+      model: `${entity}s: ${modelType}`,
+    };
   }
 
   static hasOne(entity) {
-    return `
-    ${entity}: 
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: '${capitalize(entity)}',
-    }
-  `;
+    const modelType = this.typeHandler("mongoose.Schema.Types.ObjectId");
+
+    return {
+      entity: `
+        ${entity}: 
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: '${capitalize(entity)}',
+        }
+      `,
+      model: `${entity}: any`,
+    };
   }
 }
 
