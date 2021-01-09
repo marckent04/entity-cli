@@ -1,12 +1,8 @@
 # Entity CLI
 
-## What's new ?
-
-- you can specify the folder where are located your entities inside the module dir
-- autocomplete feature in your entities research
-- you can manage many entities by module
-- works properly with nest resource
-- make relations in mongoose
+## What's new ? 
+- fix js support
+- create interfaces for mongoose ts
 
 ## Features
 
@@ -18,6 +14,11 @@
 - additionally supports Buffer, ObjectId type for mongoose
 - support config file
 - mode module
+- you can specify the folder where are located your entities inside the module dir
+- autocomplete feature in your entities research
+- you can manage many entities by module
+- works properly with nest resource
+- make relations in mongoose
 
 ## How to install
 
@@ -32,7 +33,7 @@
 }
 ```
 
-## How to use
+## Install the ORM
 
 for configuration go to [Configuration section](#configuration)
 
