@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const { getEntitiesLocation } = require("./configFile");
+const { getEntitiesLocation, getFileExtension } = require("./configFile");
 const capitalize = require("lodash.capitalize");
 
 const fileExists = async (name, module = null) => {
@@ -27,7 +27,7 @@ const createPath = async (entityName, module = null) => {
   const folder = path.join(await getEntitiesLocation(module));
 
   return {
-    file: path.join(folder, `${entityName}.entity.ts`),
+    file: path.join(folder, `${entityName}.entity.${getFileExtension()}`),
     folder,
   };
 };
