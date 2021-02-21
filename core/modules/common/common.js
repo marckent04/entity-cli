@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { getEntitiesLocation, getFileExtension } = require("./configFile");
-const capitalize = require("lodash.capitalize");
+const camelcase = require("camelcase");
 
 const fileExists = async (name, module = null) => {
   const dest = path.join(
@@ -16,11 +16,12 @@ const canBeInit = async (name, module = null) => {
     await getEntitiesLocation(module),
     `${name}.entity.ts`
   );
-  const baseContent = `export class ${capitalize(name)} {}\n`;
+  const baseContent = `export class ${camelCase(name)} {}\n`;
 
   const content = fs.readFileSync(dest, { encoding: "utf8" });
 
-  return baseContent == content;
+  console.log(content);
+  return baseContent == content || content == "";
 };
 
 const createPath = async (entityName, module = null) => {
@@ -31,8 +32,13 @@ const createPath = async (entityName, module = null) => {
     folder,
   };
 };
+
+const camelCase = (input) =>
+  camelcase(input, { pascalCase: true, preserveConsecutiveUppercase: true });
+
 module.exports = {
   fileExists,
   createPath,
   canBeInit,
+  camelCase,
 };

@@ -1,6 +1,11 @@
 # Entity CLI
 
 ## What's new ? 
+### V 1.1.13
+-   snake case files supported
+-  initialize empty files and generated nestJs crud entity file
+
+### V 1.1.12
 - fix js support
 - create interfaces for mongoose ts
 
