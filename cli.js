@@ -8,7 +8,7 @@ const chalk = require("chalk");
 const cli = () => {
   const config = getConfigFile();
 
-  const version = "1.1.13";
+  const version = "1.1.14";
   const orm = config && config.orm ? config.orm : "typeorm";
   const language = config && config.lang ? config.lang : "Ts";
   // const mode = config && config.mode ? config.mode : "simple";
