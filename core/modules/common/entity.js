@@ -28,8 +28,6 @@ const getEntity = async (path) => {
   return fs.readFileSync(path).toString().split("\n");
 };
 
-const updateEntity = (name, content) => {};
-
 const existingEntities = async (currentEntity, module = null, all = false) => {
   let entities;
   const src = await getEntitiesLocation(module);

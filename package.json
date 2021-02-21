@@ -1,6 +1,6 @@
 {
   "name": "entity-cli",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "generate typeorm, mongoose, sequelize entities by cli",
   "main": "index.js",
   "homepage": "https://www.npmjs.com/package/entity-cli#readme",
@@ -21,8 +21,10 @@
     "email": "marchenrynanguy1@gmail.com"
   },
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "boxen": "^4.2.0",
+    "camelcase": "^6.2.0",
     "chalk": "^4.1.0",
     "consola": "^2.15.0",
     "inquirer": "^7.3.3",
@@ -30,20 +32,17 @@
     "lodash.capitalize": "^4.2.1",
     "lodash.findlastindex": "^4.6.0",
     "node-persist": "^3.1.0",
-    "prettier": "2.1.2"
-  },
-  "devDependencies": {
+    "prettier": "2.1.2",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "babel-jest": "^26.6.3",
-    "jest": "^26.6.1",
-    "sequelize": "^5.22.3",
-    "sequelize-typescript": "^1.1.0",
-    "typeorm": "^0.2.26"
+    "jest": "^26.6.1"
   },
   "keywords": [
     "typeORM",
     "typeorm",
+    "sequelize",
+    "mongoose",
     "prettier",
     "inquirer",
     "entity-cli",

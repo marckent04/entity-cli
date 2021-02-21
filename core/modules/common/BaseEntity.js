@@ -4,7 +4,7 @@ const findLastIndex = require("lodash.findlastindex");
 const chalk = require("chalk");
 const { getEntitiesLocation, getFileExtension } = require("./configFile");
 const { linter } = require("./linter");
-const capitalize = require("lodash.capitalize");
+const { camelCase } = require("./common");
 
 class BaseEntityManager {
   static async directory() {
@@ -25,8 +25,8 @@ class BaseEntityManager {
   static template(name) {
     return Reflect.get(
       this,
-      `template${capitalize(this.fileExtension)}`
-    )(capitalize(name));
+      `template${camelCase(this.fileExtension)}`
+    )(camelCase(name));
   }
 
   static async create(name) {

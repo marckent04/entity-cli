@@ -1,5 +1,5 @@
 const storage = require("node-persist");
-
+const { camelCase } = require("../common");
 const { existingEntities } = require("../index");
 const { createPath } = require("../common");
 const { entityPropertyExists } = require("../../common/entity");
@@ -40,6 +40,7 @@ const entityCreationQuestions = async () => {
       message: "Entity name",
       validate: validateVariableName,
       emptyText: "No entity found, but you can create it now",
+      transformer: (input) => camelCase(input),
       source: async (previous, input) => {
         const { module } = previous;
         const regex = new RegExp(input, "gi");
