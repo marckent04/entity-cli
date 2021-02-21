@@ -20,7 +20,6 @@ const canBeInit = async (name, module = null) => {
 
   const content = fs.readFileSync(dest, { encoding: "utf8" });
 
-  console.log(content);
   return baseContent == content || content == "";
 };
 
