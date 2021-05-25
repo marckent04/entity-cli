@@ -1,7 +1,7 @@
 # Entity CLI
 
 ## What's new ? 
-### V 1.1.19 is here !!
+### V 1.1.20 is here !!
 - typescript perser Implemented
 - Core improvment
 - Mongoose support improvment
