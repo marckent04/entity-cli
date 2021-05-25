@@ -1,7 +1,7 @@
 # Entity CLI
 
 ## What's new ? 
-### V 1.1.17 is there !!
+### V 1.1.18 is here !!
 - typescript perser Implemented
 - Core improvment
 - Mongoose support improvment
