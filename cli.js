@@ -1,14 +1,18 @@
-const { getConfigFile } = require("./core/modules/common/configFile");
-const typeOrmCli = require("./core/modules/typeorm/cli/index");
-const mongooseCli = require("./core/modules/mongoose/cli/index");
-const sequelizeCli = require("./core/modules/sequelize/cli/index");
 const boxen = require("boxen");
 const chalk = require("chalk");
+
+const packageInfos = require("./package.json")
+
+const { getConfigFile } = require("./core/configFile");
+const typeOrmCli = require("./core/typeorm/cli/index");
+const mongooseCli = require("./core/mongoose/cli/index");
+const sequelizeCli = require("./core/sequelize/cli/index");
+
 
 const cli = () => {
   const config = getConfigFile();
 
-  const version = "1.1.16";
+  const version = packageInfos.version;
   const orm = config && config.orm ? config.orm : "typeorm";
   const language = config && config.lang ? config.lang : "Ts";
   // const mode = config && config.mode ? config.mode : "simple";
