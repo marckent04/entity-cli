@@ -1,13 +1,12 @@
 # Entity CLI
 
 ## What's new ? 
-### V 1.1.13
--   snake case files supported
--  initialize empty files and generated nestJs crud entity file
-
-### V 1.1.12
-- fix js support
-- create interfaces for mongoose ts
+### V 1.1.17 is there !!
+- typescript perser Implemented
+- Core improvment
+- Mongoose support improvment
+    - Add timestamp at entity generation
+    - fix property add issues interfaces 
 
 ## Features
 
@@ -24,6 +23,9 @@
 - you can manage many entities by module
 - works properly with nest resource
 - make relations in mongoose
+- create interfaces for mongoose ts
+-   snake case files supported
+-  initialize empty files and generated nestJs crud entity file
 
 ## How to install
 
