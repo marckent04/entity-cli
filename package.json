@@ -1,6 +1,6 @@
 {
   "name": "entity-cli",
-  "version": "1.1.24",
+  "version": "1.1.25",
   "description": "generate typeorm, mongoose, sequelize entities by cli",
   "main": "index.js",
   "homepage": "https://www.npmjs.com/package/entity-cli#readme",
@@ -25,7 +25,7 @@
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
     "consola": "^2.15.0",
-    "entity-cli.core": "^0.4.0-alpha6",
+    "entity-cli.core": "^0.4.0-alpha7",
     "inquirer": "^7.3.3",
     "node-persist": "^3.1.0"
   },
