@@ -1,13 +1,12 @@
 const boxen = require("boxen");
 const chalk = require("chalk");
 
-const packageInfos = require("./package.json")
+const packageInfos = require("./package.json");
 
-const { getConfigFile } = require("./core/configFile");
-const typeOrmCli = require("./core/typeorm/cli/index");
-const mongooseCli = require("./core/mongoose/cli/index");
-const sequelizeCli = require("./core/sequelize/cli/index");
-
+const { getConfigFile } = require("entity-cli.core/configFile");
+const typeOrmCli = require("entity-cli.core/typeorm/cli/index");
+const mongooseCli = require("entity-cli.core/mongoose/cli/index");
+const sequelizeCli = require("entity-cli.core/sequelize/cli/index");
 
 const cli = () => {
   const config = getConfigFile();
@@ -34,7 +33,7 @@ const cli = () => {
       margin: 1,
       borderStyle: "double",
       borderColor: "greenBright",
-    })
+    }),
   );
 
   if (config && config.orm) {
